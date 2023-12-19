@@ -6,10 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using HrApp.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HrApp.Persistence.Context
 {
-    public class HrAppDbContext : DbContext
+    public class HrAppDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
 
         public HrAppDbContext(DbContextOptions<HrAppDbContext> option) : base(option)
