@@ -5,19 +5,19 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F7BA7EBD-BD2C-42CA-82D1-FBA0F43AFC3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrApp.MVC", "Presentation\HrApp.MVC\HrApp.MVC.csproj", "{71750EB6-1F4F-42C5-9FB9-7A17429EF987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrApp.MVC", "Presentation\HrApp.MVC\HrApp.MVC.csproj", "{71750EB6-1F4F-42C5-9FB9-7A17429EF987}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrApp.WebAPI", "Presentation\HrApp.WebAPI\HrApp.WebAPI.csproj", "{ECC648E9-A988-4D4C-AD47-6C19B2480776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrApp.WebAPI", "Presentation\HrApp.WebAPI\HrApp.WebAPI.csproj", "{ECC648E9-A988-4D4C-AD47-6C19B2480776}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{27E425DA-019E-41B2-8709-B9E09882DABE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{409742AF-C8FA-4279-9E0F-70C4BD9EDDB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrApp.Persistence", "Infrastructure\HrApp.Persistence\HrApp.Persistence.csproj", "{EEA49A20-B545-41C8-BD99-E0A0C658650C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrApp.Persistence", "Infrastructure\HrApp.Persistence\HrApp.Persistence.csproj", "{EEA49A20-B545-41C8-BD99-E0A0C658650C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrApp.Application", "Core\HrApp.Application\HrApp.Application.csproj", "{257945CD-4965-405F-9C55-F36718D0F965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrApp.Application", "Core\HrApp.Application\HrApp.Application.csproj", "{257945CD-4965-405F-9C55-F36718D0F965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrApp.Domain", "Core\HrApp.Domain\HrApp.Domain.csproj", "{1F027354-4744-456B-AC28-0B07346E040F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrApp.Domain", "Core\HrApp.Domain\HrApp.Domain.csproj", "{1F027354-4744-456B-AC28-0B07346E040F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
