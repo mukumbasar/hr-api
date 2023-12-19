@@ -12,12 +12,10 @@ namespace HrApp.Persistence.UnitOfWork
     {
         private readonly HrAppDbContext _context;
 
-
         public Uow(HrAppDbContext context
            )
         {
             _context = context;
-
         }
 
         public async Task CommitAsync()
