@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.Wrappers
 {
-    internal class Class1
+    public class BaseResponse
     {
+        public bool Success { get; set; } = true;
+        public string Message { get; set; }
     }
 }
