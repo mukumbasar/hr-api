@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace HrApp.Application.Extensions
          //todo: expception yenilebilir
          services.AddMediatR(Assembly.GetExecutingAssembly());
          services.AddAutoMapper(Assembly.GetExecutingAssembly());
+         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
       }
    }
 }
