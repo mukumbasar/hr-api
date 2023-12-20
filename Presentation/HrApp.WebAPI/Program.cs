@@ -1,6 +1,8 @@
 using HrApp.Persistence.Extensions;
 using HrApp.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
+using HrApp.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,36 @@ builder.Services.AddCors(options =>
    });
 });
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    var RoleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
 
+    await userManager.CreateAsync(new AppUser()
+    {
+        UserName = "abc",
+        NormalizedUserName = "ABC",
+        Name = "Ad 1",
+        SecondName = "Ad 2",
+        Surname = "Soyad 1",
+        SecondSurname = "Soyad 2",
+        BirthYear = DateTime.Now.AddYears(-30),
+        TurkishIdentificationNumber = "12345123451",
+        StartDate = DateTime.Now.AddYears(-5),
+        EndDate = DateTime.Now.AddYears(-3),
+        IsActive = false,
+        Department = "IT",
+        CompanyName = "BA",
+        Occupation = "Full-stack Developer",
+        Email = "mail@mail.com",
+        NormalizedEmail = "MAIL@MAIL.COM",
+        Address = "Adres 1",
+        MobileNumber = "213451245",
+        Salary = 98000,
+        BirthPlace = "Ankara"
+
+    });
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
