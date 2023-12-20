@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="~/AdminLTE-3.1.0/dist/css/adminlte.min.css">
 </head>
 <body class ="hold-transition sidebar-mini">
-    <header>
-        <div class="wrapper">
+    <div class="wrapper">
+        <header>
+
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <!-- Left navbar links -->
@@ -31,6 +32,9 @@
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a asp-controller="Personel" asp-action="Index" class="nav-link">Personel</a>
                     </li>
                 </ul>
 
@@ -448,18 +452,21 @@
                 <!-- Control sidebar content goes here -->
             </aside>
             <!-- /.control-sidebar -->
-        </div>
-        
-    </header>
-    <div class="wrapper">
-        @RenderBody()
-    </div>
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <strong>Copyright &copy; 2023 <a href="https://adminlte.io">HumanResources</a>.</strong>
-        All rights reserved.
-    </footer>
+
+        </header>
+        <div class="container text-center">
+            @RenderBody()
+        </div>
+
+        <!-- Main Footer -->
+        <footer class="main-footer text-center">
+            <strong>Copyright &copy; 2023 <a href="https://adminlte.io">HumanResources</a>.</strong>
+            All rights reserved.
+        </footer>
+    </div>
+    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
