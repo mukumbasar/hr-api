@@ -30,7 +30,7 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
 
         if (user.ImageData == null) 
         {
-            userDto.Image = $"/images/user/default";
+            userDto.Image = $"/images/user/default.png";
         }
         else
         {
