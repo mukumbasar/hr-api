@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HrApp.Application.Helpers;
 using HrApp.Application.Wrappers;
 using HrApp.Domain.Entities;
 using MediatR;
@@ -27,6 +28,18 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
         }
       
         var userDto = mapper.Map<AppUserHomeDto>(user);
+
+        if(user.ImageData != null)
+        {
+            var image = await ImageConversions.ConvertToIFormFile(user.ImageData);
+
+            userDto.Image = image;
+        }
+        else
+        {
+            userDto.Image = "no pic";
+        }
+
         return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "User details retrieved successfully", Success = true };
    }
 }
