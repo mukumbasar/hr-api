@@ -15,7 +15,7 @@ namespace HrApp.Application.Extensions
       public static void AddApplicationDependencies(this IServiceCollection services)
       {
          //todo: expception yenilebilir
-         services.AddMediatR(Assembly.GetExecutingAssembly());
+         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationDependencies).Assembly));
          services.AddAutoMapper(Assembly.GetExecutingAssembly());
          services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
       }
