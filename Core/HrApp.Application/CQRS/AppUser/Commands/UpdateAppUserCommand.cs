@@ -1,8 +1,10 @@
-﻿namespace HrApp.Application;
+﻿using HrApp.Application.Wrappers;
+using MediatR;
 
-public class AppUserUpdateDto
+namespace HrApp.Application;
+
+public class UpdateAppUserCommand : IRequest<ServiceResponse<string>>
 {
-   //TODO : Daha sonra kontrol et
    public string Id { get; set; }
    public byte[] ImageData { get; set; }
    public string Address { get; set; }
