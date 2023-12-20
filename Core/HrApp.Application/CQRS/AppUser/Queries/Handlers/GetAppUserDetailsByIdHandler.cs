@@ -19,11 +19,13 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
    public async Task<ServiceResponse<AppUserDetailsDto>> Handle(GetAppUserDetailsById request, CancellationToken cancellationToken)
    {
       var user = await userManager.FindByIdAsync(request.Id);
+
       if (user == null)
       {
-         return new ServiceResponse<AppUserDetailsDto>(null) { Message = "User not found", Success = false };
+         return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", Success = false };
       }
       var userDto = mapper.Map<AppUserDetailsDto>(user);
+
       return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", Success = true };
    }
 }
