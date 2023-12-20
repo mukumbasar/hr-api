@@ -31,7 +31,7 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
 
         if (user.ImageData == null)
         {
-            userDto.Image = "images/user/default.png";
+            userDto.Image = $"/images/default";
         }
         else
         {
