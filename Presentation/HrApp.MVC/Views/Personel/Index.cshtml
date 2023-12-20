@@ -1,4 +1,4 @@
-﻿@model MenuViewModel
+﻿@* 
 
 <h2 class="text-danger">@ViewBag.Error</h2>
 
@@ -205,22 +205,6 @@
                                     }
                             </table>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="modal fade" id="partialModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Personel</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.card -->
                 </div>
@@ -231,31 +215,7 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-    @section Scripts {
-
-        <script type="text/javascript">
-            $(function () {
-                $("#Personels .details").click(function () {
-                    var id = $(this).closest("tr").find("td").eq(0).html();
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/Personel/GetPersonel",
-                        data: { "id": id },
-                        success: function (response) {
-                            $("#partialModal").find(".modal-body").html(response);
-                            $("#partialModal").modal('show');
-                        },
-                        failure: function (response) {
-                            alert(response.responseText);
-                        },
-                        error: function (response) {
-                            alert(response.responseText);
-                        }
-                    });
-                });
-            });
-        </script>
-    }
 
 
+
+ *@

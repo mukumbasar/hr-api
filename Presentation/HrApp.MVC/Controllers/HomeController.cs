@@ -7,6 +7,18 @@ namespace HrApp.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private static PersonelHomeViewModel _personelHomeViewModel = new()
+        {
+            Id = "1",
+            Name = "Name1",
+            SecondName = "SecondName1",
+            Surname = "Surname1",
+            SecondSurname = "SecondSurname1",
+            Email = "Email1",
+            MobileNumber = "MobileNumber1",
+            Occupation = "Ocuppation1",
+            Department = "Department1"
+        };
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,7 +27,8 @@ namespace HrApp.MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            return View(_personelHomeViewModel);
         }
 
         public IActionResult Privacy()
