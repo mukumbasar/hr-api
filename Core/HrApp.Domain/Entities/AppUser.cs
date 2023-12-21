@@ -28,6 +28,6 @@ namespace HrApp.Domain.Entities
       public string Address { get; set; }
       public string MobileNumber { get; set; }
       public decimal Salary { get; set; }
-      public byte[] ImageData { get; set; }
+      public byte[]? ImageData { get; set; }
    }
 }

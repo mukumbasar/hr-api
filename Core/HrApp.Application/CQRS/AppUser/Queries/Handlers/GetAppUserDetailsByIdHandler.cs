@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HrApp.Application.Helpers;
 using HrApp.Application.Wrappers;
 using HrApp.Domain.Entities;
 using MediatR;
@@ -18,14 +19,24 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
    }
    public async Task<ServiceResponse<AppUserDetailsDto>> Handle(GetAppUserDetailsById request, CancellationToken cancellationToken)
    {
-      var user = await userManager.FindByIdAsync(request.Id);
+        var user = await userManager.FindByIdAsync(request.Id);
 
-      if (user == null)
-      {
-         return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", Success = false };
-      }
-      var userDto = mapper.Map<AppUserDetailsDto>(user);
+        if (user == null)
+        {
+           return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", Success = false };
+        }
 
-      return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", Success = true };
+        var userDto = mapper.Map<AppUserDetailsDto>(user);
+
+        if (user.ImageData == null) 
+        {
+            userDto.Image = $"/images/user/default.png";
+        }
+        else
+        {
+            userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
+        }
+
+        return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", Success = true };
    }
 }

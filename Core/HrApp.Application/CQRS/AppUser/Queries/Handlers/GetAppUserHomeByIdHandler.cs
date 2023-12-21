@@ -29,15 +29,13 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
       
         var userDto = mapper.Map<AppUserHomeDto>(user);
 
-        if(user.ImageData != null)
+        if (user.ImageData == null)
         {
-            var image = await ImageConversions.ConvertToIFormFile(user.ImageData);
-
-            userDto.Image = image;
+            userDto.Image = $"/images/user/default.png";
         }
         else
         {
-            userDto.Image = "no pic";
+            userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
         }
 
         return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "User details retrieved successfully", Success = true };
