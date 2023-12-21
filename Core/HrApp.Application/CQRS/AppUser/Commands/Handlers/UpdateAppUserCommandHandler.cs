@@ -36,7 +36,7 @@ public class UpdateAppUserCommandHandler : IRequestHandler<UpdateAppUserCommand,
 
             tempUser.Address = request.Address;
             tempUser.MobileNumber = request.MobileNumber;
-            tempUser.ImageData = await ImageConversions.ConvertToByteArrayAsync(request.UpdatedImage);
+            tempUser.ImageData = request.UpdatedImage;
 
             var result = await _userManager.UpdateAsync(tempUser);
 
