@@ -12,7 +12,7 @@ namespace HrApp.Application.Validators
         public UpdateAppUserCommandValidator()
         {
             RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.ImageData).NotEmpty();
+            RuleFor(x => x.Image).NotEmpty();
             RuleFor(x => x.Address).NotEmpty();
             RuleFor(x => x.MobileNumber).NotEmpty();
         }

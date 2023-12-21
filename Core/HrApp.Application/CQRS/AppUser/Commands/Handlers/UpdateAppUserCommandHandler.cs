@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HrApp.Application.Helpers;
 using HrApp.Application.Validators;
 using HrApp.Application.Wrappers;
 using HrApp.Domain.Entities;
@@ -33,7 +34,9 @@ public class UpdateAppUserCommandHandler : IRequestHandler<UpdateAppUserCommand,
               return new ServiceResponse<string>(request.Id) { Message = "User not found", Success = false };
            }
 
-           _mapper.Map(request, tempUser);
+            tempUser.Address = request.Address;
+            tempUser.MobileNumber = request.MobileNumber;
+            tempUser.ImageData = await ImageConversions.ConvertToByteArrayAsync(request.Image);
 
            var result = await _userManager.UpdateAsync(tempUser);
 
