@@ -4,6 +4,7 @@ using HrApp.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HrApp.Persistence.Migrations
 {
     [DbContext(typeof(HrAppDbContext))]
-    partial class HrAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225104721_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,13 +179,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "db4a6a28-d39d-4a79-af5a-72b9bafdba74",
+                            Id = "64561faf-464b-4c9c-8c01-50f6f74da301",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Mom",
-                            BirthYear = new DateTime(1993, 12, 25, 14, 25, 54, 928, DateTimeKind.Local).AddTicks(4098),
+                            BirthYear = new DateTime(1993, 12, 25, 13, 47, 21, 703, DateTimeKind.Local).AddTicks(6193),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "115c6e23-68dc-482e-979a-10f233298545",
+                            ConcurrencyStamp = "2aa40e22-a024-40f4-8182-7db9e4b24108",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -191,14 +193,14 @@ namespace HrApp.Persistence.Migrations
                             LockoutEnabled = false,
                             MobileNumber = "0555555555",
                             Name = "user",
-                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK8rBRRSs7HiSzSlAR4YVGOUcV6w962rXTFhUywkAzCt/vf0CUQyZFPyYa1wd6TQSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMoCjL3ztDmGeNj/GiBdGTkipyF05dAPRC89/gYYTWRsUTgNhq/3lc6FVsLB8sHzfg==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "609e478b-6c9c-4eb0-8d38-e6deee103ed8",
-                            StartDate = new DateTime(2013, 12, 25, 14, 25, 54, 928, DateTimeKind.Local).AddTicks(4107),
+                            SecurityStamp = "5d35e8f2-4a2b-4127-8495-afaaba0d9f82",
+                            StartDate = new DateTime(2013, 12, 25, 13, 47, 21, 703, DateTimeKind.Local).AddTicks(6205),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
