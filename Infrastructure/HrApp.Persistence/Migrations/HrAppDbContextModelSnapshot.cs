@@ -88,7 +88,7 @@ namespace HrApp.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("ImageData")
@@ -136,9 +136,11 @@ namespace HrApp.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecondName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecondSurname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -173,37 +175,6 @@ namespace HrApp.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "db4a6a28-d39d-4a79-af5a-72b9bafdba74",
-                            AccessFailedCount = 0,
-                            Address = "address1231231231232",
-                            BirthPlace = "Mom",
-                            BirthYear = new DateTime(1993, 12, 25, 14, 25, 54, 928, DateTimeKind.Local).AddTicks(4098),
-                            CompanyName = "KOC",
-                            ConcurrencyStamp = "115c6e23-68dc-482e-979a-10f233298545",
-                            Department = "IT",
-                            Email = "user@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = false,
-                            MobileNumber = "0555555555",
-                            Name = "user",
-                            NormalizedEmail = "USER@GMAIL.COM",
-                            NormalizedUserName = "USER1",
-                            Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK8rBRRSs7HiSzSlAR4YVGOUcV6w962rXTFhUywkAzCt/vf0CUQyZFPyYa1wd6TQSw==",
-                            PhoneNumberConfirmed = false,
-                            Salary = 20000m,
-                            SecurityStamp = "609e478b-6c9c-4eb0-8d38-e6deee103ed8",
-                            StartDate = new DateTime(2013, 12, 25, 14, 25, 54, 928, DateTimeKind.Local).AddTicks(4107),
-                            Surname = "usersurname",
-                            TurkishIdentificationNumber = "11111111111",
-                            TwoFactorEnabled = false,
-                            UserName = "user1"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
