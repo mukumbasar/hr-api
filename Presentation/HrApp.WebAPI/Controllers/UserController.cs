@@ -1,5 +1,4 @@
 using HrApp.Application;
-using HrApp.Application.CQRS.AppUser.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,16 +39,6 @@ namespace MyApp.Namespace
             var result = await mediator.Send(updateAppUserCommand);
 
             if (result.Success) return Ok(result.Value);
-
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginCommand loginCommand)
-        {
-            var result = await mediator.Send(loginCommand);
-
-            if (result.Success) return Ok(result.Token);
 
             return BadRequest(result.Message);
         }
