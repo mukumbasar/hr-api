@@ -17,20 +17,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-   options.AddPolicy("AllowAll", builder =>
-   {
-      builder.AllowAnyOrigin()
-             .AllowAnyMethod()
-             .AllowAnyHeader();
-   });
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.WithOrigins("https://ank14hrmvc.azurewebsites.net", "https://localhost:7298")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
 var app = builder.Build();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-   app.UseSwagger();
-   app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
