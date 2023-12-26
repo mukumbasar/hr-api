@@ -10,9 +10,12 @@ namespace HrApp.Application.Dtos
     {
         public int Id { get; set; }
         public string ExpenseTypeName { get; set; }
+        public int ExpenseTypeId { get; set; }
         public decimal Amount { get; set; }
         public string Currency { get; set; }
+        public int CurrencyId { get; set; }
         public string ApprovalStatus { get; set; }
+        public int ApprovalStatusId { get; set; }
         public DateTime ApprovalDate { get; set; }
     }
 }

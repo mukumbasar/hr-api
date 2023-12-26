@@ -10,11 +10,13 @@ namespace HrApp.Application.Dtos
     {
         public int Id { get; set; }
         public string LeaveTypeName { get; set; }
+        public int LeaveTypeId { get; set; }
         public DateTime StartDate { get; set; }
         public int Amount { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime RequestDate { get; set; }
         public string ApprovalStatus { get; set; }
+        public int ApprovalStatusId { get; set; }
         public DateTime ApprovalDate { get; set; }
     }
 }
