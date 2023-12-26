@@ -10,6 +10,7 @@ namespace HrApp.Domain.Entities
     public class AdvanceType : BaseEntity
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public List<Advance> Advances { get; set; }
     }
 }

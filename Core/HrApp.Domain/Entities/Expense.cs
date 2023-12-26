@@ -11,14 +11,14 @@ namespace HrApp.Domain.Entities
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
-        public DateTime ReplyDate { get; set; }
+        public DateTime ApprovalDate { get; set; }
         public byte[] Document { get; set; }
         public int ExpenseTypeId { get; set; }
         public ExpenseType ExpenseType { get; set; }
         public int CurrencyId { get; set; }
         public Currency Currency { get; set; }
-        public int ApprovalStatueId { get; set; }
-        public ApprovalStatue ApprovalStatue { get; set; }
+        public int ApprovalStatusId { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }

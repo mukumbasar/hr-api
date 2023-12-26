@@ -10,6 +10,7 @@ namespace HrApp.Domain.Entities
     public class LeaveType : BaseEntity
     {
         public int Id { get; set; }
-        public List<Leave> Permissions { get; set; }
+        public string Name { get; set; }
+        public List<Leave> Leaves { get; set; }
     }
 }

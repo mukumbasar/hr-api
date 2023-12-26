@@ -10,6 +10,7 @@ namespace HrApp.Domain.Entities
     public class Currency : BaseEntity
     {
         public int Id { get; set; }
+        public string Name {  get; set; }
         public List<Advance> Advances { get; set; }
         public List<Expense> Expenses { get; set; }
     }

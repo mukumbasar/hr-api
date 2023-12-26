@@ -1,6 +1,7 @@
 ﻿using HrApp.Application.Interfaces;
 using HrApp.Domain.Entities;
 using HrApp.Persistence.Context;
+using HrApp.Persistence.Repositories.Specific;
 using HrApp.Persistence.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,11 @@ namespace HrApp.Persistence.Extensions
             x.UseSqlServer(connectionString);
          });
 
-         #region Uow and Repositories
-
-         services.AddScoped<IUow, Uow>();
+            #region Uow and Repositories
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<ILeaveRepository, LeaveRepository>();
+            services.AddScoped<IAdvanceRepository, AdvanceRepository>();
+            services.AddScoped<IUow, Uow>();
          #endregion
 
          services.AddIdentity<AppUser, AppRole>(options =>
