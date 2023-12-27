@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.CQRS.Advance.Commands
 {
-    public class DeleteAdvanceCommand : IRequest<ServiceResponse<int>>
+    public class DeleteAdvanceCommand : IRequest<ServiceResponse<decimal>>
     {
         public int Id { get; set; }
 

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.CQRS.Advance.Commands.Handlers
 {
-    public class CreateAdvanceCommandHandler : IRequestHandler<CreateAdvanceCommand, ServiceResponse<int>>
+    public class CreateAdvanceCommandHandler : IRequestHandler<CreateAdvanceCommand, ServiceResponse<decimal>>
     {
         private readonly IMapper _mapper;
         private readonly IUow _uow;
@@ -23,7 +23,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             _uow = uow;
         }
 
-        public async Task<ServiceResponse<int>> Handle(CreateAdvanceCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<decimal>> Handle(CreateAdvanceCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
@@ -31,7 +31,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            return new ServiceResponse<int>() { Message = "An advance has been added.", IsSuccess = true };
+            return new ServiceResponse<decimal>() { Message = "An advance has been added.", IsSuccess = true };
             
         }
     }
