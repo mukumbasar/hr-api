@@ -1,5 +1,4 @@
 using HrApp.Application;
-using HrApp.Application.CQRS.AppUser.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
