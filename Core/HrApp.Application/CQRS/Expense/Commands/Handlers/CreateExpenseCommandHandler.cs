@@ -15,12 +15,12 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
     public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, ServiceResponse<int>>
     {
         private readonly IMapper _mapper;
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IUow _uow;
 
-        public CreateExpenseCommandHandler(IMapper mapper, IExpenseRepository expenseRepository)
+        public CreateExpenseCommandHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _expenseRepository = expenseRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<int>> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
@@ -29,9 +29,11 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
 
             entity.Document = await ImageConversions.ConvertToByteArrayAsync(request.File);
 
-            await _expenseRepository.AddAsync(entity);
+            await _uow.GetExpenseRepository().AddAsync(entity);
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Expense has been added successfully", Success = true };
+            await _uow.CommitAsync();
+
+            return new ServiceResponse<int>() { Message = "An expense has been added.", IsSuccess = true };
 
         }
     }

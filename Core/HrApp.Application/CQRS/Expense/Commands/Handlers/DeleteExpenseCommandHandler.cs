@@ -13,20 +13,29 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
 {
     public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand, ServiceResponse<int>>
     {
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IUow _uow;
 
-        public DeleteExpenseCommandHandler(IExpenseRepository expenseRepository)
+        public DeleteExpenseCommandHandler(IUow uow)
         {
-            _expenseRepository = expenseRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<int>> Handle(DeleteExpenseCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _expenseRepository.GetAsync(true, x => x.Id == request.Id);
+            var entity = await _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id);
 
-            await _expenseRepository.DeleteAsync(entity);
+            await _uow.GetExpenseRepository().DeleteAsync(entity);
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Deletion has been completed successfully", Success = true };
+            await _uow.CommitAsync();
+
+            var deletedEntity = await _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id);
+
+            if(deletedEntity == null) 
+            {
+                return new ServiceResponse<int>(entity.Id) { Message = $"Deletion of expense {entity.Id} has been completed.", IsSuccess = true };
+            }
+
+            return new ServiceResponse<int>(request.Id) { Message = $"Deletion of expense {entity.Id} has not been completed.", IsSuccess = false };
         }
     }
 }

@@ -23,7 +23,7 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
 
         if (user == null)
         {
-           return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", Success = false };
+           return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", IsSuccess = false };
         }
 
         var userDto = mapper.Map<AppUserDetailsDto>(user);
@@ -37,6 +37,6 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
             userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
         }
 
-        return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", Success = true };
+        return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", IsSuccess = true };
    }
 }

@@ -22,40 +22,40 @@ namespace HrApp.WebAPI.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await mediator.Send(new ReadAllExpenseQuery());
-            if (result.Success) return Ok(result.Value);
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await mediator.Send(new ReadExpenseQuery(id));
-            if (result.Success) return Ok(result.Value);
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(CreateExpenseCommand command)
         {
             var result = await mediator.Send(command);
-            if (result.Success) return Ok(result.Value);
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(UpdateExpenseCommand command)
         {
             var result = await mediator.Send(command);
-            if (result.Success) return Ok(result.Value);
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(DeleteExpenseCommand command)
         {
             var result = await mediator.Send(command);
-            if (result.Success) return Ok(result.Value);
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
     }
 }

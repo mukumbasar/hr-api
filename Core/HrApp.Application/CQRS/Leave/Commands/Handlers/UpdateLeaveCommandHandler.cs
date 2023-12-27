@@ -2,6 +2,7 @@
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,39 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
     public class UpdateLeaveCommandHandler : IRequestHandler<UpdateLeaveCommand, ServiceResponse<int>>
     {
         private readonly IMapper _mapper;
-        private readonly ILeaveRepository _leaveRepository;
+        private readonly IUow _uow;
 
-        public UpdateLeaveCommandHandler(IMapper mapper, ILeaveRepository leaveRepository)
+        private readonly UserManager<HrApp.Domain.Entities.AppUser> _userManager;
+
+        public UpdateLeaveCommandHandler(UserManager<HrApp.Domain.Entities.AppUser> userManager, IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _leaveRepository = leaveRepository;
+            _uow = uow;
+            _userManager = userManager;
         }
 
         public async Task<ServiceResponse<int>> Handle(UpdateLeaveCommand request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
+            var user = await _userManager.FindByIdAsync(request.AppUserId);
 
-            await _leaveRepository.UpdateAsync(entity);
+            var entity = _uow.GetLeaveRepository().GetAsync(true, x => x.Id == request.Id).Result;
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Leave has been updated successfully", Success = true };
+            entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
+
+            var newLeaveAmount = entity.EndDate - entity.StartDate;
+
+            if(newLeaveAmount.Days > user.YearlyLeaveDaysLeft)
+            {
+                return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"The leave has not been updated: You only have {user.YearlyLeaveDaysLeft}", IsSuccess = false };
+            }
+
+            await _uow.GetLeaveRepository().UpdateAsync(entity);
+
+            await _uow.CommitAsync();
+
+            user.YearlyLeaveDaysLeft = newLeaveAmount.Days;
+
+            return new ServiceResponse<int>(entity.Id) { Message = "The leave has been updated successfully", IsSuccess = true };
         }
     }
 }

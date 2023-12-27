@@ -16,17 +16,17 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
     {
 
         private readonly IMapper _mapper;
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IUow _uow;
 
-        public ReadExpenseQueryHandler(IMapper mapper, IExpenseRepository expenseRepository)
+        public ReadExpenseQueryHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _expenseRepository = expenseRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<ExpenseDto>> Handle(ReadExpenseQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _expenseRepository.GetAsync(true, x => x.Id == request.Id, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
+            var entity = await _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
 
             if (entity != null)
             {
@@ -36,10 +36,10 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                 dto.Currency = entity.Currency.Name;
                 dto.ExpenseTypeName = entity.ExpenseType.Name;
 
-                return new ServiceResponse<ExpenseDto>(dto) { Success = true };
+                return new ServiceResponse<ExpenseDto>(dto) { Message = "Expense acquirement successful!", IsSuccess = true };
             }
 
-            return new ServiceResponse<ExpenseDto>() { Message = "Expense acquirement error!", Success = false };
+            return new ServiceResponse<ExpenseDto>() { Message = "Expense acquirement error!", IsSuccess = false };
         }
     }
 }

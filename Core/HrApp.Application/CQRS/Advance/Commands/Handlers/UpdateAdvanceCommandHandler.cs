@@ -2,6 +2,7 @@
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,25 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
     public class UpdateAdvanceCommandHandler : IRequestHandler<UpdateAdvanceCommand, ServiceResponse<int>>
     {
         private readonly IMapper _mapper;
-        private readonly IAdvanceRepository _advanceRepository;
+        private readonly IUow _uow;
 
-        public UpdateAdvanceCommandHandler(IMapper mapper, IAdvanceRepository advanceRepository)
+        public UpdateAdvanceCommandHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _advanceRepository = advanceRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<int>> Handle(UpdateAdvanceCommand request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
+            var entity = _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id).Result;
 
-            await _advanceRepository.UpdateAsync(entity);
+            entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Advance has been updated successfully", Success = true };
+            await _uow.GetAdvanceRepository().UpdateAsync(entity);
+
+            await _uow.CommitAsync();
+
+            return new ServiceResponse<int>(entity.Id) { Message = "The advance has been updated.", IsSuccess = true };
         }
     }
 }

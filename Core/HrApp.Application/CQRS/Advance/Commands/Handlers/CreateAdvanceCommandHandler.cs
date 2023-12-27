@@ -15,21 +15,24 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
     public class CreateAdvanceCommandHandler : IRequestHandler<CreateAdvanceCommand, ServiceResponse<int>>
     {
         private readonly IMapper _mapper;
-        private readonly IAdvanceRepository _advanceRepository;
+        private readonly IUow _uow;
 
-        public CreateAdvanceCommandHandler(IMapper mapper, IAdvanceRepository advanceRepository)
+        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _advanceRepository = advanceRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<int>> Handle(CreateAdvanceCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
-            await _advanceRepository.AddAsync(entity);
+            await _uow.GetAdvanceRepository().AddAsync(entity);
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Advance has been added successfully", Success = true };
+            await _uow.CommitAsync();
+
+            return new ServiceResponse<int>() { Message = "An advance has been added.", IsSuccess = true };
+            
         }
     }
 }

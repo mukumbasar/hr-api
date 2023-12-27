@@ -29,6 +29,8 @@ namespace HrApp.Domain.Entities
         public string MobileNumber { get; set; }
         public decimal Salary { get; set; }
         public byte[]? ImageData { get; set; }
+        public int YearlyLeaveDaysLeft { get; set; }
+        public decimal YearlyAdvanceAmountLeft { get; set; }
         public List<Advance> Advances { get; set; }
         public List<Leave> Leaves { get; set; }
         public List<Expense> Expenses { get; set; }

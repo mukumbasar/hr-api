@@ -15,17 +15,17 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
     public class ReadAllLeaveQueryHandler : IRequestHandler<ReadAllLeaveQuery, ServiceResponse<List<LeaveDto>>>
     {
         private readonly IMapper _mapper;
-        private readonly ILeaveRepository _leaveRepository;
+        private readonly IUow _uow;
 
-        public ReadAllLeaveQueryHandler(IMapper mapper, ILeaveRepository leaveRepository)
+        public ReadAllLeaveQueryHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _leaveRepository = leaveRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<List<LeaveDto>>> Handle(ReadAllLeaveQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _leaveRepository.GetAllAsync(true, null,x => x.LeaveType, x => x.ApprovalStatus);
+            var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null,x => x.LeaveType, x => x.ApprovalStatus);
 
             if (entities.Count() > 0)
             {
@@ -41,10 +41,10 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<LeaveDto>>(dtos) { Success = true };
+                return new ServiceResponse<List<LeaveDto>>(dtos) { Message = "Expense acquirement success!", IsSuccess = true };
             }
 
-            return new ServiceResponse<List<LeaveDto>>() { Message = "Expense acquirement error!", Success = false };
+            return new ServiceResponse<List<LeaveDto>>() { Message = "Expense acquirement error!", IsSuccess = false };
         }
     }
 }

@@ -24,7 +24,7 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
 
         if (user == null)
         {
-           return new ServiceResponse<AppUserHomeDto>() { Message = "User not found", Success = false };
+           return new ServiceResponse<AppUserHomeDto>() { Message = "User not found", IsSuccess = false };
         }
       
         var userDto = mapper.Map<AppUserHomeDto>(user);
@@ -38,6 +38,6 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
             userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
         }
 
-        return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "User details retrieved successfully", Success = true };
+        return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "User details retrieved successfully", IsSuccess = true };
    }
 }

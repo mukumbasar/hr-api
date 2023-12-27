@@ -14,17 +14,17 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
     public class ReadAdvanceQueryHandler : IRequestHandler<ReadAdvanceQuery, ServiceResponse<AdvanceDto>>
     {
         private readonly IMapper _mapper;
-        private readonly IAdvanceRepository _advanceRepository;
+        private readonly IUow _uow;
 
-        public ReadAdvanceQueryHandler(IMapper mapper, IAdvanceRepository advanceRepository)
+        public ReadAdvanceQueryHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _advanceRepository = advanceRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<AdvanceDto>> Handle(ReadAdvanceQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _advanceRepository.GetAsync(true, x => x.Id == request.Id, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus);
+            var entity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus);
 
             if(entity != null)
             {
@@ -34,10 +34,10 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
                 dto.Currency = entity.Currency.Name;
                 dto.AdvanceTypeName = entity.AdvanceType.Name;
 
-                return new ServiceResponse<AdvanceDto>(dto) { Success = true } ;
+                return new ServiceResponse<AdvanceDto>(dto) { IsSuccess = true , Message = $"Acquirement of {dto.Id} has been successful." } ;
             }
 
-            return new ServiceResponse<AdvanceDto>() { Message = "Advance acquirement error!", Success = false };
+            return new ServiceResponse<AdvanceDto>() { IsSuccess = false, Message = $"Acquirement of {request.Id} has not been successful." };
         }
     }
 }

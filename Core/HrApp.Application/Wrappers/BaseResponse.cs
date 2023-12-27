@@ -8,7 +8,7 @@ namespace HrApp.Application.Wrappers
 {
     public class BaseResponse
     {
-        public bool Success { get; set; } = true;
+        public bool IsSuccess { get; set; } = true;
         public string Message { get; set; }
     }
 }

@@ -8,11 +8,11 @@ namespace HrApp.Application.Wrappers
 {
     public class ServiceResponse<T> : BaseResponse
     {
-        public T Value { get; set; }
+        public T Data { get; set; }
 
         public ServiceResponse(T value)
         {
-            Value = value;
+            Data = value;
         }
         public ServiceResponse()
         {

@@ -21,7 +21,7 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(new GetAppUserHomeById { Id = Id });
 
-            if (result.Success) return Ok(result.Value);
+            if (result.IsSuccess) return Ok(result.Data);
 
             return BadRequest(result.Message);
         }
@@ -30,7 +30,7 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(new GetAppUserDetailsById { Id = Id });
 
-            if (result.Success) return Ok(result.Value);
+            if (result.IsSuccess) return Ok(result.Data);
 
             return BadRequest(result.Message);
         }
@@ -39,7 +39,7 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(updateAppUserCommand);
 
-            if (result.Success) return Ok(result.Value);
+            if (result.IsSuccess) return Ok(result.Data);
 
             return BadRequest(result.Message);
         }
@@ -49,7 +49,7 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(loginCommand);
 
-            if (result.Success) return Ok(result.Token);
+            if (result.IsSuccess) return Ok(result.Token);
 
             return BadRequest(result.Message);
         }

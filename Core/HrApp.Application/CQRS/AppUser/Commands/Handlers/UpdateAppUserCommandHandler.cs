@@ -31,7 +31,7 @@ public class UpdateAppUserCommandHandler : IRequestHandler<UpdateAppUserCommand,
 
             if (tempUser == null)
             {
-                return new ServiceResponse<string>(request.Id) { Message = "User not found", Success = false };
+                return new ServiceResponse<string>(request.Id) { Message = "User not found", IsSuccess = false };
             }
 
             tempUser.Address = request.Address;
@@ -42,14 +42,14 @@ public class UpdateAppUserCommandHandler : IRequestHandler<UpdateAppUserCommand,
 
             if (result.Succeeded)
             {
-                return new ServiceResponse<string>(tempUser.Id) { Message = "User updated successfully", Success = true };
+                return new ServiceResponse<string>(tempUser.Id) { Message = "User updated successfully", IsSuccess = true };
             }
             else
             {
-                return new ServiceResponse<string>(tempUser.Id) { Message = "User updated failed", Success = false };
+                return new ServiceResponse<string>(tempUser.Id) { Message = "User updated failed", IsSuccess = false };
             }
         }
 
-        return new ServiceResponse<string>(request.Id) { Message = "User updated failed validation error", Success = false };
+        return new ServiceResponse<string>(request.Id) { Message = "User updated failed validation error", IsSuccess = false };
     }
 }

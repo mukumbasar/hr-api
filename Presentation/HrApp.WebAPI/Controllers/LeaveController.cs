@@ -18,41 +18,36 @@ namespace HrApp.WebAPI.Controllers
         public async Task<IActionResult> Get()
         {
             var result= await _mediator.Send(new ReadAllLeaveQuery());
-            if (result.Success) 
-            { return Ok(result.Value); }
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result); 
+            return BadRequest(result);
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> Get(int id)
         {
             var result= await _mediator.Send(new ReadLeaveQuery(id));
-            if(result.Success) 
-            { return Ok(result.Value); }
-            return BadRequest(result.Message);
+            if(result.IsSuccess) return Ok(result); 
+            return BadRequest(result);
         }
         [HttpPost]
         public async Task<IActionResult> Add(CreateLeaveCommand createLeaveCommand)
         {
             var result= await _mediator.Send(createLeaveCommand);
-            if (result.Success) 
-            { return Ok(result.Value); }
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result); 
+            return BadRequest(result);
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateLeaveCommand updateLeaveCommand)
         {
             var result= await _mediator.Send(updateLeaveCommand);
-            if (result.Success) 
-            { return Ok(result.Value); }
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(DeleteLeaveCommand deleteLeaveCommand)
         {
             var result = await _mediator.Send(deleteLeaveCommand);
-            if (result.Success)
-            { return Ok(result.Value); }
-            return BadRequest(result.Message);
+            if (result.IsSuccess) return Ok(result); 
+            return BadRequest(result);
         }
     }
 }

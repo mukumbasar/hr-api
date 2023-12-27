@@ -15,17 +15,17 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
     public class ReadAllExpenseQueryHandler : IRequestHandler<ReadAllExpenseQuery, ServiceResponse<List<ExpenseDto>>>
     {
         private readonly IMapper _mapper;
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IUow _uow;
 
-        public ReadAllExpenseQueryHandler(IMapper mapper, IExpenseRepository expenseRepository)
+        public ReadAllExpenseQueryHandler(IMapper mapper, IUow uow)
         {
             _mapper = mapper;
-            _expenseRepository = expenseRepository;
+            _uow = uow;
         }
 
         public async Task<ServiceResponse<List<ExpenseDto>>> Handle(ReadAllExpenseQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _expenseRepository.GetAllAsync(true, null, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
+            var entities = await _uow.GetExpenseRepository().GetAllAsync(true, null, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
 
             if (entities.Count() > 0)
             {
@@ -42,10 +42,10 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<ExpenseDto>>(dtos) { Success = true };
+                return new ServiceResponse<List<ExpenseDto>>(dtos) { Message = "Expense acquirement successful!", IsSuccess = true };
             }
 
-            return new ServiceResponse<List<ExpenseDto>>() { Message = "Expense acquirement error!", Success = false };
+            return new ServiceResponse<List<ExpenseDto>>() { Message = "Expense acquirement error!", IsSuccess = false };
         }
     }
 }

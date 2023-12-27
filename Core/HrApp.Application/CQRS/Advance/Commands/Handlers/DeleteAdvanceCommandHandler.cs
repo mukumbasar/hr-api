@@ -12,19 +12,28 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
 {
     public class DeleteAdvanceCommandHandler : IRequestHandler<DeleteAdvanceCommand, ServiceResponse<int>>
     {
-        private readonly IAdvanceRepository _advanceRepository;
+        private readonly IUow _uow;
 
-        public DeleteAdvanceCommandHandler(IAdvanceRepository advanceRepository)
+        public DeleteAdvanceCommandHandler(IUow uow)
         {
-            _advanceRepository = advanceRepository;
+            _uow = uow;
         }
         public async Task<ServiceResponse<int>> Handle(DeleteAdvanceCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _advanceRepository.GetAsync(true, x => x.Id == request.Id);
+            var entity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id);
 
-            await _advanceRepository.DeleteAsync(entity);
+            await _uow.GetAdvanceRepository().DeleteAsync(entity);
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Deletion has been completed successfully", Success = true };
+            await _uow.CommitAsync();
+
+            var deletedEntity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id);
+
+            if(deletedEntity == null) 
+            {
+                return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has been completed.", IsSuccess = true };
+            }
+
+            return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has not been completed.", IsSuccess = false };
         }
     }
 }
