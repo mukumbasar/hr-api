@@ -31,11 +31,13 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             var entity = _uow.GetLeaveRepository().GetAsync(true, x => x.Id == request.Id).Result;
 
+            var oldLeaveAmount = entity.EndDate - entity.StartDate;
+
             entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
 
             var newLeaveAmount = entity.EndDate - entity.StartDate;
 
-            if(newLeaveAmount.Days > user.YearlyLeaveDaysLeft)
+            if(newLeaveAmount.Days > user.YearlyLeaveDaysLeft + oldLeaveAmount.Days)
             {
                 return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"The leave has not been updated: You only have {user.YearlyLeaveDaysLeft}", IsSuccess = false };
             }
@@ -44,9 +46,11 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            user.YearlyLeaveDaysLeft = newLeaveAmount.Days;
+            user.YearlyLeaveDaysLeft += oldLeaveAmount.Days - newLeaveAmount.Days;
 
-            return new ServiceResponse<int>(entity.Id) { Message = "The leave has been updated successfully", IsSuccess = true };
+            await _userManager.UpdateAsync(user);
+
+            return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"The leave has been updated successfully: You have {user.YearlyLeaveDaysLeft} leave days left.", IsSuccess = true };
         }
     }
 }
