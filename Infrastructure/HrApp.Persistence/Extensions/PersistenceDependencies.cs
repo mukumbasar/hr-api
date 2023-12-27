@@ -27,6 +27,10 @@ namespace HrApp.Persistence.Extensions
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<IAdvanceRepository, AdvanceRepository>();
+            services.AddScoped<IAdvanceTypeRepository, AdvanceTypeRepository>();
+            services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
+            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+            services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             services.AddScoped<IUow, Uow>();
          #endregion
 

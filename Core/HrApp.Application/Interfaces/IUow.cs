@@ -12,5 +12,9 @@ namespace HrApp.Application.Interfaces
         IAdvanceRepository GetAdvanceRepository();
         IExpenseRepository GetExpenseRepository();
         ILeaveRepository GetLeaveRepository();
+        IAdvanceTypeRepository GetAdvanceTypeRepository();
+        IExpenseTypeRepository GetExpenseTypeRepository();
+        ILeaveTypeRepository GetLeaveTypeRepository();
+        ICurrencyRepository GetCurrencyRepository();
     }
 }

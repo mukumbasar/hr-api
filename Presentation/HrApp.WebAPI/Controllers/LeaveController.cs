@@ -1,5 +1,6 @@
 ﻿using HrApp.Application.CQRS.Leave.Commands;
 using HrApp.Application.CQRS.Leave.Queries;
+using HrApp.Application.CQRS.LeaveType.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,15 @@ namespace HrApp.WebAPI.Controllers
             if (result.IsSuccess) return Ok(result); 
             return BadRequest(result);
         }
+
+        [HttpGet("Types")]
+        public async Task<IActionResult> GetTypes()
+        {
+            var result = await _mediator.Send(new ReadAllLeaveTypeQuery());
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+
         [HttpGet("{Id}")]
         public async Task<IActionResult> Get(int id)
         {

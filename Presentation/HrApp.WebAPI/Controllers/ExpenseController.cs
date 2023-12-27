@@ -1,5 +1,6 @@
 ﻿using HrApp.Application.CQRS.Expense.Commands;
 using HrApp.Application.CQRS.Expense.Queries;
+using HrApp.Application.CQRS.ExpenseType.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,14 @@ namespace HrApp.WebAPI.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await mediator.Send(new ReadAllExpenseQuery());
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet("Types")]
+        public async Task<IActionResult> GetTypes()
+        {
+            var result = await mediator.Send(new ReadAllExpenseTypeQuery());
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
