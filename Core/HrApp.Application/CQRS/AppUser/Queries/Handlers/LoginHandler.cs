@@ -41,8 +41,10 @@ namespace HrApp.Application
                 var user = await _userManager.FindByNameAsync(command.Email);
 
                 response.Token = GenerateJwtToken(user);
-            }
 
+                return response;
+            }
+            response.IsSuccess = false;
             return response;
         }
 
