@@ -34,13 +34,8 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             await _userManager.UpdateAsync(user);
 
             await _uow.CommitAsync();
-
-            var deletedEntity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id);
-
             
             return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"Deletion of advance {request.Id} has been completed. Current amount: {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
-            
-
         }
     }
 }
