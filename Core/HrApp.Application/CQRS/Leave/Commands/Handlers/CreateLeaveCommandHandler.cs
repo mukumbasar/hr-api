@@ -30,6 +30,15 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
         {
             var user = await _userManager.FindByIdAsync(request.AppUserId);
 
+            if(request.LeaveTypeId != 1)
+            {
+
+                var leave = await _uow.GetLeaveTypeRepository().GetAsync(true, x => x.Id == request.LeaveTypeId);
+                int numofdays = leave.NumDays;
+
+                request.EndDate = request.StartDate.AddDays(numofdays);
+            }
+
             var leaveAmount = request.EndDate - request.StartDate; 
 
             if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
