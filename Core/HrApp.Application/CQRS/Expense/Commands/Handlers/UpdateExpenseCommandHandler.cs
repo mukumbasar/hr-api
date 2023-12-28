@@ -29,7 +29,7 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
 
             entity = _mapper.Map<HrApp.Domain.Entities.Expense>(request);
 
-            entity.Document = await ImageConversions.ConvertToByteArrayAsync(request.File);
+            //entity.Document = await ImageConversions.ConvertToByteArrayAsync(request.File);
 
             await _uow.GetExpenseRepository().UpdateAsync(entity);
 
