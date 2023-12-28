@@ -34,7 +34,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
             {
-                return new ServiceResponse<int>(leaveAmount.Days) { Message = $"Leave has not been added: You only have {leaveAmount.Days} days left.", IsSuccess = false };
+                return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"Leave has not been added: You only have {user.YearlyLeaveDaysLeft} days left.", IsSuccess = false };
             }
 
             var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
