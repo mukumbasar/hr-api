@@ -50,10 +50,10 @@ namespace HrApp.WebAPI.Controllers
             if(result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
-        [HttpDelete]
-        public async Task<IActionResult> Delete(DeleteAdvanceCommand deleteAdvanceCommand)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = await _mediator.Send(deleteAdvanceCommand);
+            var result = await _mediator.Send(new DeleteAdvanceCommand(id));
             if(result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
