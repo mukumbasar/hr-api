@@ -40,6 +40,8 @@ namespace HrApp.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CreateAdvanceCommand createAdvanceCommand)
         {
+            //todo düzeltilecek
+            if (createAdvanceCommand.Amount <= 0) { return BadRequest(new ServiceResponse<decimal>() { Data = default, IsSuccess = false, Message = "Amount must be greater than 0" }); }
             var result = await _mediator.Send(createAdvanceCommand);
             if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
