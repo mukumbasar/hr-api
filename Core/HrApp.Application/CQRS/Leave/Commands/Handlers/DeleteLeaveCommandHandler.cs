@@ -31,8 +31,8 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             var user = await _userManager.FindByIdAsync(entity.AppUserId);
 
             await _uow.GetLeaveRepository().DeleteAsync(entity);
-
-            user.YearlyLeaveDaysLeft += leaveAmount.Days;
+            if (entity.LeaveTypeId == 1)
+                user.YearlyLeaveDaysLeft += leaveAmount.Days;
 
             await _userManager.UpdateAsync(user);
 
