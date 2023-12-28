@@ -30,20 +30,20 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             var user = await _userManager.FindByIdAsync(request.AppUserId);
 
             var entity = _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id).Result;
-
             var oldAdvance = entity.Amount;
             entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
             var newAdvance = entity.Amount;
-            if (user.YearlyAdvanceAmountLeft < newAdvance + oldAdvance)
+            if (user.YearlyAdvanceAmountLeft <= newAdvance - oldAdvance)
             {
                 return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"The advance has not been updated: You only have {user.YearlyAdvanceAmountLeft}", IsSuccess = false };
             }
-
+            user.YearlyAdvanceAmountLeft -= newAdvance - oldAdvance;
+            await _userManager.UpdateAsync(user);
             await _uow.GetAdvanceRepository().UpdateAsync(entity);
 
             await _uow.CommitAsync();
 
-            return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = "The advance has been updated.", IsSuccess = true };
+            return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"The advance has been updated: You have {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
         }
     }
 }

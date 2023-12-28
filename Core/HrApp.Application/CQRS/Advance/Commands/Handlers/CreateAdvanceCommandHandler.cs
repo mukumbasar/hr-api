@@ -34,6 +34,12 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             var user = await _userManager.FindByIdAsync(request.AppUserId);
 
             await _uow.GetAdvanceRepository().AddAsync(entity);
+            var tempList = await _uow.GetAdvanceRepository().GetAllAsync(true, x => x.AppUserId == request.AppUserId);
+            var userLeft = user.YearlyAdvanceAmountLeft;
+            if (request.Amount > userLeft)
+            {
+                return new ServiceResponse<decimal>() { Message = $"You have exceeded your yearly advance amount. Current amount left: {user.YearlyAdvanceAmountLeft}", IsSuccess = false };
+            }
 
             user.YearlyAdvanceAmountLeft -= request.Amount;
 
@@ -42,7 +48,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             await _uow.CommitAsync();
 
             return new ServiceResponse<decimal>() { Message = $"An advance has been added. Current Amount left: {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
-            
+
         }
     }
 }
