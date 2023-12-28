@@ -37,7 +37,7 @@ namespace HrApp.Application
             if (IsValidUser(command.Email, command.Password))
             {
 
-                var user = await _userManager.FindByNameAsync(command.Email);
+                var user = await _userManager.FindByEmailAsync(command.Email);
 
                 response.Token = GenerateJwtToken(user);
 
@@ -49,7 +49,7 @@ namespace HrApp.Application
 
         private bool IsValidUser(string username, string password)
         {
-            var user = _userManager.FindByNameAsync(username).Result;
+            var user = _userManager.FindByEmailAsync(username).Result;
 
             if ( user != null)
             {

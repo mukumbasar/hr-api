@@ -3,7 +3,6 @@ using HrApp.Domain.Entities;
 using HrApp.Persistence.Context;
 using HrApp.Persistence.Repositories.Specific;
 using HrApp.Persistence.UnitOfWork;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -41,10 +40,7 @@ namespace HrApp.Persistence.Extensions
             options.Password.RequireUppercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 4;
-            options.SignIn.RequireConfirmedEmail = false;
-            options.Stores.ProtectPersonalData = false;
-         }).AddEntityFrameworkStores<HrAppDbContext>()
-         .AddSignInManager();
+         }).AddEntityFrameworkStores<HrAppDbContext>();
       }
    }
 }
