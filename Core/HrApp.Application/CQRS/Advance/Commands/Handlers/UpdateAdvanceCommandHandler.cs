@@ -43,7 +43,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            return new ServiceResponse<decimal>(entity.Id) { Message = "The advance has been updated.", IsSuccess = true };
+            return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = "The advance has been updated.", IsSuccess = true };
         }
     }
 }

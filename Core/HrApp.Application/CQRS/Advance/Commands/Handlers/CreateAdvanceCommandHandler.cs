@@ -17,21 +17,31 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         private readonly IMapper _mapper;
         private readonly IUow _uow;
 
-        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow)
+        private readonly UserManager<Domain.Entities.AppUser> _userManager;
+
+        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager)
         {
             _mapper = mapper;
             _uow = uow;
+
+            _userManager = userManager;
         }
 
         public async Task<ServiceResponse<decimal>> Handle(CreateAdvanceCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
+            var user = await _userManager.FindByIdAsync(request.AppUserId);
+
             await _uow.GetAdvanceRepository().AddAsync(entity);
+
+            user.YearlyAdvanceAmountLeft -= request.Amount;
+
+            await _userManager.UpdateAsync(user);
 
             await _uow.CommitAsync();
 
-            return new ServiceResponse<decimal>() { Message = "An advance has been added.", IsSuccess = true };
+            return new ServiceResponse<decimal>() { Message = $"An advance has been added. Current Amount left: {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
             
         }
     }
