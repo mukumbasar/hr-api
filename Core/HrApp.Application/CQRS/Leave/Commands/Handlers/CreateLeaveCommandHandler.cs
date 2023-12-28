@@ -37,9 +37,11 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
                 int numofdays = leave.NumDays;
 
                 request.EndDate = request.StartDate.AddDays(numofdays);
+                request.NumDays = numofdays;
             }
 
-            var leaveAmount = request.EndDate - request.StartDate; 
+            var leaveAmount = request.EndDate - request.StartDate;
+            request.NumDays = leaveAmount.Days;
 
             if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
             {
