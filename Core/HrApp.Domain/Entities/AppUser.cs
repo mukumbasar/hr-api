@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace HrApp.Domain.Entities
 {
-   public class AppUser : IdentityUser, IEntity
-   {
+    public class AppUser : IdentityUser, IEntity
+    {
         public string Name { get; set; }
         public string? SecondName { get; set; }
         public string Surname { get; set; }
@@ -24,7 +24,6 @@ namespace HrApp.Domain.Entities
         public string Department { get; set; }
         public string CompanyName { get; set; }
         public string Occupation { get; set; }
-        public string Email { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }
         public decimal Salary { get; set; }
@@ -35,5 +34,5 @@ namespace HrApp.Domain.Entities
         public List<Leave> Leaves { get; set; }
         public List<Expense> Expenses { get; set; }
     }
-    
+
 }
