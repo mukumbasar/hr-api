@@ -38,9 +38,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            
             return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has been completed.", IsSuccess = true };
-            
         }
     }
 }
