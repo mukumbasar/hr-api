@@ -15,7 +15,7 @@ namespace HrApp.Application.Validators
             RuleFor(x => x.Amount).NotEmpty();
             RuleFor(x => x.CurrencyId).NotEmpty();
             RuleFor(x => x.ExpenseTypeId).NotEmpty();
-            RuleFor(x => x.File).NotEmpty();
+            RuleFor(x => x.Document).NotEmpty();
         }
     }
 }
