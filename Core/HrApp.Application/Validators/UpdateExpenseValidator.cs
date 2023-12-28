@@ -1,0 +1,23 @@
+﻿using FluentValidation;
+using HrApp.Application.CQRS.Expense.Commands;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HrApp.Application.Validators
+{
+    internal class UpdateExpenseValidator : AbstractValidator<UpdateExpenseCommand>
+    {
+
+        public UpdateExpenseValidator() 
+        {
+            RuleFor(x => x.Amount).NotEmpty();
+            RuleFor(x => x.CurrencyId).NotEmpty();
+            RuleFor(x => x.ExpenseTypeId).NotEmpty();
+            RuleFor(x => x.File).NotEmpty();
+
+        }
+    }
+}

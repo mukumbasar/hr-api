@@ -1,5 +1,4 @@
-﻿using HrApp.Application.CQRS.AppUser.Commands;
-using HrApp.Application.Wrappers;
+﻿using HrApp.Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using HrApp.Domain.Entities;
@@ -41,8 +40,10 @@ namespace HrApp.Application
                 var user = await _userManager.FindByNameAsync(command.Email);
 
                 response.Token = GenerateJwtToken(user);
-            }
 
+                return response;
+            }
+            response.IsSuccess = false;
             return response;
         }
 

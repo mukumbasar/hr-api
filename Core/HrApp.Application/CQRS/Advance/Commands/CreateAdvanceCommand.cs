@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.CQRS.Advance.Commands
 {
-    public class CreateAdvanceCommand : IRequest<ServiceResponse<int>>
+    public class CreateAdvanceCommand : IRequest<ServiceResponse<decimal>>
     {
         public string AppUserId { get; set; }
         public int AdvanceTypeId { get; set; }
