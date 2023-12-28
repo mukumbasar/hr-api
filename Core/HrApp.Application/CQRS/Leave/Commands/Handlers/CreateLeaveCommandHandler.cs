@@ -43,10 +43,15 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             var leaveAmount = request.EndDate - request.StartDate;
             request.NumDays = leaveAmount.Days;
 
-            if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
+            if(request.LeaveTypeId == 1 )
             {
-                return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"Leave has not been added: You only have {user.YearlyLeaveDaysLeft} days left.", IsSuccess = false };
+                if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
+                {
+                    return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"Leave has not been added: You only have {user.YearlyLeaveDaysLeft} days left.", IsSuccess = false };
+                }
+                user.YearlyLeaveDaysLeft -= request.NumDays;
             }
+            
 
             var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
 
