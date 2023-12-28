@@ -17,7 +17,7 @@ namespace HrApp.Domain.Entities
         public DateTime ApprovalDate { get; set; }
         public int LeaveTypeId { get; set; }
         public LeaveType LeaveType { get; set; }
-        public int ApprovalStatusId { get; set; }
+        public int ApprovalStatusId { get; set; } = 1;
         public ApprovalStatus ApprovalStatus { get; set;}
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }

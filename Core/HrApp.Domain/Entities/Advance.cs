@@ -18,7 +18,7 @@ namespace HrApp.Domain.Entities
         public AdvanceType AdvanceType { get; set; }
         public int CurrencyId { get; set; }
         public Currency Currency { get; set; }
-        public int ApprovalStatusId { get; set; }
+        public int ApprovalStatusId { get; set; } = 1;
         public ApprovalStatus ApprovalStatus { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }

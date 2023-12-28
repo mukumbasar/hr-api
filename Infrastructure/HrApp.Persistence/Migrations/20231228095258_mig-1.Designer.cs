@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HrApp.Persistence.Migrations
 {
     [DbContext(typeof(HrAppDbContext))]
-    [Migration("20231227092435_mig7")]
-    partial class mig7
+    [Migration("20231228095258_mig-1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,18 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AdvanceType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bireysel"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Kurumsal"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.AppRole", b =>
@@ -130,6 +142,23 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ApprovalStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Waiting..."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Approved!"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Declined!"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.AppUser", b =>
@@ -263,13 +292,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fd9ede9e-965c-445a-9b1d-22b3916dd5f1",
+                            Id = "aed66109-009f-42b3-9e3d-37f4b4038119",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Mom",
-                            BirthYear = new DateTime(1993, 12, 27, 12, 24, 35, 224, DateTimeKind.Local).AddTicks(6501),
+                            BirthYear = new DateTime(1993, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3766),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "84cedc6e-ca7e-4fd6-8837-d1b93259a54e",
+                            ConcurrencyStamp = "ff9bcecc-e4d8-4c18-8361-acf1adc6a27e",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -279,11 +308,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPvQfpXJMbiRv1+sDIMt/MGQHOH3Hba+IAvcK2693bwqNtc6k2vgyV8Nyvx8alYRbw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAt+zPd62N/WxhpvpHje7JijR3Cjic/Vgyj/p2zlZBSsgCMU0aKZZd5WweZDs6SYaQ==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "62b70383-bbbb-4a60-b8c5-8149fa9dc8fc",
-                            StartDate = new DateTime(2013, 12, 27, 12, 24, 35, 224, DateTimeKind.Local).AddTicks(6510),
+                            SecurityStamp = "0024aa3e-471c-4c5e-afd6-48f8fd029183",
+                            StartDate = new DateTime(2013, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3779),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -308,6 +337,28 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currency");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "₺"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "€"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "$"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "£"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.Expense", b =>
@@ -369,6 +420,28 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yeme-içme"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Eğitim"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Konaklama"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Seyahat"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.Leave", b =>
@@ -430,6 +503,38 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeaveType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yıllık"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Doğum"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Ölüm"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Babalık"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Mazeret"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Evlilik"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

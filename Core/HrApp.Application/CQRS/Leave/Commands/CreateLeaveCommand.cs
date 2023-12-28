@@ -1,4 +1,5 @@
 ﻿using HrApp.Application.Wrappers;
+using HrApp.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

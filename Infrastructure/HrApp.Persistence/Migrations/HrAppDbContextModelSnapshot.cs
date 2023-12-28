@@ -22,6 +22,82 @@ namespace HrApp.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("HrApp.Domain.Entities.Advance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AdvanceTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ApprovalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvanceTypeId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ApprovalStatusId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.ToTable("Advance");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.AdvanceType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdvanceType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bireysel"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Kurumsal"
+                        });
+                });
+
             modelBuilder.Entity("HrApp.Domain.Entities.AppRole", b =>
                 {
                     b.Property<string>("Id")
@@ -47,6 +123,40 @@ namespace HrApp.Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.ApprovalStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApprovalStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Waiting..."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Approved!"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Declined!"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.AppUser", b =>
@@ -88,14 +198,11 @@ namespace HrApp.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -136,11 +243,9 @@ namespace HrApp.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecondName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecondSurname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -164,6 +269,12 @@ namespace HrApp.Persistence.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<decimal>("YearlyAdvanceAmountLeft")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("YearlyLeaveDaysLeft")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -175,6 +286,253 @@ namespace HrApp.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "aed66109-009f-42b3-9e3d-37f4b4038119",
+                            AccessFailedCount = 0,
+                            Address = "address1231231231232",
+                            BirthPlace = "Mom",
+                            BirthYear = new DateTime(1993, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3766),
+                            CompanyName = "KOC",
+                            ConcurrencyStamp = "ff9bcecc-e4d8-4c18-8361-acf1adc6a27e",
+                            Department = "IT",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            MobileNumber = "0555555555",
+                            Name = "user",
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER1",
+                            Occupation = "Formatçı",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAt+zPd62N/WxhpvpHje7JijR3Cjic/Vgyj/p2zlZBSsgCMU0aKZZd5WweZDs6SYaQ==",
+                            PhoneNumberConfirmed = false,
+                            Salary = 20000m,
+                            SecurityStamp = "0024aa3e-471c-4c5e-afd6-48f8fd029183",
+                            StartDate = new DateTime(2013, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3779),
+                            Surname = "usersurname",
+                            TurkishIdentificationNumber = "11111111111",
+                            TwoFactorEnabled = false,
+                            UserName = "user1",
+                            YearlyAdvanceAmountLeft = 0m,
+                            YearlyLeaveDaysLeft = 0
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Currency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currency");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "₺"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "€"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "$"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "£"
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ApprovalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Document")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("ExpenseTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ApprovalStatusId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("ExpenseTypeId");
+
+                    b.ToTable("Expense");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.ExpenseType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExpenseType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yeme-içme"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Eğitim"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Konaklama"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Seyahat"
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Leave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ApprovalStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LeaveTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ApprovalStatusId");
+
+                    b.HasIndex("LeaveTypeId");
+
+                    b.ToTable("Leave");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.LeaveType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeaveType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yıllık"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Doğum"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Ölüm"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Babalık"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Mazeret"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Evlilik"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -283,6 +641,103 @@ namespace HrApp.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HrApp.Domain.Entities.Advance", b =>
+                {
+                    b.HasOne("HrApp.Domain.Entities.AdvanceType", "AdvanceType")
+                        .WithMany("Advances")
+                        .HasForeignKey("AdvanceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Advances")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.ApprovalStatus", "ApprovalStatus")
+                        .WithMany("Advances")
+                        .HasForeignKey("ApprovalStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.Currency", "Currency")
+                        .WithMany("Advances")
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdvanceType");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("ApprovalStatus");
+
+                    b.Navigation("Currency");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Expense", b =>
+                {
+                    b.HasOne("HrApp.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Expenses")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.ApprovalStatus", "ApprovalStatus")
+                        .WithMany("Expenses")
+                        .HasForeignKey("ApprovalStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.Currency", "Currency")
+                        .WithMany("Expenses")
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.ExpenseType", "ExpenseType")
+                        .WithMany("Expenses")
+                        .HasForeignKey("ExpenseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("ApprovalStatus");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("ExpenseType");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Leave", b =>
+                {
+                    b.HasOne("HrApp.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Leaves")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.ApprovalStatus", "ApprovalStatus")
+                        .WithMany("Leaves")
+                        .HasForeignKey("ApprovalStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HrApp.Domain.Entities.LeaveType", "LeaveType")
+                        .WithMany("Leaves")
+                        .HasForeignKey("LeaveTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("ApprovalStatus");
+
+                    b.Navigation("LeaveType");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("HrApp.Domain.Entities.AppRole", null)
@@ -332,6 +787,46 @@ namespace HrApp.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.AdvanceType", b =>
+                {
+                    b.Navigation("Advances");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.ApprovalStatus", b =>
+                {
+                    b.Navigation("Advances");
+
+                    b.Navigation("Expenses");
+
+                    b.Navigation("Leaves");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.AppUser", b =>
+                {
+                    b.Navigation("Advances");
+
+                    b.Navigation("Expenses");
+
+                    b.Navigation("Leaves");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Currency", b =>
+                {
+                    b.Navigation("Advances");
+
+                    b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.ExpenseType", b =>
+                {
+                    b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.LeaveType", b =>
+                {
+                    b.Navigation("Leaves");
                 });
 #pragma warning restore 612, 618
         }
