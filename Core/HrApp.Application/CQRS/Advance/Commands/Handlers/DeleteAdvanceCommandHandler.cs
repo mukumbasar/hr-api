@@ -37,12 +37,10 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
 
             var deletedEntity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id);
 
-            if(deletedEntity == null) 
-            {
-                return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"Deletion of advance {request.Id} has been completed. Current amount: {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
-            }
+            
+            return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"Deletion of advance {request.Id} has been completed. Current amount: {user.YearlyAdvanceAmountLeft}", IsSuccess = true };
+            
 
-            return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"Deletion of advance {request.Id} has not been completed. Current amount: {user.YearlyAdvanceAmountLeft}", IsSuccess = false };
         }
     }
 }
