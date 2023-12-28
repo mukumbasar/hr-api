@@ -1,6 +1,7 @@
 ﻿using HrApp.Application.CQRS.Expense.Commands;
 using HrApp.Application.CQRS.Expense.Queries;
 using HrApp.Application.CQRS.ExpenseType.Queries;
+using HrApp.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace HrApp.WebAPI.Controllers
     public class ExpenseController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly ILogger<Expense> _logger;
 
-        public ExpenseController(IMediator mediator)
+        public ExpenseController(IMediator mediator, ILogger<Expense> logger)
         {
             this.mediator = mediator;
+            _logger = logger;
         }
 
 
@@ -46,6 +49,7 @@ namespace HrApp.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateExpenseCommand command)
         {
+            _logger.LogInformation(command.File.FileName);
             var result = await mediator.Send(command);
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
