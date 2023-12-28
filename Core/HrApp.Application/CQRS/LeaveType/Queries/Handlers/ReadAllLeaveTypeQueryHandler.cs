@@ -25,7 +25,7 @@ namespace HrApp.Application.CQRS.LeaveType.Queries.Handlers
 
         public async Task<ServiceResponse<List<LeaveTypeDto>>> Handle(ReadAllLeaveTypeQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetCurrencyRepository().GetAllAsync(true);
+            var entities = await _uow.GetLeaveTypeRepository().GetAllAsync(true);
 
             if (entities.Count() > 0)
             {
