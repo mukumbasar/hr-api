@@ -13,7 +13,7 @@ namespace HrApp.Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime RequestDate { get; set; }
-        public int Amount { get; set; }
+        public int NumDays { get; set; }
         public DateTime ApprovalDate { get; set; }
         public int LeaveTypeId { get; set; }
         public LeaveType LeaveType { get; set; }
