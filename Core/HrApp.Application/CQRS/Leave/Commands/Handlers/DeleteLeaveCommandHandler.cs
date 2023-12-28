@@ -38,14 +38,9 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            var deletedEntity = await _uow.GetLeaveRepository().GetAsync(true, x => x.Id == request.Id);
-
-            if (deletedEntity == null)
-            {
-                return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has been completed.", IsSuccess = true };
-            }
-
-            return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has not been completed.", IsSuccess = false };
+            
+            return new ServiceResponse<int>(request.Id) { Message = $"Deletion of advance {request.Id} has been completed.", IsSuccess = true };
+            
         }
     }
 }

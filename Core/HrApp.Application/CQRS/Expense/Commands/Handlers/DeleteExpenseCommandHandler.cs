@@ -28,14 +28,11 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            var deletedEntity = await _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id);
+            
+            return new ServiceResponse<int>(entity.Id) { Message = $"Deletion of expense {entity.Id} has been completed.", IsSuccess = true };
+            
 
-            if(deletedEntity == null) 
-            {
-                return new ServiceResponse<int>(entity.Id) { Message = $"Deletion of expense {entity.Id} has been completed.", IsSuccess = true };
-            }
-
-            return new ServiceResponse<int>(request.Id) { Message = $"Deletion of expense {entity.Id} has not been completed.", IsSuccess = false };
+            
         }
     }
 }
