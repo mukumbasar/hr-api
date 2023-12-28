@@ -11,6 +11,8 @@ namespace HrApp.Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public int NumDays { get; set; }
         public List<Leave> Leaves { get; set; }
     }
 }

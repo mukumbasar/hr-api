@@ -53,12 +53,12 @@ namespace HrApp.Persistence.Context
             modelBuilder.Entity<AppUser>().HasData(adminUser);
 
 
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık"});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum"});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm"});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık"});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Mazeret"});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 6, Name="Evlilik"});
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık", NumDays=1});
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum", NumDays = 56 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm", NumDays = 3 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık", NumDays = 5 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Mazeret", NumDays = 10 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 6, Name="Evlilik", NumDays = 3 });
 
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 1, Name = "Bireysel" });
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 2, Name = "Kurumsal" });
