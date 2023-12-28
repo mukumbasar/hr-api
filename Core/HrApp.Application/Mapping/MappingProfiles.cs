@@ -31,6 +31,11 @@ namespace HrApp.Application.Mapping
             CreateMap<CreateLeaveCommand, Leave>();
             CreateMap<UpdateLeaveCommand, Leave>();
             CreateMap<Leave, LeaveDto>();
+
+            CreateMap<AdvanceType, AdvanceTypeDto>();
+            CreateMap<ExpenseType, ExpenseTypeDto>();
+            CreateMap<LeaveType, LeaveTypeDto>();
+            CreateMap<Currency, CurrencyDto>();
         }
    }
 }

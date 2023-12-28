@@ -18,6 +18,7 @@ namespace HrApp.Persistence.Repositories.Generic
       public GenericRepository(HrAppDbContext context)
       {
          _context = context;
+         _dbSet = _context.Set<T>();
       }
 
       public async Task AddAsync(T entity)
