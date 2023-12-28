@@ -22,7 +22,7 @@ namespace HrApp.WebAPI.Controllers
             if(result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
-        [HttpGet("Id")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result= await _mediator.Send(new ReadAdvanceQuery(id));

@@ -38,7 +38,7 @@ namespace HrApp.WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await mediator.Send(new ReadExpenseQuery(id));
