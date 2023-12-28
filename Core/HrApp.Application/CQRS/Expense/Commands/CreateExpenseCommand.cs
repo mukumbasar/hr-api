@@ -15,8 +15,6 @@ namespace HrApp.Application.CQRS.Expense.Commands
         public int ExpenseTypeId { get; set; }
         public int CurrencyId { get; set; }
         public decimal Amount { get; set; }
-        public IFormFile File { get; set; }
-
         public byte[] Document {  get; set; }
     }
 }
