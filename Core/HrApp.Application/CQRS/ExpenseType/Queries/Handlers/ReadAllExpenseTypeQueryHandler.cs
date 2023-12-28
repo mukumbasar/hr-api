@@ -25,7 +25,7 @@ namespace HrApp.Application.CQRS.ExpenseType.Queries.Handlers
 
         public async Task<ServiceResponse<List<ExpenseTypeDto>>> Handle(ReadAllExpenseTypeQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetCurrencyRepository().GetAllAsync(true);
+            var entities = await _uow.GetExpenseTypeRepository().GetAllAsync(true);
 
             if (entities.Count() > 0)
             {
