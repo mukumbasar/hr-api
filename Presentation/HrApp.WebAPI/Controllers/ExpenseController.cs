@@ -49,7 +49,6 @@ namespace HrApp.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateExpenseCommand command)
         {
-            _logger.LogInformation(command.File.FileName);
             var result = await mediator.Send(command);
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
