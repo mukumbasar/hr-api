@@ -12,7 +12,7 @@ namespace HrApp.Application.Validators
     {
         public UpdateAdvanceValidator()
         {
-            RuleFor(x => x.Amount).NotEmpty();
+            RuleFor(x => x.Amount).NotEmpty().LessThan(1);
             RuleFor(x => x.CurrencyId).NotEmpty();
             RuleFor(x => x.AdvanceTypeId).NotEmpty();
             RuleFor(x => x.RequestDate).NotEmpty();

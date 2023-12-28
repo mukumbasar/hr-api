@@ -12,7 +12,7 @@ namespace HrApp.Application.Validators
     {
         public CreateExpenseValidator()
         {
-            RuleFor(x => x.Amount).NotEmpty();
+            RuleFor(x => x.Amount).NotEmpty().LessThan(1);
             RuleFor(x => x.CurrencyId).NotEmpty();
             RuleFor(x => x.ExpenseTypeId).NotEmpty();
             RuleFor(x => x.Document).NotEmpty();
