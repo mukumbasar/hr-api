@@ -27,8 +27,6 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         {
             var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
-            entity.ApprovalStatusId = 1;
-
             await _uow.GetAdvanceRepository().AddAsync(entity);
 
             await _uow.CommitAsync();

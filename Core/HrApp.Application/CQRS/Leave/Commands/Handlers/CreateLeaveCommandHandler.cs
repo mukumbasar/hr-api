@@ -39,8 +39,6 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
 
-            entity.ApprovalStatusId = 1;
-
             await _uow.GetLeaveRepository().AddAsync(entity);
 
             await _uow.CommitAsync();
