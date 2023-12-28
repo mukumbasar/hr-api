@@ -33,7 +33,8 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             var oldAdvance = entity.Amount;
             entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
             var newAdvance = entity.Amount;
-            if (user.YearlyAdvanceAmountLeft <= newAdvance - oldAdvance)
+            var totalAdvance = newAdvance - oldAdvance;
+            if (user.YearlyAdvanceAmountLeft < totalAdvance)
             {
                 return new ServiceResponse<decimal>(user.YearlyAdvanceAmountLeft) { Message = $"The advance has not been updated: You only have {user.YearlyAdvanceAmountLeft}", IsSuccess = false };
             }
