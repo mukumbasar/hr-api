@@ -20,8 +20,7 @@ namespace HrApp.Domain.Entities
         public string TurkishIdentificationNumber { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public bool IsActive { get { return EndDate == null ? true : false; }
-        }
+        public bool IsActive { get { return EndDate == null ? true : false; } }
         public string Department { get; set; }
         public string CompanyName { get; set; }
         public string Occupation { get; set; }

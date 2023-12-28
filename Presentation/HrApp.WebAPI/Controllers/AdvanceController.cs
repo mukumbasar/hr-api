@@ -1,4 +1,4 @@
-﻿using HrApp.Application.CQRS.Advance.Commands;
+﻿ using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.CQRS.Advance.Queries;
 using HrApp.Application.CQRS.AdvanceType.Queries;
 using MediatR;
