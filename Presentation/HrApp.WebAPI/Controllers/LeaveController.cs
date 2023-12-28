@@ -1,6 +1,7 @@
 ﻿using HrApp.Application.CQRS.Leave.Commands;
 using HrApp.Application.CQRS.Leave.Queries;
 using HrApp.Application.CQRS.LeaveType.Queries;
+using HrApp.Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,7 @@ namespace HrApp.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LeaveController :ControllerBase
+    public class LeaveController : ControllerBase
     {
         private readonly IMediator _mediator;
         public LeaveController(IMediator mediator)
@@ -18,8 +19,8 @@ namespace HrApp.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result= await _mediator.Send(new ReadAllLeaveQuery());
-            if (result.IsSuccess) return Ok(result); 
+            var result = await _mediator.Send(new ReadAllLeaveQuery());
+            if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
 
@@ -34,21 +35,23 @@ namespace HrApp.WebAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var result= await _mediator.Send(new ReadLeaveQuery(id));
-            if(result.IsSuccess) return Ok(result); 
+            var result = await _mediator.Send(new ReadLeaveQuery(id));
+            if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
         [HttpPost]
         public async Task<IActionResult> Add(CreateLeaveCommand createLeaveCommand)
         {
-            var result= await _mediator.Send(createLeaveCommand);
-            if (result.IsSuccess) return Ok(result); 
+            //todo düzeltilecek
+            if (createLeaveCommand.LeaveTypeId == 1 && createLeaveCommand.StartDate > createLeaveCommand.EndDate) return BadRequest(new ServiceResponse<int>() { Data = default, IsSuccess = false, Message = "The start date of leave cannot be earlier than the end date." });
+            var result = await _mediator.Send(createLeaveCommand);
+            if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateLeaveCommand updateLeaveCommand)
         {
-            var result= await _mediator.Send(updateLeaveCommand);
+            var result = await _mediator.Send(updateLeaveCommand);
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
@@ -56,7 +59,7 @@ namespace HrApp.WebAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteLeaveCommand(id));
-            if (result.IsSuccess) return Ok(result); 
+            if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
     }

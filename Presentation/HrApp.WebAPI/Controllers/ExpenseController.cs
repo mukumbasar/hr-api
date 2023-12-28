@@ -58,6 +58,7 @@ namespace HrApp.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(UpdateExpenseCommand command)
         {
+            //todo düzeltilecek
             if (command.Amount <= 0) return BadRequest(new ServiceResponse<int>() { Data = default, IsSuccess = false, Message = "Amount must be greater than 0" });
             var result = await mediator.Send(command);
             if (result.IsSuccess) return Ok(result);

@@ -47,6 +47,7 @@ namespace HrApp.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAdvanceCommand updateAdvanceCommand)
         {
+            //todo düzeltilecek
             if (updateAdvanceCommand.Amount <= 0) { return BadRequest(new ServiceResponse<decimal>() { Data = default, IsSuccess = false, Message = "Amount must be greater than 0" }); }
             var result = await _mediator.Send(updateAdvanceCommand);
             if (result.IsSuccess) { return Ok(result); }
