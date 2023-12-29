@@ -20,27 +20,27 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(new GetAppUserHomeById { Id = Id });
 
-            if (result.IsSuccess) return Ok(result.Data);
+            if (result.IsSuccess) return Ok(result);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpGet("details/{Id}")]
         public async Task<IActionResult> GetDetailUser(string Id)
         {
             var result = await mediator.Send(new GetAppUserDetailsById { Id = Id });
 
-            if (result.IsSuccess) return Ok(result.Data);
+            if (result.IsSuccess) return Ok(result);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpPut]
         public async Task<IActionResult> UpdateAppUser(UpdateAppUserCommand updateAppUserCommand)
         {
             var result = await mediator.Send(updateAppUserCommand);
 
-            if (result.IsSuccess) return Ok(result.Data);
+            if (result.IsSuccess) return Ok(result);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("login")]
@@ -48,9 +48,9 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(loginCommand);
 
-            if (result.IsSuccess) return Ok(result.Token);
+            if (result.IsSuccess) return Ok(result);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
     }
 }
