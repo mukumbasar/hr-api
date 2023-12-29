@@ -73,7 +73,8 @@ namespace HrApp.Application
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.NameIdentifier , user.Id),
-                    new Claim(ClaimTypes.Email , user.Email)
+                    new Claim(ClaimTypes.Email , user.Email),
+                    new Claim(ClaimTypes.Gender, user.GenderId.ToString())
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(1),
