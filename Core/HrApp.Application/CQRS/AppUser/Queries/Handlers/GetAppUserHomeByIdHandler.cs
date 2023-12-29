@@ -9,24 +9,24 @@ namespace HrApp.Application;
 
 public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, ServiceResponse<AppUserHomeDto>>
 {
-   private readonly UserManager<AppUser> userManager;
-   private readonly IMapper mapper;
+    private readonly UserManager<AppUser> userManager;
+    private readonly IMapper mapper;
 
-   public GetAppUserHomeByIdHandler(UserManager<AppUser> userManager, IMapper mapper)
-   {
+    public GetAppUserHomeByIdHandler(UserManager<AppUser> userManager, IMapper mapper)
+    {
         this.userManager = userManager;
         this.mapper = mapper;
-   }
+    }
 
-   public async Task<ServiceResponse<AppUserHomeDto>> Handle(GetAppUserHomeById request, CancellationToken cancellationToken)
-   {
+    public async Task<ServiceResponse<AppUserHomeDto>> Handle(GetAppUserHomeById request, CancellationToken cancellationToken)
+    {
         var user = await userManager.FindByIdAsync(request.Id);
 
         if (user == null)
         {
-           return new ServiceResponse<AppUserHomeDto>() { Message = "User not found", IsSuccess = false };
+            return new ServiceResponse<AppUserHomeDto>() { Message = "User not found", IsSuccess = false };
         }
-      
+
         var userDto = mapper.Map<AppUserHomeDto>(user);
 
         if (user.ImageData == null)
@@ -38,6 +38,6 @@ public class GetAppUserHomeByIdHandler : IRequestHandler<GetAppUserHomeById, Ser
             userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
         }
 
-        return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "User details retrieved successfully", IsSuccess = true };
-   }
+        return new ServiceResponse<AppUserHomeDto>(userDto) { Message = "", IsSuccess = true };
+    }
 }

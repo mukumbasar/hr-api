@@ -51,7 +51,7 @@ namespace HrApp.Application
         {
             var user = _userManager.FindByEmailAsync(username).Result;
 
-            if ( user != null)
+            if (user != null)
             {
                 var result = _signInManager.CheckPasswordSignInAsync(user, password, false).Result;
                 return result.Succeeded;
@@ -87,5 +87,5 @@ namespace HrApp.Application
 
 
 
-    
+
 }

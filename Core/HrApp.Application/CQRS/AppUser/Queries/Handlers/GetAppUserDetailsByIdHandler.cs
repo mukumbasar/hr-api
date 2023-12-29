@@ -9,26 +9,26 @@ namespace HrApp.Application;
 
 public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsById, ServiceResponse<AppUserDetailsDto>>
 {
-   private readonly UserManager<AppUser> userManager;
-   private readonly IMapper mapper;
+    private readonly UserManager<AppUser> userManager;
+    private readonly IMapper mapper;
 
-   public GetAppUserDetailsByIdHandler(UserManager<AppUser> userManager, IMapper mapper)
-   {
-      this.userManager = userManager;
-      this.mapper = mapper;
-   }
-   public async Task<ServiceResponse<AppUserDetailsDto>> Handle(GetAppUserDetailsById request, CancellationToken cancellationToken)
-   {
+    public GetAppUserDetailsByIdHandler(UserManager<AppUser> userManager, IMapper mapper)
+    {
+        this.userManager = userManager;
+        this.mapper = mapper;
+    }
+    public async Task<ServiceResponse<AppUserDetailsDto>> Handle(GetAppUserDetailsById request, CancellationToken cancellationToken)
+    {
         var user = await userManager.FindByIdAsync(request.Id);
 
         if (user == null)
         {
-           return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", IsSuccess = false };
+            return new ServiceResponse<AppUserDetailsDto>() { Message = "User not found", IsSuccess = false };
         }
 
         var userDto = mapper.Map<AppUserDetailsDto>(user);
 
-        if (user.ImageData == null) 
+        if (user.ImageData == null)
         {
             userDto.Image = $"/images/user/default.png";
         }
@@ -37,6 +37,6 @@ public class GetAppUserDetailsByIdHandler : IRequestHandler<GetAppUserDetailsByI
             userDto.Image = await ImageConversions.ConvertToIFormFile(user.ImageData);
         }
 
-        return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "User details retrieved successfully", IsSuccess = true };
-   }
+        return new ServiceResponse<AppUserDetailsDto>(userDto) { Message = "", IsSuccess = true };
+    }
 }
