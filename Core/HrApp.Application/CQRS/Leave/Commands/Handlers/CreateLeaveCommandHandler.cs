@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
@@ -16,18 +17,24 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IUow _uow;
-
+        private readonly IValidator<CreateLeaveCommand> validator;
         private readonly UserManager<HrApp.Domain.Entities.AppUser> _userManager;
 
-        public CreateLeaveCommandHandler(UserManager<HrApp.Domain.Entities.AppUser> userManager, IMapper mapper, IUow uow)
+        public CreateLeaveCommandHandler(UserManager<HrApp.Domain.Entities.AppUser> userManager, IMapper mapper, IUow uow, IValidator<CreateLeaveCommand> validator)
         {
             _mapper = mapper;
             _uow = uow;
+            this.validator = validator;
             _userManager = userManager;
         }
 
         public async Task<ServiceResponse<int>> Handle(CreateLeaveCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = await validator.ValidateAsync(request);
+            if (validationResult.IsValid)
+            {
+                return new ServiceResponse<int>(0) { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
+            }
             var user = await _userManager.FindByIdAsync(request.AppUserId);
 
             if (request.LeaveTypeId != 1)

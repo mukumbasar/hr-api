@@ -42,8 +42,6 @@ namespace HrApp.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CreateLeaveCommand createLeaveCommand)
         {
-            //todo düzeltilecek
-            if (createLeaveCommand.LeaveTypeId == 1 && createLeaveCommand.StartDate > createLeaveCommand.EndDate) return BadRequest(new ServiceResponse<int>() { Data = default, IsSuccess = false, Message = "The start date of leave cannot be earlier than the end date." });
             var result = await _mediator.Send(createLeaveCommand);
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);

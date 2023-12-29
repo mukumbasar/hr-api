@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using HrApp.Application.Interfaces;
 using HrApp.Application.Validators;
 using HrApp.Application.Wrappers;
@@ -18,17 +19,24 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         private readonly IUow _uow;
 
         private readonly UserManager<Domain.Entities.AppUser> _userManager;
+        private readonly IValidator<CreateAdvanceCommand> validator;
 
-        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager)
+        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager, IValidator<CreateAdvanceCommand> validator)
         {
             _mapper = mapper;
             _uow = uow;
 
             _userManager = userManager;
+            this.validator = validator;
         }
 
         public async Task<ServiceResponse<decimal>> Handle(CreateAdvanceCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                return new ServiceResponse<decimal>(0) { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
+            }
             var entity = _mapper.Map<HrApp.Domain.Entities.Advance>(request);
 
             var user = await _userManager.FindByIdAsync(request.AppUserId);

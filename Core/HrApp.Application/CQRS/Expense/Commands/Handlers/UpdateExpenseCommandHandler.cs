@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.Helpers;
 using HrApp.Application.Interfaces;
@@ -16,15 +17,20 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IUow _uow;
+        private readonly IValidator<UpdateExpenseCommand> validator;
 
-        public UpdateExpenseCommandHandler(IMapper mapper, IUow uow)
+        public UpdateExpenseCommandHandler(IMapper mapper, IUow uow, IValidator<UpdateExpenseCommand> validator)
         {
             _mapper = mapper;
             _uow = uow;
+            this.validator = validator;
         }
 
         public async Task<ServiceResponse<int>> Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+                return new ServiceResponse<int>(0) { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
             var entity = _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id).Result;
 
             entity = _mapper.Map<HrApp.Domain.Entities.Expense>(request);
