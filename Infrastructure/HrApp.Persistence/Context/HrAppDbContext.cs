@@ -25,16 +25,15 @@ namespace HrApp.Persistence.Context
             base.OnModelCreating(modelBuilder);
             var hasher = new PasswordHasher<AppUser>();
 
-
-            var adminUser = new AppUser
+            var user1 = new AppUser
             {
-                Id = Guid.NewGuid().ToString(), // Dinamik bir kullanıcı Id oluştur
+                Id = Guid.NewGuid().ToString(),
                 UserName = "user1",
                 NormalizedUserName = "USER1",
                 Name = "user",
                 Surname = "usersurname",
                 Address = "address1231231231232",
-                BirthPlace = "Mom",
+                BirthPlace = "Istanbul",
                 BirthYear = DateTime.Now.AddYears(-30),
                 CompanyName = "KOC",
                 Department = "IT",
@@ -42,23 +41,55 @@ namespace HrApp.Persistence.Context
                 TurkishIdentificationNumber = "11111111111",
                 StartDate = DateTime.Now.AddYears(-10),
                 Salary = 20000,
-                MobileNumber = "0555555555",
+                MobileNumber = "5554443322",
                 EmailConfirmed = true,
                 Email = "user@gmail.com",
-                NormalizedEmail = "USER@GMAIL.COM"
+                NormalizedEmail = "USER@GMAIL.COM",
+                GenderId = 2
             };
+            user1.PasswordHash = hasher.HashPassword(user1, "123321Qwe!");
+            modelBuilder.Entity<AppUser>().HasData(user1);
 
+
+            var adminRoleID = Guid.NewGuid().ToString();
+            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "Admin" });
+
+            var adminUser = new AppUser
+            {
+                Id = Guid.NewGuid().ToString(), 
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Name = "adminname",
+                Surname = "adminsurname",
+                Address = "adminaddress1231231231232",
+                BirthPlace = "Ankara",
+                BirthYear = DateTime.Now.AddYears(-50),
+                CompanyName = "KOC",
+                Department = "PATRON",
+                Occupation = "PATRON",
+                TurkishIdentificationNumber = "22222222222",
+                StartDate = DateTime.Now.AddYears(-15),
+                Salary = 500000,
+                MobileNumber = "5325323232",
+                EmailConfirmed = true,
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                GenderId = 1
+            };
             adminUser.PasswordHash = hasher.HashPassword(adminUser, "123321Qwe!");
-
             modelBuilder.Entity<AppUser>().HasData(adminUser);
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = adminUser.Id,
+                RoleId = adminRoleID
+            });
 
 
             modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık", NumDays=1});
             modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum", NumDays = 56 });
             modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm", NumDays = 3 });
             modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık", NumDays = 5 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Mazeret", NumDays = 10 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 6, Name="Evlilik", NumDays = 3 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Evlilik", NumDays = 3 });
 
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 1, Name = "Bireysel" });
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 2, Name = "Kurumsal" });
@@ -76,6 +107,10 @@ namespace HrApp.Persistence.Context
             modelBuilder.Entity<Currency>().HasData(new Currency { Id = 2, Name = "€" });
             modelBuilder.Entity<Currency>().HasData(new Currency { Id = 3, Name = "$" });
             modelBuilder.Entity<Currency>().HasData(new Currency { Id = 4, Name = "£" });
+
+            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 1, Name = "Erkek" });
+            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 2, Name = "Kadın" });
+
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
