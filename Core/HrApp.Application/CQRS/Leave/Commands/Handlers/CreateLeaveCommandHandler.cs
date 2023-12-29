@@ -30,7 +30,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
         {
             var user = await _userManager.FindByIdAsync(request.AppUserId);
 
-            if(request.LeaveTypeId != 1)
+            if (request.LeaveTypeId != 1)
             {
 
                 var leave = await _uow.GetLeaveTypeRepository().GetAsync(true, x => x.Id == request.LeaveTypeId);
@@ -43,7 +43,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             var leaveAmount = request.EndDate - request.StartDate;
             request.NumDays = leaveAmount.Days;
 
-            if(request.LeaveTypeId == 1 )
+            if (request.LeaveTypeId == 1)
             {
                 if (user.YearlyLeaveDaysLeft < leaveAmount.Days)
                 {
@@ -51,7 +51,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
                 }
                 user.YearlyLeaveDaysLeft -= request.NumDays;
             }
-            
+
 
             var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
 
@@ -59,7 +59,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             await _uow.CommitAsync();
 
-            return new ServiceResponse<int>(entity.Id) { Message = "Leave has been added successfully", IsSuccess = true };
+            return new ServiceResponse<int>(entity.Id) { Message = $"Leave has been added successfully: You have {user.YearlyLeaveDaysLeft} days left.", IsSuccess = true };
         }
     }
 }

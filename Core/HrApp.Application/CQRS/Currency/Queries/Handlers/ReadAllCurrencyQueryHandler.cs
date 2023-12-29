@@ -38,7 +38,7 @@ namespace HrApp.Application.CQRS.Currency.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<CurrencyDto>>(dtos) { IsSuccess = true, Message = "Currency types acquirement successful!" };
+                return new ServiceResponse<List<CurrencyDto>>(dtos) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<List<CurrencyDto>>() { IsSuccess = false, Message = "Currency types acquirement error!" };

@@ -37,7 +37,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
 
             var newLeaveAmount = entity.EndDate - entity.StartDate;
 
-            if(newLeaveAmount.Days > user.YearlyLeaveDaysLeft + oldLeaveAmount.Days)
+            if (newLeaveAmount.Days > user.YearlyLeaveDaysLeft + oldLeaveAmount.Days)
             {
                 return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"The leave has not been updated: You only have {user.YearlyLeaveDaysLeft}", IsSuccess = false };
             }

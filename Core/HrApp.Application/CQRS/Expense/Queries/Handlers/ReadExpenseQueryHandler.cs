@@ -36,7 +36,7 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                 dto.Currency = entity.Currency.Name;
                 dto.ExpenseTypeName = entity.ExpenseType.Name;
 
-                return new ServiceResponse<ExpenseDto>(dto) { Message = "Expense acquirement successful!", IsSuccess = true };
+                return new ServiceResponse<ExpenseDto>(dto) { Message = "", IsSuccess = true };
             }
 
             return new ServiceResponse<ExpenseDto>() { Message = "Expense acquirement error!", IsSuccess = false };

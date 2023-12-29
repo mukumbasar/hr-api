@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
+    options.AddPolicy("AllowSpecific", builder =>
     {
         builder.WithOrigins("https://ank14hrmvc.azurewebsites.net", "https://localhost:7298")
               .AllowAnyMethod()
@@ -25,16 +25,19 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
-//app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+}
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecific");
 app.UseAuthorization();
 
 app.MapControllers();

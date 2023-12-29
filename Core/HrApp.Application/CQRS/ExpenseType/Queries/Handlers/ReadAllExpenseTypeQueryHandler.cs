@@ -38,7 +38,7 @@ namespace HrApp.Application.CQRS.ExpenseType.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<ExpenseTypeDto>>(dtos) { IsSuccess = true, Message = "Expense types acquirement successful!" };
+                return new ServiceResponse<List<ExpenseTypeDto>>(dtos) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<List<ExpenseTypeDto>>() { IsSuccess = false, Message = "Expense types acquirement error!" };

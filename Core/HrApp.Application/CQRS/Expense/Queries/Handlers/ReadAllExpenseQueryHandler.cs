@@ -42,7 +42,7 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<ExpenseDto>>(dtos) { Message = "Expense acquirement successful!", IsSuccess = true };
+                return new ServiceResponse<List<ExpenseDto>>(dtos) { Message = "", IsSuccess = true };
             }
 
             return new ServiceResponse<List<ExpenseDto>>() { Message = "Expense acquirement error!", IsSuccess = false };

@@ -38,7 +38,7 @@ namespace HrApp.Application.CQRS.AdvanceType.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<AdvanceTypeDto>>(dtos) { IsSuccess = true, Message = "Advance types acquirement successful!" };
+                return new ServiceResponse<List<AdvanceTypeDto>>(dtos) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<List<AdvanceTypeDto>>() { IsSuccess = false, Message = "Advance types acquirement error!" };

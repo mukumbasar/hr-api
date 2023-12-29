@@ -25,7 +25,7 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
 
         public async Task<ServiceResponse<List<LeaveDto>>> Handle(ReadAllLeaveQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null,x => x.LeaveType, x => x.ApprovalStatus);
+            var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null, x => x.LeaveType, x => x.ApprovalStatus);
 
             if (entities.Count() > 0)
             {
@@ -41,7 +41,7 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<LeaveDto>>(dtos) { Message = "Expense acquirement success!", IsSuccess = true };
+                return new ServiceResponse<List<LeaveDto>>(dtos) { Message = "", IsSuccess = true };
             }
 
             return new ServiceResponse<List<LeaveDto>>() { Message = "Expense acquirement error!", IsSuccess = false };

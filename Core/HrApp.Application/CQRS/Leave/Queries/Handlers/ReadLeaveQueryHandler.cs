@@ -34,7 +34,7 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
                 dto.ApprovalStatus = entity.ApprovalStatus.Name;
                 dto.LeaveTypeName = entity.LeaveType.Name;
 
-                return new ServiceResponse<LeaveDto>(dto) { Message = "Leave acquirement success!", IsSuccess = true };
+                return new ServiceResponse<LeaveDto>(dto) { Message = "", IsSuccess = true };
             }
 
             return new ServiceResponse<LeaveDto>() { Message = "Leave acquirement error!", IsSuccess = false };

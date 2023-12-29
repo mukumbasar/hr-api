@@ -26,7 +26,7 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
         {
             var entity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus);
 
-            if(entity != null)
+            if (entity != null)
             {
                 var dto = _mapper.Map<AdvanceDto>(entity);
 
@@ -34,7 +34,7 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
                 dto.Currency = entity.Currency.Name;
                 dto.AdvanceTypeName = entity.AdvanceType.Name;
 
-                return new ServiceResponse<AdvanceDto>(dto) { IsSuccess = true , Message = $"Acquirement of {dto.Id} has been successful." } ;
+                return new ServiceResponse<AdvanceDto>(dto) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<AdvanceDto>() { IsSuccess = false, Message = $"Acquirement of {request.Id} has not been successful." };

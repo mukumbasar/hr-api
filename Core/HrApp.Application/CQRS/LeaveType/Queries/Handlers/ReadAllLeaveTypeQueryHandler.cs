@@ -38,7 +38,7 @@ namespace HrApp.Application.CQRS.LeaveType.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<LeaveTypeDto>>(dtos) { IsSuccess = true, Message = "Leave types acquirement successful!" };
+                return new ServiceResponse<List<LeaveTypeDto>>(dtos) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<List<LeaveTypeDto>>() { IsSuccess = false, Message = "Leave types acquirement error!" };

@@ -26,12 +26,12 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
         {
             var entities = await _uow.GetAdvanceRepository().GetAllAsync(true, null, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus);
 
-            if(entities.Count() > 0)
+            if (entities.Count() > 0)
             {
                 var dtos = new List<AdvanceDto>();
 
-                foreach(var entity in entities) 
-                { 
+                foreach (var entity in entities)
+                {
                     var mappedEntity = _mapper.Map<AdvanceDto>(entity);
 
                     mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
@@ -41,7 +41,7 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
                     dtos.Add(mappedEntity);
                 }
 
-                return new ServiceResponse<List<AdvanceDto>>(dtos) { IsSuccess = true, Message = "Advance acquirement successful!" };
+                return new ServiceResponse<List<AdvanceDto>>(dtos) { IsSuccess = true, Message = "" };
             }
 
             return new ServiceResponse<List<AdvanceDto>>() { IsSuccess = false, Message = "Advance acquirement error!" };
