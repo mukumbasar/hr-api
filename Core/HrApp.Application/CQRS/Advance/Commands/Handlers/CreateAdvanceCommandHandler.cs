@@ -21,7 +21,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         private readonly UserManager<Domain.Entities.AppUser> _userManager;
         private readonly IValidator<CreateAdvanceCommand> validator;
 
-        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager, IValidator<CreateAdvanceCommand> validator)
+        public CreateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager, CreateAdvanceValidator validator)
         {
             _mapper = mapper;
             _uow = uow;

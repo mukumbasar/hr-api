@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using HrApp.Application.Validators;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.Extensions
 {
-   public static class ApplicationDependencies
-   {
-      public static void AddApplicationDependencies(this IServiceCollection services)
-      {
-         //todo: expception yenilebilir
-         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationDependencies).Assembly));
-         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-      }
-   }
+    public static class ApplicationDependencies
+    {
+        public static void AddApplicationDependencies(this IServiceCollection services)
+        {
+            //todo: expception yenilebilir
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationDependencies).Assembly));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssemblyContaining<CreateLeaveValidator>();
+        }
+    }
 }

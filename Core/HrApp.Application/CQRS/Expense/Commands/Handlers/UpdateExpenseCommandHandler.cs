@@ -3,6 +3,7 @@ using FluentValidation;
 using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.Helpers;
 using HrApp.Application.Interfaces;
+using HrApp.Application.Validators;
 using HrApp.Application.Wrappers;
 using MediatR;
 using System;
@@ -19,7 +20,7 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
         private readonly IUow _uow;
         private readonly IValidator<UpdateExpenseCommand> validator;
 
-        public UpdateExpenseCommandHandler(IMapper mapper, IUow uow, IValidator<UpdateExpenseCommand> validator)
+        public UpdateExpenseCommandHandler(IMapper mapper, IUow uow, UpdateExpenseValidator validator)
         {
             _mapper = mapper;
             _uow = uow;

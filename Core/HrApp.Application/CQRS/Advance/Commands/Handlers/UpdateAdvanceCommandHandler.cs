@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using HrApp.Application.Interfaces;
+using HrApp.Application.Validators;
 using HrApp.Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
@@ -19,9 +20,9 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         private readonly IUow _uow;
 
         private readonly UserManager<Domain.Entities.AppUser> _userManager;
-        private readonly IValidator<UpdateAdvanceCommand> validator;
+        private readonly UpdateAdvanceValidator validator;
 
-        public UpdateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager, IValidator<UpdateAdvanceCommand> validator)
+        public UpdateAdvanceCommandHandler(IMapper mapper, IUow uow, UserManager<Domain.Entities.AppUser> userManager, UpdateAdvanceValidator validator)
         {
             _mapper = mapper;
             _uow = uow;

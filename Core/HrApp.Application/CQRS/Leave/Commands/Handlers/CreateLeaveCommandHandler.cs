@@ -2,6 +2,7 @@
 using FluentValidation;
 using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.Interfaces;
+using HrApp.Application.Validators;
 using HrApp.Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
         private readonly IValidator<CreateLeaveCommand> validator;
         private readonly UserManager<HrApp.Domain.Entities.AppUser> _userManager;
 
-        public CreateLeaveCommandHandler(UserManager<HrApp.Domain.Entities.AppUser> userManager, IMapper mapper, IUow uow, IValidator<CreateLeaveCommand> validator)
+        public CreateLeaveCommandHandler(UserManager<HrApp.Domain.Entities.AppUser> userManager, IMapper mapper, IUow uow, CreateLeaveValidator validator)
         {
             _mapper = mapper;
             _uow = uow;
@@ -31,7 +32,7 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
         public async Task<ServiceResponse<int>> Handle(CreateLeaveCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await validator.ValidateAsync(request);
-            if (validationResult.IsValid)
+            if (!validationResult.IsValid)
             {
                 return new ServiceResponse<int>(0) { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
             }

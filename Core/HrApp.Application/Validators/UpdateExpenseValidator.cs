@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.Validators
 {
-    internal class UpdateExpenseValidator : AbstractValidator<UpdateExpenseCommand>
+    public class UpdateExpenseValidator : AbstractValidator<UpdateExpenseCommand>
     {
 
         public UpdateExpenseValidator()
