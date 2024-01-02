@@ -11,10 +11,9 @@ namespace HrApp.Application.Validators
     {
         public UpdateAppUserCommandValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.UpdatedImage).NotEmpty();
-            RuleFor(x => x.Address).NotEmpty();
-            RuleFor(x => x.MobileNumber).NotEmpty();
+            RuleFor(y => y.Address).NotEmpty().WithMessage("Please enter your address.").MaximumLength(200).WithMessage("Address must be maximum of 200 characters.").MinimumLength(15).WithMessage("Address must be minimum of 15 characters.");
+            RuleFor(y => y.MobileNumber).NotEmpty().WithMessage("Please enter your mobile phone number.").Length(9, 11).WithMessage("Please enter a valid phone number. Like 5325323232");
+            RuleFor(y => y.UpdatedImage).NotEmpty().WithMessage("Please choose a photo.");
         }
     }
 

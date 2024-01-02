@@ -43,6 +43,15 @@ namespace MyApp.Namespace
 
             return BadRequest(result);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddAppUser(AddAppUserCommand addAppUserCommand)
+        {
+            var result = await mediator.Send(addAppUserCommand);
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
