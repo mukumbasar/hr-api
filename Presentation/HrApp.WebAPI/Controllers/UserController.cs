@@ -1,4 +1,5 @@
 using HrApp.Application;
+using HrApp.Application.CQRS.AppUser.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,15 @@ namespace MyApp.Namespace
         public async Task<IActionResult> UpdateAppUser(UpdateAppUserCommand updateAppUserCommand)
         {
             var result = await mediator.Send(updateAppUserCommand);
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddAppUser(AddAppUserCommand addAppUserCommand)
+        {
+            var result = await mediator.Send(addAppUserCommand);
 
             if (result.IsSuccess) return Ok(result);
 
