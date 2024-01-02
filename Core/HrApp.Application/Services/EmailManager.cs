@@ -46,13 +46,13 @@ namespace HrApp.Application.Services
             smtpClient.DeliveryMethod = smtpClient.DeliveryMethod;
             smtpClient.UseDefaultCredentials = false;
 
-            smtpClient.Host = _option.ServiceEmailOption.Host;
-            smtpClient.Port = _option.ServiceEmailOption.Port;
-            smtpClient.Credentials = new NetworkCredential(_option.ServiceEmailOption.Email, _option.ServiceEmailOption.Password);
+            smtpClient.Host = _option.Host;
+            smtpClient.Port = _option.Port;
+            smtpClient.Credentials = new NetworkCredential(_option.Email, _option.Password);
 
             var mailMessage = new MailMessage();
 
-            mailMessage.From = new MailAddress(_option.ServiceEmailOption.Email);
+            mailMessage.From = new MailAddress(_option.Email);
 
             mailMessage.To.Add(reciverMailAddress);
             mailMessage.Subject = subject;

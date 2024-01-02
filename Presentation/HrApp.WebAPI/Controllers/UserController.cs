@@ -54,7 +54,7 @@ namespace MyApp.Namespace
             return BadRequest(result);
         }
 
-        [HttpGet("{PasswordEmail/{email}")]
+        [HttpGet("PasswordEmail/{email}")]
         public async Task<IActionResult> SendPasswordEmail(string email)
         {
             var result = await mediator.Send(new SendPasswordEmailCommand { Email = email });

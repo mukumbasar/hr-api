@@ -26,9 +26,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var emailOption = builder.Configuration["EmailOption"];
-
-builder.Services.Configure<EmailOption>(builder.Configuration.GetSection(emailOption));
+builder.Services.Configure<EmailOption>(builder.Configuration.GetSection("EmailOption"));
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
