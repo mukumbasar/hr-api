@@ -1,4 +1,5 @@
 using HrApp.Application;
+using HrApp.Application.CQRS.AppUser.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,16 @@ namespace MyApp.Namespace
             var result = await mediator.Send(loginCommand);
 
             if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("{PasswordEmail/{email}")]
+        public async Task<IActionResult> SendPasswordEmail(string email)
+        {
+            var result = await mediator.Send(new SendPasswordEmailCommand { Email = email });
+
+            if(result.IsSuccess) return Ok(result);
 
             return BadRequest(result);
         }

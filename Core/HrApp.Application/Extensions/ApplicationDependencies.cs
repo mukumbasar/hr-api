@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using HrApp.Application.Interfaces;
+using HrApp.Application.Services;
 using HrApp.Application.Validators;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,7 @@ namespace HrApp.Application.Extensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationDependencies).Assembly));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssemblyContaining<CreateLeaveValidator>();
+            services.AddScoped<IEmailService, EmailManager>();
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using HrApp.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using HrApp.WebAPI;
+using HrApp.Application.EmailOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,11 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+var emailOption = builder.Configuration["EmailOption"];
+
+builder.Services.Configure<EmailOption>(builder.Configuration.GetSection(emailOption));
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
