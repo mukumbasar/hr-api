@@ -11,7 +11,6 @@ namespace HrApp.Domain.Entities
 {
     public class AppUser : IdentityUser, IEntity
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string? SecondName { get; set; }
         public string Surname { get; set; }
