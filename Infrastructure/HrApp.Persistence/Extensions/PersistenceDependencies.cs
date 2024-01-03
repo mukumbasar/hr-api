@@ -24,6 +24,7 @@ namespace HrApp.Persistence.Extensions
          });
 
             #region Uow and Repositories
+            services.AddScoped<IAppUserRepository, AppUserRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<IAdvanceRepository, AdvanceRepository>();

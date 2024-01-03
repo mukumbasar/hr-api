@@ -20,7 +20,8 @@ namespace HrApp.Application.Mapping
             CreateMap<AppUser, AppUserDetailsDto>();
             CreateMap<AppUser, AppUserHomeDto>();
             CreateMap<AppUser, AppUserUpdateDto>();
-            CreateMap<AddAppUserCommand,AppUser > ();
+            CreateMap<AddAppUserCommand, AppUser>();
+            CreateMap<AppUser,AppUserDto>();
 
             CreateMap<CreateAdvanceCommand, Advance>();
             CreateMap<UpdateAdvanceCommand, Advance>();
