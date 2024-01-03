@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HrApp.Domain.Entities
 {
-    public class Gender
+    public class LeaveTypeFocus
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<AppUser> AppUsers { get; set; }
+        public List<LeaveType> LeaveTypes { get; set; }
     }
 }

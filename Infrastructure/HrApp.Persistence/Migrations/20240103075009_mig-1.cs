@@ -50,49 +50,6 @@ namespace HrApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondSurname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TurkishIdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    YearlyLeaveDaysLeft = table.Column<int>(type: "int", nullable: false),
-                    YearlyAdvanceAmountLeft = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Currency",
                 columns: table => new
                 {
@@ -119,7 +76,7 @@ namespace HrApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LeaveType",
+                name: "Gender",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -128,7 +85,20 @@ namespace HrApp.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LeaveType", x => x.Id);
+                    table.PrimaryKey("PK_Gender", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LeaveTypeFocus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeaveTypeFocus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +118,121 @@ namespace HrApp.Persistence.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondSurname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TurkishIdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    YearlyLeaveDaysLeft = table.Column<int>(type: "int", nullable: false),
+                    YearlyAdvanceAmountLeft = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    GenderId = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Gender_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Gender",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LeaveType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumDays = table.Column<int>(type: "int", nullable: false),
+                    LeaveTypeFocusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeaveType", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LeaveType_LeaveTypeFocus_LeaveTypeFocusId",
+                        column: x => x.LeaveTypeFocusId,
+                        principalTable: "LeaveTypeFocus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Advance",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdvanceTypeId = table.Column<int>(type: "int", nullable: false),
+                    CurrencyId = table.Column<int>(type: "int", nullable: false),
+                    ApprovalStatusId = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Advance", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Advance_AdvanceType_AdvanceTypeId",
+                        column: x => x.AdvanceTypeId,
+                        principalTable: "AdvanceType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Advance_ApprovalStatus_ApprovalStatusId",
+                        column: x => x.ApprovalStatusId,
+                        principalTable: "ApprovalStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Advance_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Advance_Currency_CurrencyId",
+                        column: x => x.CurrencyId,
+                        principalTable: "Currency",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -238,50 +323,6 @@ namespace HrApp.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Advance",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AdvanceTypeId = table.Column<int>(type: "int", nullable: false),
-                    CurrencyId = table.Column<int>(type: "int", nullable: false),
-                    ApprovalStatusId = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Advance", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Advance_AdvanceType_AdvanceTypeId",
-                        column: x => x.AdvanceTypeId,
-                        principalTable: "AdvanceType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Advance_ApprovalStatus_ApprovalStatusId",
-                        column: x => x.ApprovalStatusId,
-                        principalTable: "ApprovalStatus",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Advance_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Advance_Currency_CurrencyId",
-                        column: x => x.CurrencyId,
-                        principalTable: "Currency",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Expense",
                 columns: table => new
                 {
@@ -333,7 +374,7 @@ namespace HrApp.Persistence.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
+                    NumDays = table.Column<int>(type: "int", nullable: false),
                     ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LeaveTypeId = table.Column<int>(type: "int", nullable: false),
                     ApprovalStatusId = table.Column<int>(type: "int", nullable: false),
@@ -382,9 +423,9 @@ namespace HrApp.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BirthPlace", "BirthYear", "CompanyName", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "EndDate", "ImageData", "LockoutEnabled", "LockoutEnd", "MobileNumber", "Name", "NormalizedEmail", "NormalizedUserName", "Occupation", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Salary", "SecondName", "SecondSurname", "SecurityStamp", "StartDate", "Surname", "TurkishIdentificationNumber", "TwoFactorEnabled", "UserName", "YearlyAdvanceAmountLeft", "YearlyLeaveDaysLeft" },
-                values: new object[] { "aed66109-009f-42b3-9e3d-37f4b4038119", 0, "address1231231231232", "Mom", new DateTime(1993, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3766), "KOC", "ff9bcecc-e4d8-4c18-8361-acf1adc6a27e", "IT", "user@gmail.com", true, null, null, false, null, "0555555555", "user", "USER@GMAIL.COM", "USER1", "Formatçı", "AQAAAAEAACcQAAAAEAt+zPd62N/WxhpvpHje7JijR3Cjic/Vgyj/p2zlZBSsgCMU0aKZZd5WweZDs6SYaQ==", null, false, 20000m, null, null, "0024aa3e-471c-4c5e-afd6-48f8fd029183", new DateTime(2013, 12, 28, 12, 52, 58, 703, DateTimeKind.Local).AddTicks(3779), "usersurname", "11111111111", false, "user1", 0m, 0 });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "0e284e5a-b034-4073-b4d4-05cf011cdf9e", "221390bc-b5d0-45c7-984e-9f33ad3f2f1f", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "Currency",
@@ -409,17 +450,50 @@ namespace HrApp.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "LeaveType",
+                table: "Gender",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Yıllık" },
-                    { 2, "Doğum" },
-                    { 3, "Ölüm" },
-                    { 4, "Babalık" },
-                    { 5, "Mazeret" },
-                    { 6, "Evlilik" }
+                    { 1, "Erkek" },
+                    { 2, "Kadın" },
+                    { 3, "Diğer" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "LeaveTypeFocus",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Herkes" },
+                    { 2, "Erkek" },
+                    { 3, "Kadın" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BirthPlace", "BirthYear", "CompanyName", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "EndDate", "GenderId", "ImageData", "LockoutEnabled", "LockoutEnd", "MobileNumber", "Name", "NormalizedEmail", "NormalizedUserName", "Occupation", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Salary", "SecondName", "SecondSurname", "SecurityStamp", "StartDate", "Surname", "TurkishIdentificationNumber", "TwoFactorEnabled", "UserName", "YearlyAdvanceAmountLeft", "YearlyLeaveDaysLeft" },
+                values: new object[,]
+                {
+                    { "09cbccb9-a587-4ba8-b603-d73c39e524c4", 0, "address1231231231232", "Istanbul", new DateTime(1994, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(675), "KOC", "6de88eae-f430-4c46-a9d5-42268004ca26", "IT", "user@gmail.com", true, null, 2, null, false, null, "5554443322", "user", "USER@GMAIL.COM", "USER1", "Formatçı", "AQAAAAEAACcQAAAAEFXU2ieAa5s5QBGG/kM8G3oldS4gCC4LflyHLEPx8Wzpq9XTNWiQ+MiGaoCp4RLaEQ==", null, false, 20000m, null, null, "a4fc5b8b-d4b3-4a6b-b706-1e8a65a96a4d", new DateTime(2014, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(692), "usersurname", "11111111111", false, "user1", 0m, 0 },
+                    { "f741f6df-02c3-442f-89c9-2316154e702f", 0, "adminaddress1231231231232", "Ankara", new DateTime(1974, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2745), "KOC", "a1bd0db7-e36f-4235-b827-089bbb349a25", "PATRON", "admin@gmail.com", true, null, 1, null, false, null, "5325323232", "adminname", "ADMIN@GMAIL.COM", "ADMIN", "PATRON", "AQAAAAEAACcQAAAAEBP80+fuXlNiVLVMcoHX0YES+5oxK9rQhaTzwRPViQLXPLNUhPVDOtd5WG66xSx+1A==", null, false, 500000m, null, null, "41155747-ff61-4062-9934-c37065f4643a", new DateTime(2009, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2761), "adminsurname", "22222222222", false, "admin", 0m, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "LeaveType",
+                columns: new[] { "Id", "LeaveTypeFocusId", "Name", "NumDays" },
+                values: new object[,]
+                {
+                    { 1, 1, "Yıllık", 1 },
+                    { 2, 3, "Doğum", 56 },
+                    { 3, 1, "Ölüm", 3 },
+                    { 4, 2, "Babalık", 5 },
+                    { 5, 1, "Evlilik", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "0e284e5a-b034-4073-b4d4-05cf011cdf9e", "f741f6df-02c3-442f-89c9-2316154e702f" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Advance_AdvanceTypeId",
@@ -474,6 +548,11 @@ namespace HrApp.Persistence.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GenderId",
+                table: "AspNetUsers",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -514,6 +593,11 @@ namespace HrApp.Persistence.Migrations
                 name: "IX_Leave_LeaveTypeId",
                 table: "Leave",
                 column: "LeaveTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeaveType_LeaveTypeFocusId",
+                table: "LeaveType",
+                column: "LeaveTypeFocusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -562,6 +646,12 @@ namespace HrApp.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LeaveType");
+
+            migrationBuilder.DropTable(
+                name: "Gender");
+
+            migrationBuilder.DropTable(
+                name: "LeaveTypeFocus");
         }
     }
 }
