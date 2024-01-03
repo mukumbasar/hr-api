@@ -38,8 +38,9 @@ namespace HrApp.Application
             {
 
                 var user = await _userManager.FindByEmailAsync(command.Email);
+                var roles = await _userManager.GetRolesAsync(user);
 
-                response.Token = GenerateJwtToken(user);
+                response.Token = GenerateJwtToken(user,roles);
 
                 return response;
             }
@@ -61,7 +62,7 @@ namespace HrApp.Application
 
 
 
-        private string GenerateJwtToken(AppUser user)
+        private string GenerateJwtToken(AppUser user, IList<string> userRoles)
         {
             string _secretKey = "buraküzüldüyasarüzüldüburcuüzüldüutkuüzüldüsonraburakagladıasjdasjdlkajsldkjaslkdjalskdjalskdjlaksjdlaksjdlk";
 
@@ -74,7 +75,8 @@ namespace HrApp.Application
                 {
                     new Claim(ClaimTypes.NameIdentifier , user.Id),
                     new Claim(ClaimTypes.Email , user.Email),
-                    new Claim(ClaimTypes.Gender, user.GenderId.ToString())
+                    new Claim(ClaimTypes.Gender, user.GenderId.ToString()),
+                    new Claim(ClaimTypes.Role, string.Join(",", userRoles))
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(1),
@@ -85,8 +87,4 @@ namespace HrApp.Application
             return tokenHandler.WriteToken(token);
         }
     }
-
-
-
-
 }
