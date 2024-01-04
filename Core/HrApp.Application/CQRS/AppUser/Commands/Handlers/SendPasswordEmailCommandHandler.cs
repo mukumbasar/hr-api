@@ -27,12 +27,12 @@ namespace HrApp.Application.CQRS.AppUser.Commands.Handlers
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
 
-            if (user == null) 
+            if (user == null)
             {
                 return new ServiceResponse<string>(request.Email) { Message = "Please enter a registered email!", IsSuccess = false };
             }
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
 
