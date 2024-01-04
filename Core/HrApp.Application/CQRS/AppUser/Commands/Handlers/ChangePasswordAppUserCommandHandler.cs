@@ -1,4 +1,6 @@
-﻿using HrApp.Application.Wrappers;
+﻿using System.Net;
+using System.Text;
+using HrApp.Application.Wrappers;
 using HrApp.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +21,6 @@ public class ChangePasswordAppUserCommandHandler : IRequestHandler<ChangePasswor
         var identityResult = await userManager.ResetPasswordAsync(user, request.Token, request.Password);
         if (identityResult.Succeeded)
             return new ServiceResponse<string> { IsSuccess = true, Data = request.Id, Message = "Giriş başarılı" };
-        return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = string.Join(" . ", identityResult.Errors) };
+        return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = "Password process failed please try again" };
     }
 }
