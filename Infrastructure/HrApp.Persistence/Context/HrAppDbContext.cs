@@ -84,15 +84,15 @@ namespace HrApp.Persistence.Context
                 RoleId = adminRoleID
             });
 
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 1, Name = "Herkes" });
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 2, Name = "Erkek" });
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 3, Name = "Kadın" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 1, Name = "Erkek" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 2, Name = "Kadın" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 3, Name = "Herkes" });
 
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık", NumDays=1, LeaveTypeFocusId = 1});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum", NumDays = 56, LeaveTypeFocusId = 3 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm", NumDays = 3 , LeaveTypeFocusId = 1 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık", NumDays = 5, LeaveTypeFocusId = 2 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Evlilik", NumDays = 3 , LeaveTypeFocusId = 1 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık", NumDays=1, LeaveTypeFocusId = 3});
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum", NumDays = 56, LeaveTypeFocusId = 2 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm", NumDays = 3 , LeaveTypeFocusId = 3});
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık", NumDays = 5, LeaveTypeFocusId = 1 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Evlilik", NumDays = 3 , LeaveTypeFocusId = 3 });
 
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 1, Name = "Bireysel" });
             modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 2, Name = "Kurumsal" });

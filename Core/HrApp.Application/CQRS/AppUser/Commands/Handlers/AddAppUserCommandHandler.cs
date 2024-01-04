@@ -17,12 +17,14 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
     private readonly AddAppUserCommandValidator _validator;
     private readonly IMapper _mapper;
     private readonly IUow _uow;
-    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow)
+    private readonly IEmailService _emailService;
+    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService)
     {
         _userManager = userManager;
         _validator = validator;
         _mapper = mapper;
         _uow = uow;
+        _emailService = emailService;
     }
 
     public async Task<ServiceResponse<string>> Handle(AddAppUserCommand request, CancellationToken cancellationToken)
@@ -52,6 +54,12 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
+
+                _emailService.SendMail(user.Email, "Yeni Şifre Temini", mailBody);
+
                 return new ServiceResponse<string>() { Message = "User added successfully", IsSuccess = true };
             }
             else

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HrApp.Persistence.Migrations
 {
     [DbContext(typeof(HrAppDbContext))]
-    [Migration("20240103075009_mig-1")]
+    [Migration("20240103083201_mig-1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,8 +129,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0e284e5a-b034-4073-b4d4-05cf011cdf9e",
-                            ConcurrencyStamp = "221390bc-b5d0-45c7-984e-9f33ad3f2f1f",
+                            Id = "a6093bb0-3d6c-46fd-a83f-8cc8709094fd",
+                            ConcurrencyStamp = "2fce43f5-d4fa-414f-aa5a-581a8936f988",
                             Name = "Admin"
                         });
                 });
@@ -304,13 +304,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "09cbccb9-a587-4ba8-b603-d73c39e524c4",
+                            Id = "f64ec7c2-3104-4c8a-8605-181f9d922913",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Istanbul",
-                            BirthYear = new DateTime(1994, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(675),
+                            BirthYear = new DateTime(1994, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2597),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "6de88eae-f430-4c46-a9d5-42268004ca26",
+                            ConcurrencyStamp = "fb572aba-19e0-4a0f-9e8b-367a7ca2d710",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -321,11 +321,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFXU2ieAa5s5QBGG/kM8G3oldS4gCC4LflyHLEPx8Wzpq9XTNWiQ+MiGaoCp4RLaEQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE9dMjsXDht1cB8Ww9XRJZyaQ4+3pMZLexF3MSEU4kr/Og/hV/IVGXeeLQJx/h6qmw==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "a4fc5b8b-d4b3-4a6b-b706-1e8a65a96a4d",
-                            StartDate = new DateTime(2014, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(692),
+                            SecurityStamp = "082a0376-a964-4664-af9a-0d47a0cb9337",
+                            StartDate = new DateTime(2014, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2613),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -335,13 +335,13 @@ namespace HrApp.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "f741f6df-02c3-442f-89c9-2316154e702f",
+                            Id = "5044c498-2d3c-4aab-b08c-da4277d87e15",
                             AccessFailedCount = 0,
                             Address = "adminaddress1231231231232",
                             BirthPlace = "Ankara",
-                            BirthYear = new DateTime(1974, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2745),
+                            BirthYear = new DateTime(1974, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7069),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "a1bd0db7-e36f-4235-b827-089bbb349a25",
+                            ConcurrencyStamp = "db0a8755-677a-49bc-ac07-b5e68c0964f4",
                             Department = "PATRON",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -352,11 +352,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
                             Occupation = "PATRON",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBP80+fuXlNiVLVMcoHX0YES+5oxK9rQhaTzwRPViQLXPLNUhPVDOtd5WG66xSx+1A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB0DWxeMSV5pM0f8W0C8qWnvvf3yd2w2Ok5CYXNKar/lEJr2HGmqvNgL2wGIcJW06A==",
                             PhoneNumberConfirmed = false,
                             Salary = 500000m,
-                            SecurityStamp = "41155747-ff61-4062-9934-c37065f4643a",
-                            StartDate = new DateTime(2009, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2761),
+                            SecurityStamp = "2d6ac3d7-d214-426d-a6b6-132cf57e0381",
+                            StartDate = new DateTime(2009, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7082),
                             Surname = "adminsurname",
                             TurkishIdentificationNumber = "22222222222",
                             TwoFactorEnabled = false,
@@ -594,35 +594,35 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            LeaveTypeFocusId = 1,
+                            LeaveTypeFocusId = 3,
                             Name = "Yıllık",
                             NumDays = 1
                         },
                         new
                         {
                             Id = 2,
-                            LeaveTypeFocusId = 3,
+                            LeaveTypeFocusId = 2,
                             Name = "Doğum",
                             NumDays = 56
                         },
                         new
                         {
                             Id = 3,
-                            LeaveTypeFocusId = 1,
+                            LeaveTypeFocusId = 3,
                             Name = "Ölüm",
                             NumDays = 3
                         },
                         new
                         {
                             Id = 4,
-                            LeaveTypeFocusId = 2,
+                            LeaveTypeFocusId = 1,
                             Name = "Babalık",
                             NumDays = 5
                         },
                         new
                         {
                             Id = 5,
-                            LeaveTypeFocusId = 1,
+                            LeaveTypeFocusId = 3,
                             Name = "Evlilik",
                             NumDays = 3
                         });
@@ -648,17 +648,17 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Herkes"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Name = "Erkek"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Name = "Kadın"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Herkes"
                         });
                 });
 
@@ -751,8 +751,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "f741f6df-02c3-442f-89c9-2316154e702f",
-                            RoleId = "0e284e5a-b034-4073-b4d4-05cf011cdf9e"
+                            UserId = "5044c498-2d3c-4aab-b08c-da4277d87e15",
+                            RoleId = "a6093bb0-3d6c-46fd-a83f-8cc8709094fd"
                         });
                 });
 

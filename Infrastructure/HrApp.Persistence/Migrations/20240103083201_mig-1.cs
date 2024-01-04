@@ -425,7 +425,7 @@ namespace HrApp.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0e284e5a-b034-4073-b4d4-05cf011cdf9e", "221390bc-b5d0-45c7-984e-9f33ad3f2f1f", "Admin", null });
+                values: new object[] { "a6093bb0-3d6c-46fd-a83f-8cc8709094fd", "2fce43f5-d4fa-414f-aa5a-581a8936f988", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "Currency",
@@ -464,9 +464,9 @@ namespace HrApp.Persistence.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Herkes" },
-                    { 2, "Erkek" },
-                    { 3, "Kadın" }
+                    { 1, "Erkek" },
+                    { 2, "Kadın" },
+                    { 3, "Herkes" }
                 });
 
             migrationBuilder.InsertData(
@@ -474,8 +474,8 @@ namespace HrApp.Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthPlace", "BirthYear", "CompanyName", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "EndDate", "GenderId", "ImageData", "LockoutEnabled", "LockoutEnd", "MobileNumber", "Name", "NormalizedEmail", "NormalizedUserName", "Occupation", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Salary", "SecondName", "SecondSurname", "SecurityStamp", "StartDate", "Surname", "TurkishIdentificationNumber", "TwoFactorEnabled", "UserName", "YearlyAdvanceAmountLeft", "YearlyLeaveDaysLeft" },
                 values: new object[,]
                 {
-                    { "09cbccb9-a587-4ba8-b603-d73c39e524c4", 0, "address1231231231232", "Istanbul", new DateTime(1994, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(675), "KOC", "6de88eae-f430-4c46-a9d5-42268004ca26", "IT", "user@gmail.com", true, null, 2, null, false, null, "5554443322", "user", "USER@GMAIL.COM", "USER1", "Formatçı", "AQAAAAEAACcQAAAAEFXU2ieAa5s5QBGG/kM8G3oldS4gCC4LflyHLEPx8Wzpq9XTNWiQ+MiGaoCp4RLaEQ==", null, false, 20000m, null, null, "a4fc5b8b-d4b3-4a6b-b706-1e8a65a96a4d", new DateTime(2014, 1, 3, 10, 50, 9, 149, DateTimeKind.Local).AddTicks(692), "usersurname", "11111111111", false, "user1", 0m, 0 },
-                    { "f741f6df-02c3-442f-89c9-2316154e702f", 0, "adminaddress1231231231232", "Ankara", new DateTime(1974, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2745), "KOC", "a1bd0db7-e36f-4235-b827-089bbb349a25", "PATRON", "admin@gmail.com", true, null, 1, null, false, null, "5325323232", "adminname", "ADMIN@GMAIL.COM", "ADMIN", "PATRON", "AQAAAAEAACcQAAAAEBP80+fuXlNiVLVMcoHX0YES+5oxK9rQhaTzwRPViQLXPLNUhPVDOtd5WG66xSx+1A==", null, false, 500000m, null, null, "41155747-ff61-4062-9934-c37065f4643a", new DateTime(2009, 1, 3, 10, 50, 9, 158, DateTimeKind.Local).AddTicks(2761), "adminsurname", "22222222222", false, "admin", 0m, 0 }
+                    { "5044c498-2d3c-4aab-b08c-da4277d87e15", 0, "adminaddress1231231231232", "Ankara", new DateTime(1974, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7069), "KOC", "db0a8755-677a-49bc-ac07-b5e68c0964f4", "PATRON", "admin@gmail.com", true, null, 1, null, false, null, "5325323232", "adminname", "ADMIN@GMAIL.COM", "ADMIN", "PATRON", "AQAAAAEAACcQAAAAEB0DWxeMSV5pM0f8W0C8qWnvvf3yd2w2Ok5CYXNKar/lEJr2HGmqvNgL2wGIcJW06A==", null, false, 500000m, null, null, "2d6ac3d7-d214-426d-a6b6-132cf57e0381", new DateTime(2009, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7082), "adminsurname", "22222222222", false, "admin", 0m, 0 },
+                    { "f64ec7c2-3104-4c8a-8605-181f9d922913", 0, "address1231231231232", "Istanbul", new DateTime(1994, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2597), "KOC", "fb572aba-19e0-4a0f-9e8b-367a7ca2d710", "IT", "user@gmail.com", true, null, 2, null, false, null, "5554443322", "user", "USER@GMAIL.COM", "USER1", "Formatçı", "AQAAAAEAACcQAAAAEE9dMjsXDht1cB8Ww9XRJZyaQ4+3pMZLexF3MSEU4kr/Og/hV/IVGXeeLQJx/h6qmw==", null, false, 20000m, null, null, "082a0376-a964-4664-af9a-0d47a0cb9337", new DateTime(2014, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2613), "usersurname", "11111111111", false, "user1", 0m, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -483,17 +483,17 @@ namespace HrApp.Persistence.Migrations
                 columns: new[] { "Id", "LeaveTypeFocusId", "Name", "NumDays" },
                 values: new object[,]
                 {
-                    { 1, 1, "Yıllık", 1 },
-                    { 2, 3, "Doğum", 56 },
-                    { 3, 1, "Ölüm", 3 },
-                    { 4, 2, "Babalık", 5 },
-                    { 5, 1, "Evlilik", 3 }
+                    { 1, 3, "Yıllık", 1 },
+                    { 2, 2, "Doğum", 56 },
+                    { 3, 3, "Ölüm", 3 },
+                    { 4, 1, "Babalık", 5 },
+                    { 5, 3, "Evlilik", 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "0e284e5a-b034-4073-b4d4-05cf011cdf9e", "f741f6df-02c3-442f-89c9-2316154e702f" });
+                values: new object[] { "a6093bb0-3d6c-46fd-a83f-8cc8709094fd", "5044c498-2d3c-4aab-b08c-da4277d87e15" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Advance_AdvanceTypeId",
