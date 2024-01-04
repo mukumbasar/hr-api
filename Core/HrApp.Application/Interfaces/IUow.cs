@@ -9,6 +9,7 @@ namespace HrApp.Application.Interfaces
     public interface IUow
     {
         Task CommitAsync();
+        IAppUserRepository GetAppUserRepository();
         IAdvanceRepository GetAdvanceRepository();
         IExpenseRepository GetExpenseRepository();
         ILeaveRepository GetLeaveRepository();

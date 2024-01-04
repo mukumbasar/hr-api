@@ -1,4 +1,6 @@
 using HrApp.Application;
+using HrApp.Application.CQRS.AppUser.Commands;
+using HrApp.Application.CQRS.AppUser.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +44,29 @@ namespace MyApp.Namespace
 
             return BadRequest(result);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddAppUser(AddAppUserCommand addAppUserCommand)
+        {
+            var result = await mediator.Send(addAppUserCommand);
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+        [HttpGet("list/")]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var result = await mediator.Send(new GetAllAppUserQuery());
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+        [HttpGet("list/{Id}")]
+        public async Task<IActionResult> GetUser(string Id)
+        {
+            var result = await mediator.Send(new GetAppUserQuery(Id));
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
@@ -52,5 +77,25 @@ namespace MyApp.Namespace
 
             return BadRequest(result);
         }
+
+        [HttpGet("PasswordEmail/{email}")]
+        public async Task<IActionResult> SendPasswordEmail(string email)
+        {
+            var result = await mediator.Send(new SendPasswordEmailCommand { Email = email });
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+        [HttpPut("PasswordChange")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordAppUserCommand changePassword)
+        {
+            var result = await mediator.Send(changePassword);
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using HrApp.Application.CQRS.Advance.Commands;
+using HrApp.Application.CQRS.AppUser.Commands;
 using HrApp.Application.CQRS.Expense.Commands;
 using HrApp.Application.CQRS.Leave.Commands;
 using HrApp.Application.Dtos;
@@ -19,6 +20,8 @@ namespace HrApp.Application.Mapping
             CreateMap<AppUser, AppUserDetailsDto>();
             CreateMap<AppUser, AppUserHomeDto>();
             CreateMap<AppUser, AppUserUpdateDto>();
+            CreateMap<AddAppUserCommand, AppUser>();
+            CreateMap<AppUser,AppUserDto>();
 
             CreateMap<CreateAdvanceCommand, Advance>();
             CreateMap<UpdateAdvanceCommand, Advance>();

@@ -14,5 +14,8 @@ namespace HrApp.Domain.Entities
 
         public int NumDays { get; set; }
         public List<Leave> Leaves { get; set; }
+
+        public LeaveTypeFocus LeaveTypeFocus { get; set; }
+        public int LeaveTypeFocusId { get; set; }
     }
 }

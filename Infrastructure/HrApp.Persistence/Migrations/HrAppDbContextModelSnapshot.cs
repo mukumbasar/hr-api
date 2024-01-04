@@ -127,8 +127,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7cb83f72-898d-440d-8745-e662a4a0c8c4",
-                            ConcurrencyStamp = "cda5dda9-2310-4324-8704-1d81370405a7",
+                            Id = "a6093bb0-3d6c-46fd-a83f-8cc8709094fd",
+                            ConcurrencyStamp = "2fce43f5-d4fa-414f-aa5a-581a8936f988",
                             Name = "Admin"
                         });
                 });
@@ -302,13 +302,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9b2433c0-f90f-47b0-9c77-775eec58a4cd",
+                            Id = "f64ec7c2-3104-4c8a-8605-181f9d922913",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Istanbul",
-                            BirthYear = new DateTime(1993, 12, 29, 21, 51, 34, 36, DateTimeKind.Local).AddTicks(1179),
+                            BirthYear = new DateTime(1994, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2597),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "0f461f3a-5a38-4be2-9302-3c595ce40bc7",
+                            ConcurrencyStamp = "fb572aba-19e0-4a0f-9e8b-367a7ca2d710",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -319,11 +319,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGUrUWTTdoA95VFZcowSaua2OAfwSACM7Bgtxx/WF3M0zq8VlJz27KsyjKAKnhzXZg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE9dMjsXDht1cB8Ww9XRJZyaQ4+3pMZLexF3MSEU4kr/Og/hV/IVGXeeLQJx/h6qmw==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "398ab1fd-a465-4436-b6ae-f94c190992d7",
-                            StartDate = new DateTime(2013, 12, 29, 21, 51, 34, 36, DateTimeKind.Local).AddTicks(1189),
+                            SecurityStamp = "082a0376-a964-4664-af9a-0d47a0cb9337",
+                            StartDate = new DateTime(2014, 1, 3, 11, 32, 0, 628, DateTimeKind.Local).AddTicks(2613),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -333,13 +333,13 @@ namespace HrApp.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "a09e53d6-542e-4dcb-8869-b106cb1d2269",
+                            Id = "5044c498-2d3c-4aab-b08c-da4277d87e15",
                             AccessFailedCount = 0,
                             Address = "adminaddress1231231231232",
                             BirthPlace = "Ankara",
-                            BirthYear = new DateTime(1973, 12, 29, 21, 51, 34, 37, DateTimeKind.Local).AddTicks(1481),
+                            BirthYear = new DateTime(1974, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7069),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "37c1839e-0eb9-43fe-a6a1-a693ba7cdc6b",
+                            ConcurrencyStamp = "db0a8755-677a-49bc-ac07-b5e68c0964f4",
                             Department = "PATRON",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -350,11 +350,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
                             Occupation = "PATRON",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMVICnVELlyr6tKz9pSv8AQiFsmF/AMsYgyAyfXGvC/Xs5O0/UQlAwctyvSaofmZ0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB0DWxeMSV5pM0f8W0C8qWnvvf3yd2w2Ok5CYXNKar/lEJr2HGmqvNgL2wGIcJW06A==",
                             PhoneNumberConfirmed = false,
                             Salary = 500000m,
-                            SecurityStamp = "3f1f23a9-33c7-46c3-9380-a8d4f76f2115",
-                            StartDate = new DateTime(2008, 12, 29, 21, 51, 34, 37, DateTimeKind.Local).AddTicks(1482),
+                            SecurityStamp = "2d6ac3d7-d214-426d-a6b6-132cf57e0381",
+                            StartDate = new DateTime(2009, 1, 3, 11, 32, 0, 637, DateTimeKind.Local).AddTicks(7082),
                             Surname = "adminsurname",
                             TurkishIdentificationNumber = "22222222222",
                             TwoFactorEnabled = false,
@@ -512,6 +512,11 @@ namespace HrApp.Persistence.Migrations
                         {
                             Id = 2,
                             Name = "Kadın"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Diğer"
                         });
                 });
 
@@ -567,6 +572,9 @@ namespace HrApp.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("LeaveTypeFocusId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -576,38 +584,79 @@ namespace HrApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LeaveTypeFocusId");
+
                     b.ToTable("LeaveType");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            LeaveTypeFocusId = 3,
                             Name = "Yıllık",
                             NumDays = 1
                         },
                         new
                         {
                             Id = 2,
+                            LeaveTypeFocusId = 2,
                             Name = "Doğum",
                             NumDays = 56
                         },
                         new
                         {
                             Id = 3,
+                            LeaveTypeFocusId = 3,
                             Name = "Ölüm",
                             NumDays = 3
                         },
                         new
                         {
                             Id = 4,
+                            LeaveTypeFocusId = 1,
                             Name = "Babalık",
                             NumDays = 5
                         },
                         new
                         {
                             Id = 5,
+                            LeaveTypeFocusId = 3,
                             Name = "Evlilik",
                             NumDays = 3
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.LeaveTypeFocus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeaveTypeFocus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Erkek"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Kadın"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Herkes"
                         });
                 });
 
@@ -700,8 +749,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a09e53d6-542e-4dcb-8869-b106cb1d2269",
-                            RoleId = "7cb83f72-898d-440d-8745-e662a4a0c8c4"
+                            UserId = "5044c498-2d3c-4aab-b08c-da4277d87e15",
+                            RoleId = "a6093bb0-3d6c-46fd-a83f-8cc8709094fd"
                         });
                 });
 
@@ -762,7 +811,7 @@ namespace HrApp.Persistence.Migrations
             modelBuilder.Entity("HrApp.Domain.Entities.AppUser", b =>
                 {
                     b.HasOne("HrApp.Domain.Entities.Gender", "Gender")
-                        .WithMany()
+                        .WithMany("AppUsers")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -830,6 +879,17 @@ namespace HrApp.Persistence.Migrations
                     b.Navigation("ApprovalStatus");
 
                     b.Navigation("LeaveType");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.LeaveType", b =>
+                {
+                    b.HasOne("HrApp.Domain.Entities.LeaveTypeFocus", "LeaveTypeFocus")
+                        .WithMany("LeaveTypes")
+                        .HasForeignKey("LeaveTypeFocusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LeaveTypeFocus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -918,9 +978,19 @@ namespace HrApp.Persistence.Migrations
                     b.Navigation("Expenses");
                 });
 
+            modelBuilder.Entity("HrApp.Domain.Entities.Gender", b =>
+                {
+                    b.Navigation("AppUsers");
+                });
+
             modelBuilder.Entity("HrApp.Domain.Entities.LeaveType", b =>
                 {
                     b.Navigation("Leaves");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.LeaveTypeFocus", b =>
+                {
+                    b.Navigation("LeaveTypes");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,7 @@ using HrApp.Domain.Entities;
 using HrApp.Persistence.Context;
 using HrApp.Persistence.Repositories.Specific;
 using HrApp.Persistence.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,6 +24,7 @@ namespace HrApp.Persistence.Extensions
          });
 
             #region Uow and Repositories
+            services.AddScoped<IAppUserRepository, AppUserRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<IAdvanceRepository, AdvanceRepository>();
@@ -40,7 +42,8 @@ namespace HrApp.Persistence.Extensions
             options.Password.RequireUppercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 4;
-         }).AddEntityFrameworkStores<HrAppDbContext>();
+         }).AddEntityFrameworkStores<HrAppDbContext>()
+         .AddDefaultTokenProviders();
       }
    }
 }

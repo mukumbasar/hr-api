@@ -11,6 +11,7 @@ namespace HrApp.Persistence.UnitOfWork
     public class Uow : IUow
     {
         private readonly HrAppDbContext _context;
+        private readonly IAppUserRepository _userRepository;
         private readonly IAdvanceRepository _advanceRepository;
         private readonly ILeaveRepository _leaveRepository;
         private readonly IExpenseRepository _expenseRepository;
@@ -20,6 +21,7 @@ namespace HrApp.Persistence.UnitOfWork
         private readonly ICurrencyRepository _currencyRepository;
 
         public Uow(HrAppDbContext context,
+            IAppUserRepository userRepository,
             IAdvanceRepository advanceRepository,
             ILeaveRepository leaveLeaveory,
             IExpenseRepository expenseRepository,
@@ -30,6 +32,7 @@ namespace HrApp.Persistence.UnitOfWork
   )
         {
             _context = context;
+            _userRepository = userRepository;
             _advanceRepository = advanceRepository;
             _leaveRepository = leaveLeaveory;
             _expenseRepository = expenseRepository;
@@ -44,6 +47,11 @@ namespace HrApp.Persistence.UnitOfWork
             await _context.SaveChangesAsync();
         }
 
+        public IAppUserRepository GetAppUserRepository()
+        {
+            return _userRepository;
+        }
+
         public IAdvanceRepository GetAdvanceRepository()
         {
             return _advanceRepository;
@@ -53,6 +61,7 @@ namespace HrApp.Persistence.UnitOfWork
         {
             return _advanceTypeRepository;
         }
+
 
         public ICurrencyRepository GetCurrencyRepository()
         {
