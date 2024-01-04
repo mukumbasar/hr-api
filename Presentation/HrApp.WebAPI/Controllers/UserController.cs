@@ -83,9 +83,19 @@ namespace MyApp.Namespace
         {
             var result = await mediator.Send(new SendPasswordEmailCommand { Email = email });
 
-            if(result.IsSuccess) return Ok(result);
+            if (result.IsSuccess) return Ok(result);
 
             return BadRequest(result);
         }
+        [HttpPut("PasswordChange")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordAppUserCommand changePassword)
+        {
+            var result = await mediator.Send(changePassword);
+
+            if (result.IsSuccess) return Ok(result);
+
+            return BadRequest(result);
+        }
+
     }
 }
