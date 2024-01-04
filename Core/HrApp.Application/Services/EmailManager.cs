@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HrApp.Application.Interfaces;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 
 namespace HrApp.Application.Services
 {
@@ -21,7 +23,7 @@ namespace HrApp.Application.Services
             _option = option.Value;
         }
 
-        public async Task<string> GenerateNewPasswordMailBody (string id, string token) 
+        public async Task<string> GenerateNewPasswordMailBody(string id, string token)
         {
             byte[] tokenGeneratedBytes = Encoding.UTF8.GetBytes(token);
             var codeEncoded = WebEncoders.Base64UrlEncode(tokenGeneratedBytes);
@@ -59,12 +61,17 @@ namespace HrApp.Application.Services
             mailMessage.Body = mailBody;
             mailMessage.IsBodyHtml = true;
 
-            smtpClient.Send(mailMessage);  
+            smtpClient.Send(mailMessage);
         }
 
         private string EmailComfirmLinkGenerator(string token, string userId)
         {
-            var link = "https://ank14hrmvc.azurewebsites.net/Personnel/PasswordChange";
+            var temp = WebApplication.Create();
+            string link = "";
+            if (temp.Environment.IsDevelopment())
+                link = "https://localhost:7298/Personnel/PasswordChange";
+            else
+                link = "https://ank14hrmvc.azurewebsites.net/Personnel/PasswordChange";
 
             link += "?" + "token=" + token + "&userId=" + userId;
 
