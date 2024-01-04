@@ -1,5 +1,6 @@
 using HrApp.Application;
 using HrApp.Application.CQRS.AppUser.Commands;
+using HrApp.Application.CQRS.AppUser.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,20 @@ namespace MyApp.Namespace
 
             if (result.IsSuccess) return Ok(result);
 
+            return BadRequest(result);
+        }
+        [HttpGet("list/")]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var result = await mediator.Send(new GetAllAppUserQuery());
+            if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+        [HttpGet("list/{Id}")]
+        public async Task<IActionResult> GetUser(string Id)
+        {
+            var result = await mediator.Send(new GetAppUserQuery(Id));
+            if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }
 
