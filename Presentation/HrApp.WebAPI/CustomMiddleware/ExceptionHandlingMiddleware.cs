@@ -1,5 +1,8 @@
 ﻿using System.Net;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
+using HrApp.Application.Wrappers;
 
 namespace HrApp.WebAPI;
 
@@ -19,7 +22,9 @@ public class ExceptionHandlingMiddleware
         catch (Exception ex)
         {
             context.Response.ContentType = "application/json";
-            context.Response.Body = new MemoryStream(Encoding.UTF8.GetBytes(ex.Message));
+            var temp = new ServiceResponse<string>(ex.Message) { IsSuccess = false };
+            var jsonBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(temp));
+            await context.Response.Body.WriteAsync(jsonBytes);
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         }
     }
