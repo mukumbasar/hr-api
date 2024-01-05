@@ -38,15 +38,15 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             { "ğ", "g" },
             { "ı", "i" }
         };
-        var validationResult= await _validator.ValidateAsync(request);
+        var validationResult = await _validator.ValidateAsync(request);
         if (validationResult.IsValid)
         {
             var user = _mapper.Map<AppUser>(request);
-            user.SecondName??= "";
+            user.SecondName ??= "";
             user.SecondSurname ??= "";
             user.UserName = Guid.NewGuid().ToString();
-            user.Email = user.Name.ToLower() + user.SecondName.ToLower()+ "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + user.CompanyName.ToLower() + ".com";
-            foreach(var items in turkishChar.Keys)
+            user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + user.CompanyName.ToLower() + ".com";
+            foreach (var items in turkishChar.Keys)
             {
                 if (user.Email.Contains(turkishChar[items]))
                     user.Email = user.Email.Replace(items, turkishChar[items]);
@@ -54,7 +54,7 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                 var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
 

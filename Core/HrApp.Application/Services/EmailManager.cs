@@ -73,8 +73,7 @@ namespace HrApp.Application.Services
             else
                 link = "https://ank14hrmvc.azurewebsites.net/Personnel/PasswordChange";
 
-            link += "?" + "token=" + token + "&userId=" + userId;
-
+            link += "?" + "token=" + Uri.EscapeDataString(token) + "&userId=" + userId;
             return link;
         }
     }
