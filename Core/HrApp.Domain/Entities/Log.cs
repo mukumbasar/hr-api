@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Domain.Entities
 {
-    internal class Log
+    public class Log
     {
         public int Id { get; set; }
         public string ExceptionMessage { get; set; }

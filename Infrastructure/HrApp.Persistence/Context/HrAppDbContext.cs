@@ -15,6 +15,9 @@ namespace HrApp.Persistence.Context
     public class HrAppDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
 
+        //TODO : Dbset eklenecek
+
+
         public HrAppDbContext(DbContextOptions<HrAppDbContext> option) : base(option)
         {
 
@@ -114,6 +117,8 @@ namespace HrApp.Persistence.Context
             modelBuilder.Entity<Gender>().HasData(new Gender { Id = 1, Name = "Erkek" });
             modelBuilder.Entity<Gender>().HasData(new Gender { Id = 2, Name = "Kadın" });
             modelBuilder.Entity<Gender>().HasData(new Gender { Id = 3, Name = "Diğer" });
+
+            modelBuilder.Entity<Log>().HasData(new Log { Id = 1, ExceptionMessage = "burak", ExceptionMethod = "siki", ExceptionPath = "tuttu", ExceptionTime = DateTime.Now });
 
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
