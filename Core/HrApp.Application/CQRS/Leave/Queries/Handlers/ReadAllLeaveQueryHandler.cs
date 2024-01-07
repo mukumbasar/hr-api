@@ -27,24 +27,20 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
         {
             var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null, x => x.LeaveType, x => x.ApprovalStatus);
 
-            if (entities.Count() > 0)
+
+            var dtos = new List<LeaveDto>();
+
+            foreach (var entity in entities)
             {
-                var dtos = new List<LeaveDto>();
+                var mappedEntity = _mapper.Map<LeaveDto>(entity);
 
-                foreach (var entity in entities)
-                {
-                    var mappedEntity = _mapper.Map<LeaveDto>(entity);
+                mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
+                mappedEntity.LeaveTypeName = entity.LeaveType.Name;
 
-                    mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
-                    mappedEntity.LeaveTypeName = entity.LeaveType.Name;
-
-                    dtos.Add(mappedEntity);
-                }
-
-                return new ServiceResponse<List<LeaveDto>>(dtos) { Message = "", IsSuccess = true };
+                dtos.Add(mappedEntity);
             }
 
-            return new ServiceResponse<List<LeaveDto>>() { Message = "Expense acquirement error!", IsSuccess = false };
+            return new ServiceResponse<List<LeaveDto>>(dtos) { Message = "", IsSuccess = true };
         }
     }
 }
