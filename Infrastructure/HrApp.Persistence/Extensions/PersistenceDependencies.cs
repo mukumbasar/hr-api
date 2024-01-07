@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace HrApp.Persistence.Extensions
 {
-   public static class PersistenceDependencies
-   {
-      public static void AddPersistenceDependencies(this IServiceCollection services, string connectionString)
-      {
-         services.AddDbContext<HrAppDbContext>(x =>
-         {
-            x.UseSqlServer(connectionString);
-         });
+    public static class PersistenceDependencies
+    {
+        public static void AddPersistenceDependencies(this IServiceCollection services, string connectionString)
+        {
+            services.AddDbContext<HrAppDbContext>(x =>
+            {
+                x.UseSqlServer(connectionString);
+            });
 
             #region Uow and Repositories
             services.AddScoped<IAppUserRepository, AppUserRepository>();
@@ -33,17 +33,18 @@ namespace HrApp.Persistence.Extensions
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             services.AddScoped<IUow, Uow>();
-         #endregion
+            #endregion
 
-         services.AddIdentity<AppUser, AppRole>(options =>
-         {
-            options.Password.RequireDigit = false;
-            options.Password.RequireLowercase = false;
-            options.Password.RequireUppercase = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequiredLength = 4;
-         }).AddEntityFrameworkStores<HrAppDbContext>()
-         .AddDefaultTokenProviders();
-      }
-   }
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 4;
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<HrAppDbContext>()
+            .AddDefaultTokenProviders();
+        }
+    }
 }

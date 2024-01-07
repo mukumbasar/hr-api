@@ -54,11 +54,11 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
-                // var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-                // var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
+                var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
 
-                // _emailService.SendMail(user.Email, "Yeni Şifre Temini", mailBody);
+                _emailService.SendMail(user.Email, "Yeni Şifre Temini", mailBody);
 
                 return new ServiceResponse<string>() { Message = "User added successfully", IsSuccess = true };
             }
