@@ -16,7 +16,7 @@ namespace HrApp.Persistence.Context
     {
 
         //TODO : Dbset eklenecek
-
+        public DbSet<Log> Logs { get; set; }
 
         public HrAppDbContext(DbContextOptions<HrAppDbContext> option) : base(option)
         {
