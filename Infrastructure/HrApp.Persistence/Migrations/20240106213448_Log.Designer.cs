@@ -4,6 +4,7 @@ using HrApp.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HrApp.Persistence.Migrations
 {
     [DbContext(typeof(HrAppDbContext))]
-    partial class HrAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240106213448_Log")]
+    partial class Log
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,8 +129,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "334f2cb0-c7b4-4b4e-bdab-4ceb905365eb",
-                            ConcurrencyStamp = "d616fa2c-618d-44fe-9430-7cb1b469cde6",
+                            Id = "fd2ce27d-1ed9-44b7-ae52-08460b72bffd",
+                            ConcurrencyStamp = "1264c2c5-6fc0-4bc7-965d-d889c75361ea",
                             Name = "Admin"
                         });
                 });
@@ -302,13 +304,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5d7948eb-de7f-46a8-98ee-6f75981f79c1",
+                            Id = "a206642b-26d0-4fdb-8273-d7ebb7a943c1",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Istanbul",
-                            BirthYear = new DateTime(1994, 1, 7, 0, 54, 19, 879, DateTimeKind.Local).AddTicks(3669),
+                            BirthYear = new DateTime(1994, 1, 7, 0, 34, 47, 813, DateTimeKind.Local).AddTicks(327),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "1e792d31-cbd5-4b9a-8208-c075aa9cfd47",
+                            ConcurrencyStamp = "79871e11-abba-4abe-a9ee-5eaf5a7265a0",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -319,11 +321,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOK9fm0QrwD5O3wc+CIoRaSQukhgsi72PEbrAvmk9A5fCRhQM0Xy55CoDAnee2L0qQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEHyC1u93sRPaHLqYBazQfnEovi795WKf3Ytesr3n+JYDdpdPPBix+68HSxMSkqn0g==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "df316aaf-734d-4856-b949-5fbce0c6d19d",
-                            StartDate = new DateTime(2014, 1, 7, 0, 54, 19, 879, DateTimeKind.Local).AddTicks(3677),
+                            SecurityStamp = "cb4c800a-9c23-4159-bd7f-af78c440a71b",
+                            StartDate = new DateTime(2014, 1, 7, 0, 34, 47, 813, DateTimeKind.Local).AddTicks(336),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -333,13 +335,13 @@ namespace HrApp.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "13adc82e-e85e-457a-b84c-6bdbfa27253a",
+                            Id = "5a8817a3-747f-4a69-a55e-0963bc26a876",
                             AccessFailedCount = 0,
                             Address = "adminaddress1231231231232",
                             BirthPlace = "Ankara",
-                            BirthYear = new DateTime(1974, 1, 7, 0, 54, 19, 880, DateTimeKind.Local).AddTicks(3140),
+                            BirthYear = new DateTime(1974, 1, 7, 0, 34, 47, 814, DateTimeKind.Local).AddTicks(178),
                             CompanyName = "KOC",
-                            ConcurrencyStamp = "de8e8a11-69af-42f4-bb52-ee173bbcaab2",
+                            ConcurrencyStamp = "ae2cb8cd-ff57-456b-b0f4-a28d0ee1fd7a",
                             Department = "PATRON",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -350,11 +352,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
                             Occupation = "PATRON",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHItO8KqKoA+1JoK0Q2/dNMyRWn2ui76UlSJLjizO6IEAcAQ9tOsqiJdGluRswuEKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGw1HikOuf/G4I3Cn4KOFFAwgxdNlaL745+H5InlYDA8/QdxyunaE3GZHVmSTrf7JQ==",
                             PhoneNumberConfirmed = false,
                             Salary = 500000m,
-                            SecurityStamp = "ae64279f-6d02-4add-bc42-aec59535af7b",
-                            StartDate = new DateTime(2009, 1, 7, 0, 54, 19, 880, DateTimeKind.Local).AddTicks(3141),
+                            SecurityStamp = "c7eb0e46-f8da-4428-b2fc-0fa3750d7941",
+                            StartDate = new DateTime(2009, 1, 7, 0, 34, 47, 814, DateTimeKind.Local).AddTicks(180),
                             Surname = "adminsurname",
                             TurkishIdentificationNumber = "22222222222",
                             TwoFactorEnabled = false,
@@ -660,44 +662,6 @@ namespace HrApp.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HrApp.Domain.Entities.Log", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ExceptionMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExceptionMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExceptionPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ExceptionTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Log");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ExceptionMessage = "burak",
-                            ExceptionMethod = "siki",
-                            ExceptionPath = "tuttu",
-                            ExceptionTime = new DateTime(2024, 1, 7, 0, 54, 19, 881, DateTimeKind.Local).AddTicks(5821)
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -787,8 +751,8 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "13adc82e-e85e-457a-b84c-6bdbfa27253a",
-                            RoleId = "334f2cb0-c7b4-4b4e-bdab-4ceb905365eb"
+                            UserId = "5a8817a3-747f-4a69-a55e-0963bc26a876",
+                            RoleId = "fd2ce27d-1ed9-44b7-ae52-08460b72bffd"
                         });
                 });
 

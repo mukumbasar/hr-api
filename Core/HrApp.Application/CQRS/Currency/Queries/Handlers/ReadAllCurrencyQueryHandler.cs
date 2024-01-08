@@ -27,21 +27,16 @@ namespace HrApp.Application.CQRS.Currency.Queries.Handlers
         {
             var entities = await _uow.GetCurrencyRepository().GetAllAsync(true);
 
-            if (entities.Count() > 0)
+            var dtos = new List<CurrencyDto>();
+
+            foreach (var entity in entities)
             {
-                var dtos = new List<CurrencyDto>();
+                var mappedEntity = _mapper.Map<CurrencyDto>(entity);
 
-                foreach (var entity in entities)
-                {
-                    var mappedEntity = _mapper.Map<CurrencyDto>(entity);
-
-                    dtos.Add(mappedEntity);
-                }
-
-                return new ServiceResponse<List<CurrencyDto>>(dtos) { IsSuccess = true, Message = "" };
+                dtos.Add(mappedEntity);
             }
 
-            return new ServiceResponse<List<CurrencyDto>>() { IsSuccess = false, Message = "Currency types acquirement error!" };
+            return new ServiceResponse<List<CurrencyDto>>(dtos) { IsSuccess = true, Message = "" };
         }
     }
 }

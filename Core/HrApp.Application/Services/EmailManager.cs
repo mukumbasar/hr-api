@@ -45,7 +45,6 @@ namespace HrApp.Application.Services
             var smtpClient = new SmtpClient();
 
             smtpClient.EnableSsl = true;
-            smtpClient.DeliveryMethod = smtpClient.DeliveryMethod;
             smtpClient.UseDefaultCredentials = false;
 
             smtpClient.Host = _option.Host;
@@ -73,8 +72,7 @@ namespace HrApp.Application.Services
             else
                 link = "https://ank14hrmvc.azurewebsites.net/Personnel/PasswordChange";
 
-            link += "?" + "token=" + token + "&userId=" + userId;
-
+            link += "?" + "token=" + Uri.EscapeDataString(token) + "&userId=" + userId;
             return link;
         }
     }

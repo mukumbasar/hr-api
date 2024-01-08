@@ -28,8 +28,8 @@ namespace HrApp.Domain.Entities
         public string MobileNumber { get; set; }
         public decimal Salary { get; set; }
         public byte[]? ImageData { get; set; }
-        public int YearlyLeaveDaysLeft { get; set; }
-        public decimal YearlyAdvanceAmountLeft { get; set; }
+        public int YearlyLeaveDaysLeft { get; set; } = 20;
+        public decimal YearlyAdvanceAmountLeft { get; set; } = 40000;
         public Gender Gender { get; set; }
         public int GenderId { get; set; }
 

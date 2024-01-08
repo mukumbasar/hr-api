@@ -23,7 +23,7 @@ public class ChangePasswordAppUserCommandHandler : IRequestHandler<ChangePasswor
         string tokenDecoded = Encoding.UTF8.GetString(tokenDecodedBytes);
         var identityResult = await userManager.ResetPasswordAsync(user, tokenDecoded, request.Password);
         if (identityResult.Succeeded)
-            return new ServiceResponse<string> { IsSuccess = true, Data = request.Id, Message = "Giriş başarılı" };
+            return new ServiceResponse<string> { IsSuccess = true, Data = request.Id, Message = "Password has been updated." };
         return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = "Password process failed please try again" };
     }
 }

@@ -27,25 +27,21 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
         {
             var entities = await _uow.GetExpenseRepository().GetAllAsync(true, null, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
 
-            if (entities.Count() > 0)
+
+            var dtos = new List<ExpenseDto>();
+
+            foreach (var entity in entities)
             {
-                var dtos = new List<ExpenseDto>();
+                var mappedEntity = _mapper.Map<ExpenseDto>(entity);
 
-                foreach (var entity in entities)
-                {
-                    var mappedEntity = _mapper.Map<ExpenseDto>(entity);
+                mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
+                mappedEntity.Currency = entity.Currency.Name;
+                mappedEntity.ExpenseTypeName = entity.ExpenseType.Name;
 
-                    mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
-                    mappedEntity.Currency = entity.Currency.Name;
-                    mappedEntity.ExpenseTypeName = entity.ExpenseType.Name;
-
-                    dtos.Add(mappedEntity);
-                }
-
-                return new ServiceResponse<List<ExpenseDto>>(dtos) { Message = "", IsSuccess = true };
+                dtos.Add(mappedEntity);
             }
 
-            return new ServiceResponse<List<ExpenseDto>>() { Message = "Expense acquirement error!", IsSuccess = false };
+            return new ServiceResponse<List<ExpenseDto>>(dtos) { Message = "", IsSuccess = true };
         }
     }
 }

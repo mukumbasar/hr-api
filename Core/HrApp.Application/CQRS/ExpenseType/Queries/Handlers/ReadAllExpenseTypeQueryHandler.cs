@@ -27,21 +27,17 @@ namespace HrApp.Application.CQRS.ExpenseType.Queries.Handlers
         {
             var entities = await _uow.GetExpenseTypeRepository().GetAllAsync(true);
 
-            if (entities.Count() > 0)
+
+            var dtos = new List<ExpenseTypeDto>();
+
+            foreach (var entity in entities)
             {
-                var dtos = new List<ExpenseTypeDto>();
+                var mappedEntity = _mapper.Map<ExpenseTypeDto>(entity);
 
-                foreach (var entity in entities)
-                {
-                    var mappedEntity = _mapper.Map<ExpenseTypeDto>(entity);
-
-                    dtos.Add(mappedEntity);
-                }
-
-                return new ServiceResponse<List<ExpenseTypeDto>>(dtos) { IsSuccess = true, Message = "" };
+                dtos.Add(mappedEntity);
             }
 
-            return new ServiceResponse<List<ExpenseTypeDto>>() { IsSuccess = false, Message = "Expense types acquirement error!" };
+            return new ServiceResponse<List<ExpenseTypeDto>>(dtos) { IsSuccess = true, Message = "" };
         }
     }
 }
