@@ -23,9 +23,8 @@ namespace HrApp.Domain.Entities
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractEndDate { get; set; }
         public bool IsActive { get; set; } = true;
-        
-        public string? AppUserId { get; set; }
-        public AppUser? AppUser { get; set; }
+
+        public List<AppUser> AppUsers { get; set; }
 
         public int CompanyTypeId { get; set; }
         public CompanyType CompanyType { get; set; }

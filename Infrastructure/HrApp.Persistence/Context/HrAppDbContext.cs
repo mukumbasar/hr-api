@@ -56,7 +56,7 @@ namespace HrApp.Persistence.Context
 
             var adminRoleID = Guid.NewGuid().ToString();
             modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
-            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "WebsiteManager", NormalizedName = "WEBSITEMANAGER" });
+            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = "2", Name = "WebsiteManager", NormalizedName = "WEBSITEMANAGER" });
 
             var adminUser = new AppUser
             {
