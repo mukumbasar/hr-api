@@ -19,6 +19,8 @@ namespace HrApp.Persistence.UnitOfWork
         private readonly IAdvanceTypeRepository _advanceTypeRepository;
         private readonly ILeaveTypeRepository _leaveTypeRepository;
         private readonly ICurrencyRepository _currencyRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly ICompanyTypeRepository _companyTypeRepository;
 
         public Uow(HrAppDbContext context,
             IAppUserRepository userRepository,
@@ -28,7 +30,9 @@ namespace HrApp.Persistence.UnitOfWork
             IExpenseTypeRepository expenseTypeRepository,
             IAdvanceTypeRepository advanceTypeRepository,
             ILeaveTypeRepository leaveTypeRepository,
-            ICurrencyRepository currencyRepository
+            ICurrencyRepository currencyRepository,
+            ICompanyRepository companyRepository,
+            ICompanyTypeRepository companyTypeRepository
   )
         {
             _context = context;
@@ -40,6 +44,8 @@ namespace HrApp.Persistence.UnitOfWork
             _advanceTypeRepository = advanceTypeRepository;
             _leaveTypeRepository = leaveTypeRepository;
             _currencyRepository = currencyRepository;
+            _companyRepository = companyRepository;
+            _companyTypeRepository = companyTypeRepository;
         }
 
         public async Task CommitAsync()
@@ -86,6 +92,16 @@ namespace HrApp.Persistence.UnitOfWork
         public ILeaveTypeRepository GetLeaveTypeRepository()
         {
             return _leaveTypeRepository;
+        }
+
+        public ICompanyRepository GetCompanyRepository()
+        {
+            return _companyRepository;
+        }
+
+        public ICompanyTypeRepository GetCompanyTypeRepository()
+        {
+            return _companyTypeRepository;
         }
     }
 }

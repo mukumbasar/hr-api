@@ -33,6 +33,9 @@ namespace HrApp.Domain.Entities
         public Gender Gender { get; set; }
         public int GenderId { get; set; }
 
+        public int? CompanyId { get; set; }
+        public Company? Company { get; set; }
+
         public List<Advance> Advances { get; set; }
         public List<Leave> Leaves { get; set; }
         public List<Expense> Expenses { get; set; }

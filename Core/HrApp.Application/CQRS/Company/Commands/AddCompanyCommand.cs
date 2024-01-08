@@ -1,15 +1,15 @@
-﻿using HrApp.Domain.Common;
+﻿using HrApp.Application.Wrappers;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HrApp.Domain.Entities
+namespace HrApp.Application.CQRS.Company.Commands
 {
-    public class Company : IEntity
+    public class AddCompanyCommand : IRequest<ServiceResponse<string>>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string MersisNo { get; set; }
         public string TaxNo { get; set; }
@@ -18,16 +18,9 @@ namespace HrApp.Domain.Entities
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string EmailAddress { get; set; }
-        public int EmployeeCount { get; set; } = 0;
         public DateTime FoundationYear { get; set; }
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractEndDate { get; set; }
-        public bool IsActive { get; set; } = true;
-        
-        public string? AppUserId { get; set; }
-        public AppUser? AppUser { get; set; }
-
         public int CompanyTypeId { get; set; }
-        public CompanyType CompanyType { get; set; }
     }
 }

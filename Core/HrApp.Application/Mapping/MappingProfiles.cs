@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using HrApp.Application.CQRS.Advance.Commands;
 using HrApp.Application.CQRS.AppUser.Commands;
+using HrApp.Application.CQRS.Company.Commands;
 using HrApp.Application.CQRS.Expense.Commands;
 using HrApp.Application.CQRS.Leave.Commands;
 using HrApp.Application.Dtos;
@@ -39,6 +40,8 @@ namespace HrApp.Application.Mapping
             CreateMap<ExpenseType, ExpenseTypeDto>();
             CreateMap<LeaveType, LeaveTypeDto>();
             CreateMap<Currency, CurrencyDto>();
+            
+            CreateMap<AddCompanyCommand, Company>();
         }
    }
 }
