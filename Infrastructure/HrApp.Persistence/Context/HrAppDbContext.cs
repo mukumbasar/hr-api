@@ -55,11 +55,12 @@ namespace HrApp.Persistence.Context
 
 
             var adminRoleID = Guid.NewGuid().ToString();
-            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "Admin" });
+            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
+            modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "WebsiteManager", NormalizedName = "WEBSITEMANAGER" });
 
             var adminUser = new AppUser
             {
-                Id = Guid.NewGuid().ToString(), 
+                Id = Guid.NewGuid().ToString(),
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
                 Name = "adminname",
@@ -87,23 +88,23 @@ namespace HrApp.Persistence.Context
                 RoleId = adminRoleID
             });
 
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 1, Name = "Erkek" });
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 2, Name = "Kadın" });
-            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 3, Name = "Herkes" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 1, Name = "Male" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 2, Name = "Female" });
+            modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 3, Name = "Everyone" });
 
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name="Yıllık", NumDays=1, LeaveTypeFocusId = 3});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name="Doğum", NumDays = 56, LeaveTypeFocusId = 2 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name="Ölüm", NumDays = 3 , LeaveTypeFocusId = 3});
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name="Babalık", NumDays = 5, LeaveTypeFocusId = 1 });
-            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name="Evlilik", NumDays = 3 , LeaveTypeFocusId = 3 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 1, Name = "Annual", NumDays = 1, LeaveTypeFocusId = 3 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 2, Name = "Maternity", NumDays = 56, LeaveTypeFocusId = 2 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 3, Name = "Bereavement", NumDays = 3, LeaveTypeFocusId = 3 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 4, Name = "Paternity", NumDays = 5, LeaveTypeFocusId = 1 });
+            modelBuilder.Entity<LeaveType>().HasData(new LeaveType { Id = 5, Name = "Marriage", NumDays = 3, LeaveTypeFocusId = 3 });
 
-            modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 1, Name = "Bireysel" });
-            modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 2, Name = "Kurumsal" });
+            modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 1, Name = "Individual" });
+            modelBuilder.Entity<AdvanceType>().HasData(new AdvanceType { Id = 2, Name = "Corporate" });
 
-            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 1, Name = "Yeme-içme" });
-            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 2, Name = "Eğitim" });
-            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 3, Name = "Konaklama" });
-            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 4, Name = "Seyahat" });
+            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 1, Name = "Food and Beverage" });
+            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 2, Name = "Education" });
+            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 3, Name = "Accommodation" });
+            modelBuilder.Entity<ExpenseType>().HasData(new ExpenseType { Id = 4, Name = "Travel" });
 
             modelBuilder.Entity<ApprovalStatus>().HasData(new ApprovalStatus { Id = 1, Name = "Waiting..." });
             modelBuilder.Entity<ApprovalStatus>().HasData(new ApprovalStatus { Id = 2, Name = "Approved!" });
@@ -114,11 +115,11 @@ namespace HrApp.Persistence.Context
             modelBuilder.Entity<Currency>().HasData(new Currency { Id = 3, Name = "$" });
             modelBuilder.Entity<Currency>().HasData(new Currency { Id = 4, Name = "£" });
 
-            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 1, Name = "Erkek" });
-            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 2, Name = "Kadın" });
-            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 3, Name = "Diğer" });
+            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 1, Name = "Male" });
+            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 2, Name = "Female" });
+            modelBuilder.Entity<Gender>().HasData(new Gender { Id = 3, Name = "Other" });
 
-            modelBuilder.Entity<Log>().HasData(new Log { Id = 1, ExceptionMessage = "burak", ExceptionMethod = "siki", ExceptionPath = "tuttu", ExceptionTime = DateTime.Now });
+            modelBuilder.Entity<Log>().HasData(new Log { Id = 1, ExceptionMessage = "Test Exception", ExceptionMethod = "N/A", ExceptionPath = "N/A", ExceptionTime = DateTime.Now });
 
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
