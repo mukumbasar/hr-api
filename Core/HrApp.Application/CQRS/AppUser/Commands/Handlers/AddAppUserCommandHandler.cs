@@ -54,6 +54,14 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
+                if (request.IsAdmin)
+                {
+                    if (_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyName == user.CompanyName))
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    else
+                        return new ServiceResponse<string>() { Message = "Personnel add process failed company already have admin", IsSuccess = false };
+                }
+
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                 var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
@@ -62,10 +70,10 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
 
                 return new ServiceResponse<string>() { Message = "User added successfully", IsSuccess = true };
             }
-            else
-            {
-                return new ServiceResponse<string>() { Message = "User added failed", IsSuccess = false };
-            }
+            var errorList = result.Errors.ToList();
+            var errors = string.Join(", ", errorList.Select(e => e.Code));
+            return new ServiceResponse<string>() { Message = errors, IsSuccess = false };
+
         }
         return new ServiceResponse<string>() { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
     }
