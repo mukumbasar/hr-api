@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\CompanyType\Queries\Handlers\" />
     <Folder Include="CQRS\Company\Queries\" />
   </ItemGroup>
 
