@@ -42,6 +42,9 @@ namespace HrApp.Application.Mapping
             CreateMap<Currency, CurrencyDto>();
             
             CreateMap<AddCompanyCommand, Company>();
+            CreateMap<Company, CompanyDto>();
+
+            CreateMap<CompanyType, CompanyTypeDto>();
         }
    }
 }

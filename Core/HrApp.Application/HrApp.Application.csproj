@@ -22,9 +22,4 @@
     <ProjectReference Include="..\HrApp.Domain\HrApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\CompanyType\Queries\Handlers\" />
-    <Folder Include="CQRS\Company\Queries\" />
-  </ItemGroup>
-
 </Project>
