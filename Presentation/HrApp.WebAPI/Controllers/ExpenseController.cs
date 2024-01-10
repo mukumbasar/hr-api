@@ -25,9 +25,9 @@ namespace HrApp.WebAPI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int? companyId)
         {
-            var result = await mediator.Send(new ReadAllExpenseQuery());
+            var result = await mediator.Send(new ReadAllExpenseQuery() { companyId = companyId });
             if (result.IsSuccess) return Ok(result);
             return BadRequest(result);
         }

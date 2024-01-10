@@ -25,10 +25,14 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
 
         public async Task<ServiceResponse<List<ExpenseDto>>> Handle(ReadAllExpenseQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetExpenseRepository().GetAllAsync(true, null, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus);
+            var entities = await _uow.GetExpenseRepository().GetAllAsync(true, null, x => x.Currency, x => x.ExpenseType, x => x.ApprovalStatus, x => x.AppUser);
 
 
             var dtos = new List<ExpenseDto>();
+            if (request.companyId != null)
+            {
+                entities = entities.Where(x => x.AppUser.CompanyId == request.companyId).ToList();
+            }
 
             foreach (var entity in entities)
             {
