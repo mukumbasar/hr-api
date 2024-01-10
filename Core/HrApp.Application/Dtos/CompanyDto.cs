@@ -18,7 +18,7 @@ namespace HrApp.Application.Dtos
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string EmailAddress { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get { return ContractEndDate > DateTime.Now ? true : false; } }
         public string CompanyTypeName { get; set; }
         public int EmployeeCount { get; set; }
         public DateTime FoundationYear { get; set; }
