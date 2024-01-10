@@ -59,5 +59,13 @@ namespace HrApp.WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("Approve")]
+        public async Task<IActionResult> Approve(int id, bool isApproved)
+        {
+            var result = await _mediator.Send(new ApproveAdvanceCommand() { Id = id, IsApproved = isApproved });
+            if (result.IsSuccess) { return Ok(result); }
+            return BadRequest(result);
+        }
+
     }
 }

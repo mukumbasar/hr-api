@@ -1,4 +1,5 @@
-﻿using HrApp.Application.CQRS.Expense.Commands;
+﻿using HrApp.Application.CQRS.Advance.Commands;
+using HrApp.Application.CQRS.Expense.Commands;
 using HrApp.Application.CQRS.Expense.Queries;
 using HrApp.Application.CQRS.ExpenseType.Queries;
 using HrApp.Application.Wrappers;
@@ -68,6 +69,14 @@ namespace HrApp.WebAPI.Controllers
         {
             var result = await mediator.Send(new DeleteExpenseCommand(id));
             if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet("Approve")]
+        public async Task<IActionResult> Approve(int id, bool isApproved)
+        {
+            var result = await mediator.Send(new ApproveExpenseCommand() { Id = id, IsApproved = isApproved });
+            if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
     }
