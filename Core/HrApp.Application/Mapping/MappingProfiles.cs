@@ -43,6 +43,7 @@ namespace HrApp.Application.Mapping
             
             CreateMap<AddCompanyCommand, Company>();
             CreateMap<Company, CompanyDto>();
+            
 
             CreateMap<CompanyType, CompanyTypeDto>();
         }

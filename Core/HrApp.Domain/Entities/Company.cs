@@ -22,7 +22,7 @@ namespace HrApp.Domain.Entities
         public DateTime FoundationYear { get; set; }
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractEndDate { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get { return ContractEndDate > DateTime.Now ? true : false; } }
 
         public List<AppUser> AppUsers { get; set; }
 

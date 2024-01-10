@@ -121,6 +121,12 @@ namespace HrApp.Persistence.Context
 
             modelBuilder.Entity<Log>().HasData(new Log { Id = 1, ExceptionMessage = "Test Exception", ExceptionMethod = "N/A", ExceptionPath = "N/A", ExceptionTime = DateTime.Now });
 
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 1, Name = "Limited" });
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 2, Name = "Anonim" });
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 3, Name = "Kooperatif" });
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 4, Name = "Kollektif" });
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 5, Name = "Komandit" });
+            modelBuilder.Entity<CompanyType>().HasData(new CompanyType { Id = 6, Name = "Adi" });
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
