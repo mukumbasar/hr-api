@@ -18,13 +18,15 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
     private readonly IMapper _mapper;
     private readonly IUow _uow;
     private readonly IEmailService _emailService;
-    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService)
+    private readonly ICompanyRepository _companyRepository;
+    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService,ICompanyRepository companyRepository)
     {
         _userManager = userManager;
         _validator = validator;
         _mapper = mapper;
         _uow = uow;
         _emailService = emailService;
+        _companyRepository = companyRepository;
     }
 
     public async Task<ServiceResponse<string>> Handle(AddAppUserCommand request, CancellationToken cancellationToken)
@@ -45,7 +47,8 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             user.SecondName ??= "";
             user.SecondSurname ??= "";
             user.UserName = Guid.NewGuid().ToString();
-            user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + user.CompanyName.ToLower() + ".com";
+            var company = await _companyRepository.GetAsync(true, x => x.Id == request.CompanyId);
+            user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + company.Name.ToLower() + ".com";
             foreach (var items in turkishChar.Keys)
             {
                 if (user.Email.Contains(turkishChar[items]))
@@ -56,7 +59,7 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             {
                 if (request.IsAdmin)
                 {
-                    if (_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyName == user.CompanyName))
+                    if (_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyId == user.CompanyId))
                         await _userManager.AddToRoleAsync(user, "Admin");
                     else
                         return new ServiceResponse<string>() { Message = "Personnel add process failed company already have admin", IsSuccess = false };

@@ -38,7 +38,7 @@ namespace HrApp.Persistence.Context
                 Address = "address1231231231232",
                 BirthPlace = "Istanbul",
                 BirthYear = DateTime.Now.AddYears(-30),
-                CompanyName = "KOC",
+                CompanyId = 2,
                 Department = "IT",
                 Occupation = "Formatçı",
                 TurkishIdentificationNumber = "11111111111",
@@ -53,6 +53,56 @@ namespace HrApp.Persistence.Context
             user1.PasswordHash = hasher.HashPassword(user1, "123321Qwe!");
             modelBuilder.Entity<AppUser>().HasData(user1);
 
+            var user2 = new AppUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "user2",
+                NormalizedUserName = "USER2",
+                Name = "user2",
+                Surname = "user2surname",
+                Address = "address1231231231232",
+                BirthPlace = "Ankara",
+                BirthYear = DateTime.Now.AddYears(-30),
+                CompanyId = 1,
+                Department = "IT",
+                Occupation = "Formatçı",
+                TurkishIdentificationNumber = "11111111111",
+                StartDate = DateTime.Now.AddYears(-10),
+                Salary = 20000,
+                MobileNumber = "5554443322",
+                EmailConfirmed = true,
+                Email = "user@gmail.com",
+                NormalizedEmail = "USER@GMAIL.COM",
+                GenderId = 2
+            };
+            user1.PasswordHash = hasher.HashPassword(user2, "123321Qwe!");
+            modelBuilder.Entity<AppUser>().HasData(user2);
+
+
+            var webadmin = new AppUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "webadmin",
+                NormalizedUserName = "WEBADMIN",
+                Name = "webadmin",
+                Surname = "webadminname",
+                Address = "webadminaddress1231231231232",
+                BirthPlace = "Ank",
+                BirthYear = DateTime.Now.AddYears(-30),
+                CompanyId = 2,
+                Department = "IT",
+                Occupation = "Formatçı",
+                TurkishIdentificationNumber = "11111111111",
+                StartDate = DateTime.Now.AddYears(-10),
+                Salary = 20000,
+                MobileNumber = "5554443322",
+                EmailConfirmed = true,
+                Email = "user@gmail.com",
+                NormalizedEmail = "USER@GMAIL.COM",
+                GenderId = 2
+            };
+            user1.PasswordHash = hasher.HashPassword(webadmin, "123321Qwe!");
+            modelBuilder.Entity<AppUser>().HasData(webadmin);
 
             var adminRoleID = Guid.NewGuid().ToString();
             modelBuilder.Entity<AppRole>().HasData(new AppRole { Id = adminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
@@ -68,7 +118,7 @@ namespace HrApp.Persistence.Context
                 Address = "adminaddress1231231231232",
                 BirthPlace = "Ankara",
                 BirthYear = DateTime.Now.AddYears(-50),
-                CompanyName = "KOC",
+                CompanyId = 1,
                 Department = "PATRON",
                 Occupation = "PATRON",
                 TurkishIdentificationNumber = "22222222222",
@@ -87,6 +137,50 @@ namespace HrApp.Persistence.Context
                 UserId = adminUser.Id,
                 RoleId = adminRoleID
             });
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = webadmin.Id,
+                RoleId = "2"
+            });
+
+
+            modelBuilder.Entity<Company>().HasData(
+        new Company
+        {
+            Id = 1,
+            Name = "Company 1",
+            MersisNo = "0123456789000015",
+            TaxNo = "1234567890",
+            TaxOffice = "Ankara",
+            ImageData = null, // Replace with actual byte array if needed
+            PhoneNumber = "5555555555",
+            Address = "123 Main St, City",
+            EmailAddress = "company1@example.com",
+            EmployeeCount = 100,
+            FoundationYear = new DateTime(2000, 1, 1),
+            ContractStartDate = new DateTime(2024, 1, 1),
+            ContractEndDate = new DateTime(2024, 12, 31),
+            IsActive = true,
+            CompanyTypeId = 1, // Assuming you have a CompanyType with an Id of 1
+        },
+        new Company
+        {
+            Id = 2,
+            Name = "Company 2",
+            MersisNo = "123",
+            TaxNo = "123",
+            TaxOffice = "A",
+            ImageData = null, // Replace with actual byte array if needed
+            PhoneNumber = "5555555555",
+            Address = "456 Oak St, City",
+            EmailAddress = "company2@example.com",
+            EmployeeCount = 50,
+            FoundationYear = new DateTime(2005, 3, 15),
+            ContractStartDate = new DateTime(2024, 2, 1),
+            ContractEndDate = new DateTime(2024, 11, 30),
+            IsActive = true,
+            CompanyTypeId = 2, // Assuming you have a CompanyType with an Id of 2
+        });
 
             modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 1, Name = "Male" });
             modelBuilder.Entity<LeaveTypeFocus>().HasData(new LeaveTypeFocus { Id = 2, Name = "Female" });
