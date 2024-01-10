@@ -76,7 +76,8 @@ namespace HrApp.Application
                     new Claim(ClaimTypes.NameIdentifier , user.Id),
                     new Claim(ClaimTypes.Email , user.Email),
                     new Claim(ClaimTypes.Gender, user.GenderId.ToString()),
-                    new Claim(ClaimTypes.Role, string.Join(",", userRoles))
+                    new Claim(ClaimTypes.Role, string.Join(",", userRoles)),
+                    new Claim("company", user.CompanyId.ToString())
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(1),
