@@ -27,6 +27,14 @@ namespace HrApp.WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _mediator.Send(new ReadCompanyQuery(id));
+            if (result.IsSuccess) { return Ok(result); }
+            return BadRequest(result);
+        }
+
         [HttpGet("Types")]
         public async Task<IActionResult> GetTypes()
         {
