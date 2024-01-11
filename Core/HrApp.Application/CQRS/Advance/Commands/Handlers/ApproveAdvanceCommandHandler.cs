@@ -22,13 +22,15 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
         {
             var entity = await _uow.GetAdvanceRepository().GetAsync(true, x => x.Id == request.Id);
 
+            entity.ApprovalStatusId = 3;
+
+            entity.ApprovalDate = DateTime.Now;
+
             if (request.IsApproved)
             {
-                entity.ApprovalDate = DateTime.Now;
                 entity.ApprovalStatusId = 2;
             }
 
-            entity.ApprovalStatusId = 3;
 
             await _uow.GetAdvanceRepository().UpdateAsync(entity);
 
@@ -38,7 +40,7 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             {
                 return new ServiceResponse<int>(request.Id) { Message = $"The advance has been approved.", IsSuccess = true };
             }
-            
+
             return new ServiceResponse<int>(request.Id) { Message = $"The advance has been denied.", IsSuccess = true };
         }
     }
