@@ -43,5 +43,13 @@ namespace HrApp.WebAPI.Controllers
             if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateCompanyCommand updateCompanyCommand)
+        {
+            var result = await _mediator.Send(updateCompanyCommand);
+            if (result.IsSuccess) { return Ok(result); }
+            return BadRequest(result);
+        }
     }
 }
