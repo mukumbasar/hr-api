@@ -38,7 +38,7 @@ namespace HrApp.Persistence.Context
                 Address = "address1231231231232",
                 BirthPlace = "Istanbul",
                 BirthYear = DateTime.Now.AddYears(-30),
-                CompanyId = 2,
+                CompanyId = 1,
                 Department = "IT",
                 Occupation = "Formatçı",
                 TurkishIdentificationNumber = "11111111111",
@@ -89,7 +89,7 @@ namespace HrApp.Persistence.Context
                 Address = "webadminaddress1231231231232",
                 BirthPlace = "Ank",
                 BirthYear = DateTime.Now.AddYears(-30),
-                CompanyId = 2,
+                CompanyId = 1,
                 Department = "IT",
                 Occupation = "Formatçı",
                 TurkishIdentificationNumber = "11111111111",
@@ -101,7 +101,7 @@ namespace HrApp.Persistence.Context
                 NormalizedEmail = "WEBADMIN@GMAIL.COM",
                 GenderId = 2
             };
-            user1.PasswordHash = hasher.HashPassword(webadmin, "123321Qwe!");
+            webadmin.PasswordHash = hasher.HashPassword(webadmin, "webadmin");
             modelBuilder.Entity<AppUser>().HasData(webadmin);
 
             var adminRoleID = Guid.NewGuid().ToString();
@@ -130,7 +130,7 @@ namespace HrApp.Persistence.Context
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 GenderId = 1
             };
-            adminUser.PasswordHash = hasher.HashPassword(adminUser, "123321Qwe!");
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, "admin");
             modelBuilder.Entity<AppUser>().HasData(adminUser);
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
