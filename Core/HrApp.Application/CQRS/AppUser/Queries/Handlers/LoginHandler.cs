@@ -38,9 +38,15 @@ namespace HrApp.Application
             {
 
                 var user = await _userManager.FindByEmailAsync(command.Email);
+                if (!user.IsActive)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "User is not active";
+                    return response;
+                }
                 var roles = await _userManager.GetRolesAsync(user);
 
-                response.Token = GenerateJwtToken(user,roles);
+                response.Token = GenerateJwtToken(user, roles);
 
                 return response;
             }
