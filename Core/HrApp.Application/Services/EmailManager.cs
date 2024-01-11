@@ -42,6 +42,7 @@ namespace HrApp.Application.Services
 
         public void SendMail(string reciverMailAddress, string subject, string mailBody)
         {
+            reciverMailAddress = string.Join("", reciverMailAddress.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries));
             var smtpClient = new SmtpClient();
 
             smtpClient.EnableSsl = true;

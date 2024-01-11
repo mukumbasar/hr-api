@@ -1,6 +1,7 @@
 ﻿using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
     public class ApproveAdvanceCommandHandler : IRequestHandler<ApproveAdvanceCommand, ServiceResponse<int>>
     {
         private readonly IUow _uow;
+        private readonly UserManager<Domain.Entities.AppUser> userManager;
 
-        public ApproveAdvanceCommandHandler(IUow uow)
+        public ApproveAdvanceCommandHandler(IUow uow, UserManager<HrApp.Domain.Entities.AppUser> userManager)
         {
             _uow = uow;
+            this.userManager = userManager;
         }
 
         public async Task<ServiceResponse<int>> Handle(ApproveAdvanceCommand request, CancellationToken cancellationToken)
@@ -29,6 +32,12 @@ namespace HrApp.Application.CQRS.Advance.Commands.Handlers
             if (request.IsApproved)
             {
                 entity.ApprovalStatusId = 2;
+            }
+            else
+            {
+                var temp = userManager.FindByIdAsync(entity.AppUserId.ToString()).Result;
+                temp.YearlyAdvanceAmountLeft += entity.Amount;
+                await userManager.UpdateAsync(temp);
             }
 
 
