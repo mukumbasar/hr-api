@@ -2,6 +2,7 @@
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
     public class ApproveLeaveCommandHandler : IRequestHandler<ApproveLeaveCommand, ServiceResponse<int>>
     {
         private readonly IUow _uow;
+        private readonly UserManager<Domain.Entities.AppUser> userManager;
 
-        public ApproveLeaveCommandHandler(IUow uow)
+        public ApproveLeaveCommandHandler(IUow uow, UserManager<HrApp.Domain.Entities.AppUser> userManager)
         {
             _uow = uow;
+            this.userManager = userManager;
         }
 
         public async Task<ServiceResponse<int>> Handle(ApproveLeaveCommand request, CancellationToken cancellationToken)
@@ -31,6 +34,17 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             {
                 entity.ApprovalStatusId = 2;
             }
+            else
+            {
+                if (entity.LeaveTypeId == 1)
+                {
+                    var temp = userManager.FindByIdAsync(entity.AppUserId.ToString()).Result;
+
+                    temp.YearlyLeaveDaysLeft += entity.NumDays;
+                    await userManager.UpdateAsync(temp);
+                }
+            }
+
 
 
             await _uow.GetLeaveRepository().UpdateAsync(entity);

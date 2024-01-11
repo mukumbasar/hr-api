@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.CQRS.Company.Queries
 {
-    public class ReadAllCompanyQuery : IRequest<ServiceResponse<List<CompanyDto>>>
+    public class ReadCompanyQuery : IRequest<ServiceResponse<CompanyDto>>
     {
-        public bool isFree { get; set; }
+        public int id { get; set; }
+        public ReadCompanyQuery(int _Id)
+        {
+            id = _Id;
+        }
     }
 }

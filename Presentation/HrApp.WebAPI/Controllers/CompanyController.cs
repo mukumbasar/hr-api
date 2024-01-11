@@ -20,9 +20,17 @@ namespace HrApp.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool? isFree = false)
         {
-            var result = await _mediator.Send(new ReadAllCompanyQuery());
+            var result = await _mediator.Send(new ReadAllCompanyQuery() { isFree = isFree.Value });
+            if (result.IsSuccess) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _mediator.Send(new ReadCompanyQuery(id));
             if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }

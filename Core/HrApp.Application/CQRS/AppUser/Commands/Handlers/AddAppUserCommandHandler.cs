@@ -19,7 +19,7 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
     private readonly IUow _uow;
     private readonly IEmailService _emailService;
     private readonly ICompanyRepository _companyRepository;
-    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService,ICompanyRepository companyRepository)
+    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService, ICompanyRepository companyRepository)
     {
         _userManager = userManager;
         _validator = validator;
@@ -59,8 +59,10 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             {
                 if (request.IsAdmin)
                 {
-                    if (_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyId == user.CompanyId))
+                    if (!_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyId == user.CompanyId))
+                    {
                         await _userManager.AddToRoleAsync(user, "Admin");
+                    }
                     else
                         return new ServiceResponse<string>() { Message = "Personnel add process failed company already have admin", IsSuccess = false };
                 }
