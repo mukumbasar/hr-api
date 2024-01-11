@@ -18,13 +18,15 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
     private readonly IMapper _mapper;
     private readonly IUow _uow;
     private readonly IEmailService _emailService;
-    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService)
+    private readonly ICompanyRepository _companyRepository;
+    public AddAppUserCommandHandler(UserManager<AppUser> userManager, AddAppUserCommandValidator validator, IMapper mapper, IUow uow, IEmailService emailService,ICompanyRepository companyRepository)
     {
         _userManager = userManager;
         _validator = validator;
         _mapper = mapper;
         _uow = uow;
         _emailService = emailService;
+        _companyRepository = companyRepository;
     }
 
     public async Task<ServiceResponse<string>> Handle(AddAppUserCommand request, CancellationToken cancellationToken)
@@ -45,7 +47,8 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             user.SecondName ??= "";
             user.SecondSurname ??= "";
             user.UserName = Guid.NewGuid().ToString();
-            user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + user.CompanyName.ToLower() + ".com";
+            var company = await _companyRepository.GetAsync(true, x => x.Id == request.CompanyId);
+            user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + company.Name.ToLower() + ".com";
             foreach (var items in turkishChar.Keys)
             {
                 if (user.Email.Contains(turkishChar[items]))
@@ -54,6 +57,14 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
+                if (request.IsAdmin)
+                {
+                    if (_userManager.GetUsersInRoleAsync("Admin").Result.Any(x => x.CompanyId == user.CompanyId))
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    else
+                        return new ServiceResponse<string>() { Message = "Personnel add process failed company already have admin", IsSuccess = false };
+                }
+
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                 var mailBody = await _emailService.GenerateNewPasswordMailBody(user.Id, token);
@@ -62,10 +73,10 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
 
                 return new ServiceResponse<string>() { Message = "User added successfully", IsSuccess = true };
             }
-            else
-            {
-                return new ServiceResponse<string>() { Message = "User added failed", IsSuccess = false };
-            }
+            var errorList = result.Errors.ToList();
+            var errors = string.Join(", ", errorList.Select(e => e.Code));
+            return new ServiceResponse<string>() { Message = errors, IsSuccess = false };
+
         }
         return new ServiceResponse<string>() { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
     }

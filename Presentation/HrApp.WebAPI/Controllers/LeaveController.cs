@@ -1,4 +1,5 @@
-﻿using HrApp.Application.CQRS.Leave.Commands;
+﻿using HrApp.Application.CQRS.Expense.Commands;
+using HrApp.Application.CQRS.Leave.Commands;
 using HrApp.Application.CQRS.Leave.Queries;
 using HrApp.Application.CQRS.LeaveType.Queries;
 using HrApp.Application.Wrappers;
@@ -17,10 +18,10 @@ namespace HrApp.WebAPI.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int? id)
         {
-            var result = await _mediator.Send(new ReadAllLeaveQuery());
-            if (result.IsSuccess) return Ok(result);
+            var result = await _mediator.Send(new ReadAllLeaveQuery() { companyId = id });
+            if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
 
@@ -58,6 +59,14 @@ namespace HrApp.WebAPI.Controllers
         {
             var result = await _mediator.Send(new DeleteLeaveCommand(id));
             if (result.IsSuccess) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet("Approve")]
+        public async Task<IActionResult> Approve(int id, bool isApproved)
+        {
+            var result = await _mediator.Send(new ApproveLeaveCommand() { Id = id, IsApproved = isApproved });
+            if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
     }

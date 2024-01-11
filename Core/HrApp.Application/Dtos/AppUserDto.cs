@@ -20,7 +20,7 @@ namespace HrApp.Application.Dtos
         public DateTime? EndDate { get; set; }
         public bool IsActive { get { return EndDate == null ? true : false; } }
         public string Department { get; set; }
-        public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
         public string Occupation { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }

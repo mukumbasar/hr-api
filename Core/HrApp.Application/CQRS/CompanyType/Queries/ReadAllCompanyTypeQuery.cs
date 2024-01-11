@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HrApp.Application.CQRS.Advance.Queries
+namespace HrApp.Application.CQRS.CompanyType.Queries
 {
-    public class ReadAllAdvanceQuery : IRequest<ServiceResponse<List<AdvanceDto>>>
+    public class ReadAllCompanyTypeQuery : IRequest<ServiceResponse<List<CompanyTypeDto>>>
     {
-        public int? companyId { get; set; }
+
     }
 }

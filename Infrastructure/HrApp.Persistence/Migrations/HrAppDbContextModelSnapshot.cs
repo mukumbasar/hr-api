@@ -89,12 +89,12 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Bireysel"
+                            Name = "Individual"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Kurumsal"
+                            Name = "Corporate"
                         });
                 });
 
@@ -127,9 +127,17 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "334f2cb0-c7b4-4b4e-bdab-4ceb905365eb",
-                            ConcurrencyStamp = "d616fa2c-618d-44fe-9430-7cb1b469cde6",
-                            Name = "Admin"
+                            Id = "bc393177-e917-4e1e-8b37-fb42a1f6a6a7",
+                            ConcurrencyStamp = "baac6b24-611f-4d58-a4ba-ec74a48e7a56",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "2b4a4226-63aa-4259-a431-752ef99b61d0",
+                            Name = "WebsiteManager",
+                            NormalizedName = "WEBSITEMANAGER"
                         });
                 });
 
@@ -186,9 +194,8 @@ namespace HrApp.Persistence.Migrations
                     b.Property<DateTime>("BirthYear")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -287,6 +294,8 @@ namespace HrApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("GenderId");
 
                     b.HasIndex("NormalizedEmail")
@@ -302,13 +311,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5d7948eb-de7f-46a8-98ee-6f75981f79c1",
+                            Id = "7f2c79b7-f774-436f-bb4a-27bcaaa134e4",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Istanbul",
-                            BirthYear = new DateTime(1994, 1, 7, 0, 54, 19, 879, DateTimeKind.Local).AddTicks(3669),
-                            CompanyName = "KOC",
-                            ConcurrencyStamp = "1e792d31-cbd5-4b9a-8208-c075aa9cfd47",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 759, DateTimeKind.Local).AddTicks(9072),
+                            CompanyId = 2,
+                            ConcurrencyStamp = "212f2f4a-a4b8-45a0-88e1-d1d95c514aff",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -319,11 +328,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOK9fm0QrwD5O3wc+CIoRaSQukhgsi72PEbrAvmk9A5fCRhQM0Xy55CoDAnee2L0qQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHc6PPxktw7ly6lF349aUj09ZpkbwiWD6IOeeymOXXh5N37cA11klBuHqd27hAPD7g==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "df316aaf-734d-4856-b949-5fbce0c6d19d",
-                            StartDate = new DateTime(2014, 1, 7, 0, 54, 19, 879, DateTimeKind.Local).AddTicks(3677),
+                            SecurityStamp = "142f830d-dc48-462f-b773-09437040d13d",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 759, DateTimeKind.Local).AddTicks(9086),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -333,13 +342,73 @@ namespace HrApp.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "13adc82e-e85e-457a-b84c-6bdbfa27253a",
+                            Id = "28fb4f54-9fd7-4bc6-a565-c6640a534d3b",
+                            AccessFailedCount = 0,
+                            Address = "address1231231231232",
+                            BirthPlace = "Ankara",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 761, DateTimeKind.Local).AddTicks(671),
+                            CompanyId = 1,
+                            ConcurrencyStamp = "f996c44e-e812-4caf-9976-9f28d52cafd5",
+                            Department = "IT",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            GenderId = 2,
+                            LockoutEnabled = false,
+                            MobileNumber = "5554443322",
+                            Name = "user2",
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER2",
+                            Occupation = "Formatçı",
+                            PhoneNumberConfirmed = false,
+                            Salary = 20000m,
+                            SecurityStamp = "0128fdbf-7359-4ad3-ba14-e1381b5ca5f1",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 761, DateTimeKind.Local).AddTicks(674),
+                            Surname = "user2surname",
+                            TurkishIdentificationNumber = "11111111111",
+                            TwoFactorEnabled = false,
+                            UserName = "user2",
+                            YearlyAdvanceAmountLeft = 40000m,
+                            YearlyLeaveDaysLeft = 20
+                        },
+                        new
+                        {
+                            Id = "cd131289-4c0d-47d3-8b37-8069e6d8ece8",
+                            AccessFailedCount = 0,
+                            Address = "webadminaddress1231231231232",
+                            BirthPlace = "Ank",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 762, DateTimeKind.Local).AddTicks(600),
+                            CompanyId = 2,
+                            ConcurrencyStamp = "97fda14e-d580-4e32-b40e-214ecaa1e183",
+                            Department = "IT",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            GenderId = 2,
+                            LockoutEnabled = false,
+                            MobileNumber = "5554443322",
+                            Name = "webadmin",
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "WEBADMIN",
+                            Occupation = "Formatçı",
+                            PhoneNumberConfirmed = false,
+                            Salary = 20000m,
+                            SecurityStamp = "2a629d8b-4bcc-4cdc-9a8f-63dfe85a36a8",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 762, DateTimeKind.Local).AddTicks(601),
+                            Surname = "webadminname",
+                            TurkishIdentificationNumber = "11111111111",
+                            TwoFactorEnabled = false,
+                            UserName = "webadmin",
+                            YearlyAdvanceAmountLeft = 40000m,
+                            YearlyLeaveDaysLeft = 20
+                        },
+                        new
+                        {
+                            Id = "7dc571ac-07c5-4f6e-bdd0-3fc8303112db",
                             AccessFailedCount = 0,
                             Address = "adminaddress1231231231232",
                             BirthPlace = "Ankara",
-                            BirthYear = new DateTime(1974, 1, 7, 0, 54, 19, 880, DateTimeKind.Local).AddTicks(3140),
-                            CompanyName = "KOC",
-                            ConcurrencyStamp = "de8e8a11-69af-42f4-bb52-ee173bbcaab2",
+                            BirthYear = new DateTime(1974, 1, 10, 22, 41, 17, 763, DateTimeKind.Local).AddTicks(665),
+                            CompanyId = 1,
+                            ConcurrencyStamp = "64047ccb-2db4-4ee3-9dad-8585162d85ca",
                             Department = "PATRON",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -350,17 +419,166 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
                             Occupation = "PATRON",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHItO8KqKoA+1JoK0Q2/dNMyRWn2ui76UlSJLjizO6IEAcAQ9tOsqiJdGluRswuEKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIhy91fup2dDsWiihVTxjoV+BUTgYpgUNtXUED2uNynErvzkxS3mhCUmt3EoLkkO8g==",
                             PhoneNumberConfirmed = false,
                             Salary = 500000m,
-                            SecurityStamp = "ae64279f-6d02-4add-bc42-aec59535af7b",
-                            StartDate = new DateTime(2009, 1, 7, 0, 54, 19, 880, DateTimeKind.Local).AddTicks(3141),
+                            SecurityStamp = "16415e4d-a773-4dbc-b4bb-ed124881c9ab",
+                            StartDate = new DateTime(2009, 1, 10, 22, 41, 17, 763, DateTimeKind.Local).AddTicks(667),
                             Surname = "adminsurname",
                             TurkishIdentificationNumber = "22222222222",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             YearlyAdvanceAmountLeft = 40000m,
                             YearlyLeaveDaysLeft = 20
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ContractEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ContractStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FoundationYear")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MersisNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxOffice")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyTypeId");
+
+                    b.ToTable("Company");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "123 Main St, City",
+                            CompanyTypeId = 1,
+                            ContractEndDate = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContractStartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmailAddress = "company1@example.com",
+                            EmployeeCount = 100,
+                            FoundationYear = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MersisNo = "0123456789000015",
+                            Name = "Company 1",
+                            PhoneNumber = "5555555555",
+                            TaxNo = "1234567890",
+                            TaxOffice = "Ankara"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "456 Oak St, City",
+                            CompanyTypeId = 2,
+                            ContractEndDate = new DateTime(2024, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContractStartDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmailAddress = "company2@example.com",
+                            EmployeeCount = 50,
+                            FoundationYear = new DateTime(2005, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MersisNo = "123",
+                            Name = "Company 2",
+                            PhoneNumber = "5555555555",
+                            TaxNo = "123",
+                            TaxOffice = "A"
+                        });
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.CompanyType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CompanyType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Limited"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Anonim"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Kooperatif"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Kollektif"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Komandit"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Adi"
                         });
                 });
 
@@ -467,22 +685,22 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Yeme-içme"
+                            Name = "Food and Beverage"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Eğitim"
+                            Name = "Education"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Konaklama"
+                            Name = "Accommodation"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Seyahat"
+                            Name = "Travel"
                         });
                 });
 
@@ -506,17 +724,17 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Erkek"
+                            Name = "Male"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Kadın"
+                            Name = "Female"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Diğer"
+                            Name = "Other"
                         });
                 });
 
@@ -593,35 +811,35 @@ namespace HrApp.Persistence.Migrations
                         {
                             Id = 1,
                             LeaveTypeFocusId = 3,
-                            Name = "Yıllık",
+                            Name = "Annual",
                             NumDays = 1
                         },
                         new
                         {
                             Id = 2,
                             LeaveTypeFocusId = 2,
-                            Name = "Doğum",
+                            Name = "Maternity",
                             NumDays = 56
                         },
                         new
                         {
                             Id = 3,
                             LeaveTypeFocusId = 3,
-                            Name = "Ölüm",
+                            Name = "Bereavement",
                             NumDays = 3
                         },
                         new
                         {
                             Id = 4,
                             LeaveTypeFocusId = 1,
-                            Name = "Babalık",
+                            Name = "Paternity",
                             NumDays = 5
                         },
                         new
                         {
                             Id = 5,
                             LeaveTypeFocusId = 3,
-                            Name = "Evlilik",
+                            Name = "Marriage",
                             NumDays = 3
                         });
                 });
@@ -646,17 +864,17 @@ namespace HrApp.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Erkek"
+                            Name = "Male"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Kadın"
+                            Name = "Female"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Herkes"
+                            Name = "Everyone"
                         });
                 });
 
@@ -685,16 +903,16 @@ namespace HrApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Log");
+                    b.ToTable("Logs");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            ExceptionMessage = "burak",
-                            ExceptionMethod = "siki",
-                            ExceptionPath = "tuttu",
-                            ExceptionTime = new DateTime(2024, 1, 7, 0, 54, 19, 881, DateTimeKind.Local).AddTicks(5821)
+                            ExceptionMessage = "Test Exception",
+                            ExceptionMethod = "N/A",
+                            ExceptionPath = "N/A",
+                            ExceptionTime = new DateTime(2024, 1, 10, 22, 41, 17, 764, DateTimeKind.Local).AddTicks(729)
                         });
                 });
 
@@ -787,8 +1005,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "13adc82e-e85e-457a-b84c-6bdbfa27253a",
-                            RoleId = "334f2cb0-c7b4-4b4e-bdab-4ceb905365eb"
+                            UserId = "7dc571ac-07c5-4f6e-bdd0-3fc8303112db",
+                            RoleId = "bc393177-e917-4e1e-8b37-fb42a1f6a6a7"
+                        },
+                        new
+                        {
+                            UserId = "cd131289-4c0d-47d3-8b37-8069e6d8ece8",
+                            RoleId = "2"
                         });
                 });
 
@@ -848,13 +1071,30 @@ namespace HrApp.Persistence.Migrations
 
             modelBuilder.Entity("HrApp.Domain.Entities.AppUser", b =>
                 {
+                    b.HasOne("HrApp.Domain.Entities.Company", "Company")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("CompanyId");
+
                     b.HasOne("HrApp.Domain.Entities.Gender", "Gender")
                         .WithMany("AppUsers")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Company");
+
                     b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Company", b =>
+                {
+                    b.HasOne("HrApp.Domain.Entities.CompanyType", "CompanyType")
+                        .WithMany("Companies")
+                        .HasForeignKey("CompanyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompanyType");
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.Expense", b =>
@@ -1002,6 +1242,16 @@ namespace HrApp.Persistence.Migrations
                     b.Navigation("Expenses");
 
                     b.Navigation("Leaves");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.Company", b =>
+                {
+                    b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("HrApp.Domain.Entities.CompanyType", b =>
+                {
+                    b.Navigation("Companies");
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.Currency", b =>

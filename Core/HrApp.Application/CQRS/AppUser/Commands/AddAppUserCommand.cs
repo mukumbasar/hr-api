@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.Application.CQRS.AppUser.Commands
 {
-    public class AddAppUserCommand:IRequest<ServiceResponse<string>>
+    public class AddAppUserCommand : IRequest<ServiceResponse<string>>
     {
         public string Name { get; set; }
         public string? SecondName { get; set; }
@@ -20,12 +20,14 @@ namespace HrApp.Application.CQRS.AppUser.Commands
         public string TurkishIdentificationNumber { get; set; }
         public DateTime StartDate { get; set; }
         public string Department { get; set; }
-        public string CompanyName { get; set; }
+        public int CompanyId  { get; set; }
         public string Occupation { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }
         public decimal Salary { get; set; }
         public byte[] ImageData { get; set; }
         public int GenderId { get; set; }
+        public bool IsAdmin { get; set; }
+
     }
 }

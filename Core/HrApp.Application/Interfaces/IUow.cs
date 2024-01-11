@@ -17,5 +17,7 @@ namespace HrApp.Application.Interfaces
         IExpenseTypeRepository GetExpenseTypeRepository();
         ILeaveTypeRepository GetLeaveTypeRepository();
         ICurrencyRepository GetCurrencyRepository();
+        ICompanyRepository GetCompanyRepository();
+        ICompanyTypeRepository GetCompanyTypeRepository();
     }
 }

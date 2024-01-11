@@ -96,6 +96,12 @@ namespace MyApp.Namespace
 
             return BadRequest(result);
         }
+        [HttpGet("list/admin")]
+        public async Task<IActionResult> GetAllAdminUser()
+        {
+            var result = await mediator.Send(new GetAllAdminAppUserQuery());
+            return Ok(result);
+        }
 
     }
 }

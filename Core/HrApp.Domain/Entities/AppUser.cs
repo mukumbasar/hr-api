@@ -22,7 +22,6 @@ namespace HrApp.Domain.Entities
         public DateTime? EndDate { get; set; }
         public bool IsActive { get { return EndDate == null ? true : false; } }
         public string Department { get; set; }
-        public string CompanyName { get; set; }
         public string Occupation { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }
@@ -32,6 +31,9 @@ namespace HrApp.Domain.Entities
         public decimal YearlyAdvanceAmountLeft { get; set; } = 40000;
         public Gender Gender { get; set; }
         public int GenderId { get; set; }
+
+        public int? CompanyId { get; set; }
+        public Company? Company { get; set; }
 
         public List<Advance> Advances { get; set; }
         public List<Leave> Leaves { get; set; }

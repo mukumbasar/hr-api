@@ -17,9 +17,9 @@ namespace HrApp.WebAPI.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int? id)
         {
-            var result = await _mediator.Send(new ReadAllAdvanceQuery());
+            var result = await _mediator.Send(new ReadAllAdvanceQuery() { companyId = id });
             if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
@@ -55,6 +55,14 @@ namespace HrApp.WebAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteAdvanceCommand(id));
+            if (result.IsSuccess) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+        [HttpGet("Approve")]
+        public async Task<IActionResult> Approve(int id, bool isApproved)
+        {
+            var result = await _mediator.Send(new ApproveAdvanceCommand() { Id = id, IsApproved = isApproved });
             if (result.IsSuccess) { return Ok(result); }
             return BadRequest(result);
         }
