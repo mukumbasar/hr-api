@@ -18,5 +18,6 @@ namespace HrApp.Application.Dtos
         public int ApprovalStatusId { get; set; }
         public DateTime ApprovalDate { get; set; }
         public string AppUserId { get; set; }
+        public byte[] Document { get; set; }
     }
 }
