@@ -21,6 +21,15 @@ public class GetAllAdminAppUserQueryHandler : IRequestHandler<GetAllAdminAppUser
     public async Task<ServiceResponse<List<AppUserDto>>> Handle(GetAllAdminAppUserQuery request, CancellationToken cancellationToken)
     {
         var users = await userManager.GetUsersInRoleAsync("Admin");
+
+        var dtos = new List<AppUserDto>();
+
+        foreach (var entity in users)
+        {
+            var mappedEntity = mapper.Map<AppUserDto>(entity);
+            dtos.Add(mappedEntity);
+        }
+
         var temp = mapper.Map<List<AppUserDto>>(users);
         return new ServiceResponse<List<AppUserDto>>(temp) { IsSuccess = true, Message = "" };
     }

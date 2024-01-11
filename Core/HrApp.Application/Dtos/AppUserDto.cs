@@ -31,5 +31,6 @@ namespace HrApp.Application.Dtos
         public decimal YearlyAdvanceAmountLeft { get; set; }
         public string Gender { get; set; }
         public int GenderId { get; set; }
+        public string Email { get; set; }
     }
 }
