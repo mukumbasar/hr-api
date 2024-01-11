@@ -25,10 +25,14 @@ namespace HrApp.Application.CQRS.Leave.Queries.Handlers
 
         public async Task<ServiceResponse<List<LeaveDto>>> Handle(ReadAllLeaveQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null, x => x.LeaveType, x => x.ApprovalStatus);
+            var entities = await _uow.GetLeaveRepository().GetAllAsync(true, null, x => x.LeaveType, x => x.ApprovalStatus, x => x.AppUser);
 
 
             var dtos = new List<LeaveDto>();
+            if (request.companyId != null)
+            {
+                entities = entities.Where(x => x.AppUser.CompanyId == request.companyId).ToList();
+            }
 
             foreach (var entity in entities)
             {

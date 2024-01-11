@@ -11,6 +11,6 @@ namespace HrApp.Application.CQRS.Leave.Queries
 {
     public class ReadAllLeaveQuery : IRequest<ServiceResponse<List<LeaveDto>>>
     {
-
+        public int? companyId { get; set; }
     }
 }

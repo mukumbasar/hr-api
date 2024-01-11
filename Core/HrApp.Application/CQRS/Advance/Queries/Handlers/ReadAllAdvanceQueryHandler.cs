@@ -24,11 +24,13 @@ namespace HrApp.Application.CQRS.Advance.Queries.Handlers
 
         public async Task<ServiceResponse<List<AdvanceDto>>> Handle(ReadAllAdvanceQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetAdvanceRepository().GetAllAsync(true, null, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus);
-
+            var entities = await _uow.GetAdvanceRepository().GetAllAsync(true, null, x => x.Currency, x => x.AdvanceType, x => x.ApprovalStatus, x => x.AppUser);
 
             var dtos = new List<AdvanceDto>();
-
+            if (request.companyId != null)
+            {
+                entities = entities.Where(x => x.AppUser.CompanyId == request.companyId).ToList();
+            }
             foreach (var entity in entities)
             {
                 var mappedEntity = _mapper.Map<AdvanceDto>(entity);

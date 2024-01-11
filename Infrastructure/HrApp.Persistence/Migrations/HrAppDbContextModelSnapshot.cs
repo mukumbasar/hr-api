@@ -127,15 +127,15 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "090b7410-fa03-4c1b-bcaa-7eea3914ca47",
-                            ConcurrencyStamp = "9b423215-a842-4579-891b-2d3bffab40e0",
+                            Id = "bc393177-e917-4e1e-8b37-fb42a1f6a6a7",
+                            ConcurrencyStamp = "baac6b24-611f-4d58-a4ba-ec74a48e7a56",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "98a877c5-72ae-40f7-b4b0-d60a37ef8118",
+                            ConcurrencyStamp = "2b4a4226-63aa-4259-a431-752ef99b61d0",
                             Name = "WebsiteManager",
                             NormalizedName = "WEBSITEMANAGER"
                         });
@@ -196,10 +196,6 @@ namespace HrApp.Persistence.Migrations
 
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -315,13 +311,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "56a4456f-3e86-4699-b02e-a6db5642ab02",
+                            Id = "7f2c79b7-f774-436f-bb4a-27bcaaa134e4",
                             AccessFailedCount = 0,
                             Address = "address1231231231232",
                             BirthPlace = "Istanbul",
-                            BirthYear = new DateTime(1994, 1, 8, 15, 18, 13, 986, DateTimeKind.Local).AddTicks(8669),
-                            CompanyName = "KOC",
-                            ConcurrencyStamp = "020d90d9-1e38-42cf-84cf-0fb461129820",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 759, DateTimeKind.Local).AddTicks(9072),
+                            CompanyId = 2,
+                            ConcurrencyStamp = "212f2f4a-a4b8-45a0-88e1-d1d95c514aff",
                             Department = "IT",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -332,11 +328,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER1",
                             Occupation = "Formatçı",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB3Uz35IMq/+W+89QtDNP1jJNEVKnwl24GvBPsQosmcCLkWiKvjYEdqcHq1WqRf2xw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHc6PPxktw7ly6lF349aUj09ZpkbwiWD6IOeeymOXXh5N37cA11klBuHqd27hAPD7g==",
                             PhoneNumberConfirmed = false,
                             Salary = 20000m,
-                            SecurityStamp = "894218d0-c982-4b92-9eea-d56d19899e2e",
-                            StartDate = new DateTime(2014, 1, 8, 15, 18, 13, 986, DateTimeKind.Local).AddTicks(8681),
+                            SecurityStamp = "142f830d-dc48-462f-b773-09437040d13d",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 759, DateTimeKind.Local).AddTicks(9086),
                             Surname = "usersurname",
                             TurkishIdentificationNumber = "11111111111",
                             TwoFactorEnabled = false,
@@ -346,13 +342,73 @@ namespace HrApp.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "201bcc2f-b7cf-41f3-a84f-262542067522",
+                            Id = "28fb4f54-9fd7-4bc6-a565-c6640a534d3b",
+                            AccessFailedCount = 0,
+                            Address = "address1231231231232",
+                            BirthPlace = "Ankara",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 761, DateTimeKind.Local).AddTicks(671),
+                            CompanyId = 1,
+                            ConcurrencyStamp = "f996c44e-e812-4caf-9976-9f28d52cafd5",
+                            Department = "IT",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            GenderId = 2,
+                            LockoutEnabled = false,
+                            MobileNumber = "5554443322",
+                            Name = "user2",
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER2",
+                            Occupation = "Formatçı",
+                            PhoneNumberConfirmed = false,
+                            Salary = 20000m,
+                            SecurityStamp = "0128fdbf-7359-4ad3-ba14-e1381b5ca5f1",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 761, DateTimeKind.Local).AddTicks(674),
+                            Surname = "user2surname",
+                            TurkishIdentificationNumber = "11111111111",
+                            TwoFactorEnabled = false,
+                            UserName = "user2",
+                            YearlyAdvanceAmountLeft = 40000m,
+                            YearlyLeaveDaysLeft = 20
+                        },
+                        new
+                        {
+                            Id = "cd131289-4c0d-47d3-8b37-8069e6d8ece8",
+                            AccessFailedCount = 0,
+                            Address = "webadminaddress1231231231232",
+                            BirthPlace = "Ank",
+                            BirthYear = new DateTime(1994, 1, 10, 22, 41, 17, 762, DateTimeKind.Local).AddTicks(600),
+                            CompanyId = 2,
+                            ConcurrencyStamp = "97fda14e-d580-4e32-b40e-214ecaa1e183",
+                            Department = "IT",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            GenderId = 2,
+                            LockoutEnabled = false,
+                            MobileNumber = "5554443322",
+                            Name = "webadmin",
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "WEBADMIN",
+                            Occupation = "Formatçı",
+                            PhoneNumberConfirmed = false,
+                            Salary = 20000m,
+                            SecurityStamp = "2a629d8b-4bcc-4cdc-9a8f-63dfe85a36a8",
+                            StartDate = new DateTime(2014, 1, 10, 22, 41, 17, 762, DateTimeKind.Local).AddTicks(601),
+                            Surname = "webadminname",
+                            TurkishIdentificationNumber = "11111111111",
+                            TwoFactorEnabled = false,
+                            UserName = "webadmin",
+                            YearlyAdvanceAmountLeft = 40000m,
+                            YearlyLeaveDaysLeft = 20
+                        },
+                        new
+                        {
+                            Id = "7dc571ac-07c5-4f6e-bdd0-3fc8303112db",
                             AccessFailedCount = 0,
                             Address = "adminaddress1231231231232",
                             BirthPlace = "Ankara",
-                            BirthYear = new DateTime(1974, 1, 8, 15, 18, 13, 987, DateTimeKind.Local).AddTicks(8129),
-                            CompanyName = "KOC",
-                            ConcurrencyStamp = "b3df58e2-df3f-46b3-a037-61cae8d176fe",
+                            BirthYear = new DateTime(1974, 1, 10, 22, 41, 17, 763, DateTimeKind.Local).AddTicks(665),
+                            CompanyId = 1,
+                            ConcurrencyStamp = "64047ccb-2db4-4ee3-9dad-8585162d85ca",
                             Department = "PATRON",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -363,11 +419,11 @@ namespace HrApp.Persistence.Migrations
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
                             Occupation = "PATRON",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF17haT15Y02KYgpc42yiD2+k1nd+5jhnIvF3rElVomZzWqHFiELMKTQIpJT+hciKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIhy91fup2dDsWiihVTxjoV+BUTgYpgUNtXUED2uNynErvzkxS3mhCUmt3EoLkkO8g==",
                             PhoneNumberConfirmed = false,
                             Salary = 500000m,
-                            SecurityStamp = "9d870f5b-5313-48cd-9a44-40cc7abb2169",
-                            StartDate = new DateTime(2009, 1, 8, 15, 18, 13, 987, DateTimeKind.Local).AddTicks(8130),
+                            SecurityStamp = "16415e4d-a773-4dbc-b4bb-ed124881c9ab",
+                            StartDate = new DateTime(2009, 1, 10, 22, 41, 17, 763, DateTimeKind.Local).AddTicks(667),
                             Surname = "adminsurname",
                             TurkishIdentificationNumber = "22222222222",
                             TwoFactorEnabled = false,
@@ -439,6 +495,42 @@ namespace HrApp.Persistence.Migrations
                     b.HasIndex("CompanyTypeId");
 
                     b.ToTable("Company");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "123 Main St, City",
+                            CompanyTypeId = 1,
+                            ContractEndDate = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContractStartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmailAddress = "company1@example.com",
+                            EmployeeCount = 100,
+                            FoundationYear = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MersisNo = "0123456789000015",
+                            Name = "Company 1",
+                            PhoneNumber = "5555555555",
+                            TaxNo = "1234567890",
+                            TaxOffice = "Ankara"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "456 Oak St, City",
+                            CompanyTypeId = 2,
+                            ContractEndDate = new DateTime(2024, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContractStartDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmailAddress = "company2@example.com",
+                            EmployeeCount = 50,
+                            FoundationYear = new DateTime(2005, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            MersisNo = "123",
+                            Name = "Company 2",
+                            PhoneNumber = "5555555555",
+                            TaxNo = "123",
+                            TaxOffice = "A"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.CompanyType", b =>
@@ -456,6 +548,38 @@ namespace HrApp.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CompanyType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Limited"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Anonim"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Kooperatif"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Kollektif"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Komandit"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Adi"
+                        });
                 });
 
             modelBuilder.Entity("HrApp.Domain.Entities.Currency", b =>
@@ -788,7 +912,7 @@ namespace HrApp.Persistence.Migrations
                             ExceptionMessage = "Test Exception",
                             ExceptionMethod = "N/A",
                             ExceptionPath = "N/A",
-                            ExceptionTime = new DateTime(2024, 1, 8, 15, 18, 13, 988, DateTimeKind.Local).AddTicks(7743)
+                            ExceptionTime = new DateTime(2024, 1, 10, 22, 41, 17, 764, DateTimeKind.Local).AddTicks(729)
                         });
                 });
 
@@ -881,8 +1005,13 @@ namespace HrApp.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "201bcc2f-b7cf-41f3-a84f-262542067522",
-                            RoleId = "090b7410-fa03-4c1b-bcaa-7eea3914ca47"
+                            UserId = "7dc571ac-07c5-4f6e-bdd0-3fc8303112db",
+                            RoleId = "bc393177-e917-4e1e-8b37-fb42a1f6a6a7"
+                        },
+                        new
+                        {
+                            UserId = "cd131289-4c0d-47d3-8b37-8069e6d8ece8",
+                            RoleId = "2"
                         });
                 });
 

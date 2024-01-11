@@ -11,6 +11,6 @@ namespace HrApp.Application.CQRS.Advance.Queries
 {
     public class ReadAllAdvanceQuery : IRequest<ServiceResponse<List<AdvanceDto>>>
     {
-
+        public int? companyId { get; set; }
     }
 }
