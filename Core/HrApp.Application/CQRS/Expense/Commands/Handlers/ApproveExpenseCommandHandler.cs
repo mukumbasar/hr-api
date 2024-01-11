@@ -23,13 +23,15 @@ namespace HrApp.Application.CQRS.Expense.Commands.Handlers
         {
             var entity = await _uow.GetExpenseRepository().GetAsync(true, x => x.Id == request.Id);
 
+            entity.ApprovalStatusId = 3;
+
+            entity.ApprovalDate = DateTime.Now;
+
             if (request.IsApproved)
             {
-                entity.ApprovalDate = DateTime.Now;
                 entity.ApprovalStatusId = 2;
             }
 
-            entity.ApprovalStatusId = 3;
 
             await _uow.GetExpenseRepository().UpdateAsync(entity);
 
