@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HrApp.Application.CQRS.Advance.Queries;
 using HrApp.Application.Dtos;
+using HrApp.Application.Helpers;
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
@@ -35,7 +36,10 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                 dto.ApprovalStatus = entity.ApprovalStatus.Name;
                 dto.Currency = entity.Currency.Name;
                 dto.ExpenseTypeName = entity.ExpenseType.Name;
-
+                if(entity.Document!= null)
+                {
+                    dto.ConvertedFile = await ImageConversions.ConvertToIFormFile(entity.Document);
+                }
                 return new ServiceResponse<ExpenseDto>(dto) { Message = "", IsSuccess = true };
             }
 

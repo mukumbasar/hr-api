@@ -29,11 +29,12 @@ public class GetAppUserQueryHandler : IRequestHandler<GetAppUserQuery, ServiceRe
 
     public async Task<ServiceResponse<AppUserDto>> Handle(GetAppUserQuery request, CancellationToken cancellationToken)
     {
-        var entity = await _uow.GetAppUserRepository().GetAsync(true,x=>x.Id==(request.userId),x=>x.Gender);
+        var entity = await _uow.GetAppUserRepository().GetAsync(true,x=>x.Id==(request.userId),x=>x.Gender, x => x.Company);
         if (entity != null)
         {
             var dto = _mapper.Map<AppUserDto>(entity);
             dto.Gender = entity.Gender.Name;
+            dto.CompanyName = entity.Company.Name;
             return new ServiceResponse<AppUserDto>(dto) { Message = "", IsSuccess = true };
         }
         return new ServiceResponse<AppUserDto>() { Message = "Personnel acquirement error!", IsSuccess = false };

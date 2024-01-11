@@ -27,7 +27,7 @@ public class GetAllAppUserQueryHandler : IRequestHandler<GetAllAppUserQuery, Ser
 
     public async Task<ServiceResponse<List<AppUserDto>>> Handle(GetAllAppUserQuery request, CancellationToken cancellationToken)
     {
-        var entities = await _uow.GetAppUserRepository().GetAllAsync(true, null, x => x.Gender);
+        var entities = await _uow.GetAppUserRepository().GetAllAsync(true, null, x => x.Gender, x => x.Company);
         if (entities.Count() > 0)
         {
             var dtos= new List<AppUserDto>();
@@ -36,6 +36,7 @@ public class GetAllAppUserQueryHandler : IRequestHandler<GetAllAppUserQuery, Ser
             { 
                 var mappedEntity= _mapper.Map<AppUserDto>(entity);
                 mappedEntity.Gender = entity.Gender.Name;
+                mappedEntity.CompanyName = entity.Company.Name;
                 dtos.Add(mappedEntity);
             }
             return  new ServiceResponse<List<AppUserDto>>(dtos) { Message="",IsSuccess=true };
