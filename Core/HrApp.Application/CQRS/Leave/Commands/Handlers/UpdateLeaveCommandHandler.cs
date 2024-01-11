@@ -41,16 +41,18 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             {
                 return new ServiceResponse<int>(user.YearlyLeaveDaysLeft) { Message = $"The leave has not been updated: You only have {user.YearlyLeaveDaysLeft}", IsSuccess = false };
             }
+
             var leaveList = await _uow.GetLeaveRepository().GetAllAsync(true, x => x.AppUserId == request.AppUserId);
+
             foreach (var item in leaveList)
             {
                 if (item.StartDate <= request.StartDate && item.EndDate >= request.StartDate)
                 {
-                    return new ServiceResponse<int>(0) { Message = $"Leave has not been updated: You already have a leave in this date range.", IsSuccess = false };
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been updated: You already have a leave in this date range.Leave id = {item.Id}.", IsSuccess = false };
                 }
                 if (item.StartDate <= request.EndDate && item.EndDate >= request.EndDate)
                 {
-                    return new ServiceResponse<int>(0) { Message = $"Leave has not been updated: You already have a leave in this date range.", IsSuccess = false };
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been updated: You already have a leave in this date range.Leave id = {item.Id}.", IsSuccess = false };
                 }
             }
 

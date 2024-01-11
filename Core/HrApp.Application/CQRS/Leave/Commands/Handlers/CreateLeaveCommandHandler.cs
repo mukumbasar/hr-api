@@ -65,11 +65,11 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             {
                 if (item.StartDate <= request.StartDate && item.EndDate >= request.StartDate)
                 {
-                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.", IsSuccess = false };
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.Leave id = {item.Id}.", IsSuccess = false };
                 }
                 if (item.StartDate <= request.EndDate && item.EndDate >= request.EndDate)
                 {
-                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.", IsSuccess = false };
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.Leave id = {item.Id}.", IsSuccess = false };
                 }
             }
 
