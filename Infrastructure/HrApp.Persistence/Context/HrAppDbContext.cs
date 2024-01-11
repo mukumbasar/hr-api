@@ -71,11 +71,11 @@ namespace HrApp.Persistence.Context
                 Salary = 20000,
                 MobileNumber = "5554443322",
                 EmailConfirmed = true,
-                Email = "user@gmail.com",
-                NormalizedEmail = "USER@GMAIL.COM",
+                Email = "user2@gmail.com",
+                NormalizedEmail = "USER2@GMAIL.COM",
                 GenderId = 2
             };
-            user1.PasswordHash = hasher.HashPassword(user2, "123321Qwe!");
+            user2.PasswordHash = hasher.HashPassword(user2, "123321Qwe!");
             modelBuilder.Entity<AppUser>().HasData(user2);
 
 
@@ -97,8 +97,8 @@ namespace HrApp.Persistence.Context
                 Salary = 20000,
                 MobileNumber = "5554443322",
                 EmailConfirmed = true,
-                Email = "user@gmail.com",
-                NormalizedEmail = "USER@GMAIL.COM",
+                Email = "webadmin@gmail.com",
+                NormalizedEmail = "WEBADMIN@GMAIL.COM",
                 GenderId = 2
             };
             user1.PasswordHash = hasher.HashPassword(webadmin, "123321Qwe!");
