@@ -4,6 +4,7 @@ using HrApp.Application.Dtos;
 using HrApp.Application.Interfaces;
 using HrApp.Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,22 +18,25 @@ namespace HrApp.Application.CQRS.Company.Queries.Handlers
 
         private readonly IUow _uow;
         private readonly IMapper _mapper;
+        private readonly UserManager<Domain.Entities.AppUser> userManager;
 
-        public RealAllCompanyQueryHandler(IUow uow, IMapper mapper)
+        public RealAllCompanyQueryHandler(IUow uow, IMapper mapper, UserManager<HrApp.Domain.Entities.AppUser> userManager)
         {
             _uow = uow;
             _mapper = mapper;
+            this.userManager = userManager;
         }
         public async Task<ServiceResponse<List<CompanyDto>>> Handle(ReadAllCompanyQuery request, CancellationToken cancellationToken)
         {
             var entities = await _uow.GetCompanyRepository().GetAllAsync(true, null, x => x.CompanyType);
-
+            var employeeList = userManager.Users.ToList();
             List<CompanyDto> dtos = new List<CompanyDto>();
 
             foreach (var entity in entities)
             {
                 var dto = _mapper.Map<CompanyDto>(entity);
                 dto.CompanyTypeName = entity.CompanyType.Name;
+                dto.EmployeeCount = employeeList.Where(x => x.CompanyId == entity.Id).Count();
                 dtos.Add(dto);
             }
 
