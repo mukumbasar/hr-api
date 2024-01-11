@@ -23,9 +23,16 @@ namespace HrApp.Application.Helpers
         {
             using (MemoryStream memoryStream = new MemoryStream(fileBytes))
             {
+                var extension = PictureHelper.TryGetExtension(fileBytes);
+
                 var base64 = Convert.ToBase64String(fileBytes);
 
-                return string.Format("data:image/jpg;base64,{0}", base64);
+                if(extension != null)
+                {
+                    return string.Format("data:image/jpg;base64,{0}", base64);
+                }
+
+                return string.Format("data:application/pdf;base64,{0}", base64);
             }
         }
     }
