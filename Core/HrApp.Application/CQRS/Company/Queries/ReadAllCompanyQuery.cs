@@ -11,6 +11,6 @@ namespace HrApp.Application.CQRS.Company.Queries
 {
     public class ReadAllCompanyQuery : IRequest<ServiceResponse<List<CompanyDto>>>
     {
-
+        public bool isFree { get; set; }
     }
 }

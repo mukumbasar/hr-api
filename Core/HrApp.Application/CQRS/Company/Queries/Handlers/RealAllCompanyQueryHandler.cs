@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,10 +29,13 @@ namespace HrApp.Application.CQRS.Company.Queries.Handlers
         }
         public async Task<ServiceResponse<List<CompanyDto>>> Handle(ReadAllCompanyQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _uow.GetCompanyRepository().GetAllAsync(true, null, x => x.CompanyType);
+            var entities = await _uow.GetCompanyRepository().GetAllAsync(true, null, x => x.CompanyType, x => x.AppUsers);
             var employeeList = userManager.Users.ToList();
             List<CompanyDto> dtos = new List<CompanyDto>();
-
+            if (request.isFree)
+            {
+                entities = entities.Where(x => x.AppUsers.Count == 0).ToList();
+            }
             foreach (var entity in entities)
             {
                 var dto = _mapper.Map<CompanyDto>(entity);
