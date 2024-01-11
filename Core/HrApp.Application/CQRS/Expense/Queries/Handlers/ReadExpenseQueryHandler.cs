@@ -38,7 +38,7 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                 dto.ExpenseTypeName = entity.ExpenseType.Name;
                 if(entity.Document!= null)
                 {
-                    dto.File = await ImageConversions.ConvertToIFormFile(entity.Document);
+                    dto.ConvertedFile = await ImageConversions.ConvertToIFormFile(entity.Document);
                 }
                 return new ServiceResponse<ExpenseDto>(dto) { Message = "", IsSuccess = true };
             }

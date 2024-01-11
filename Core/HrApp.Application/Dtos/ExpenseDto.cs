@@ -19,6 +19,6 @@ namespace HrApp.Application.Dtos
         public int ApprovalStatusId { get; set; }
         public DateTime ApprovalDate { get; set; }
         public string AppUserId { get; set; }
-        public string? File { get; set; }
+        public string? ConvertedFile { get; set; }
     }
 }
