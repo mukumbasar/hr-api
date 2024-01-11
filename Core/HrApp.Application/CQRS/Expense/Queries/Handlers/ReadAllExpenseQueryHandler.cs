@@ -41,6 +41,10 @@ namespace HrApp.Application.CQRS.Expense.Queries.Handlers
                 mappedEntity.ApprovalStatus = entity.ApprovalStatus.Name;
                 mappedEntity.Currency = entity.Currency.Name;
                 mappedEntity.ExpenseTypeName = entity.ExpenseType.Name;
+                mappedEntity.Name = entity.AppUser.Name;
+                mappedEntity.SecondName = entity.AppUser.SecondName;
+                mappedEntity.Surname = entity.AppUser.Surname;
+                mappedEntity.SecondName = entity.AppUser.SecondName;
 
                 dtos.Add(mappedEntity);
             }
