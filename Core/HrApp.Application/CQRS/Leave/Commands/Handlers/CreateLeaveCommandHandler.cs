@@ -37,11 +37,11 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
                 return new ServiceResponse<int>(0) { Message = string.Join(" ", validationResult.Errors), IsSuccess = false };
             }
             var user = await _userManager.FindByIdAsync(request.AppUserId);
-
             if (request.LeaveTypeId != 1)
             {
 
                 var leave = await _uow.GetLeaveTypeRepository().GetAsync(true, x => x.Id == request.LeaveTypeId);
+
                 int numofdays = leave.NumDays;
 
                 request.EndDate = request.StartDate.AddDays(numofdays);
@@ -59,7 +59,19 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
                 }
                 user.YearlyLeaveDaysLeft -= request.NumDays;
             }
-
+            //aynı tarihte alınmış başka bir izin varsa izin aldırtma
+            var leaveList = await _uow.GetLeaveRepository().GetAllAsync(true, x => x.AppUserId == request.AppUserId);
+            foreach (var item in leaveList)
+            {
+                if (item.StartDate <= request.StartDate && item.EndDate >= request.StartDate)
+                {
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.", IsSuccess = false };
+                }
+                if (item.StartDate <= request.EndDate && item.EndDate >= request.EndDate)
+                {
+                    return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.", IsSuccess = false };
+                }
+            }
 
             var entity = _mapper.Map<HrApp.Domain.Entities.Leave>(request);
 
