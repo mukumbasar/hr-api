@@ -49,7 +49,7 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
             user.UserName = Guid.NewGuid().ToString();
             var company = await _companyRepository.GetAsync(true, x => x.Id == request.CompanyId);
             user.Email = user.Name.ToLower() + user.SecondName.ToLower() + "." + user.Surname.ToLower() + user.SecondSurname.ToLower() + "@" + company.Name.ToLower() + ".com";
-            user.Email = user.Email.Replace(" ", "");
+            user.Email = user.Email.Split(" ", StringSplitOptions.RemoveEmptyEntries).Aggregate((i, j) => i + j);
             foreach (var items in turkishChar.Keys)
             {
                 if (user.Email.Contains(turkishChar[items]))
