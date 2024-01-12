@@ -30,7 +30,7 @@ public class ChangePasswordAppUserCommandHandler : IRequestHandler<ChangePasswor
         }
         else
         {
-            var errors = string.Join(", ", identityResult.Errors.Select(e => e.Description));
+            var errors = string.Join(", ", identityResult.Errors.Select(e => e.Code));
             return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = $"Password update failed. Errors: {errors}" };
         }
     }
