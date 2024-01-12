@@ -54,7 +54,9 @@ public class AddAppUserCommandHandler : IRequestHandler<AddAppUserCommand, Servi
                 if (user.Email.Contains(turkishChar[items]))
                     user.Email = user.Email.Replace(items, turkishChar[items]);
             }
+            user.YearlyAdvanceAmountLeft = user.Salary * 3;
             var result = await _userManager.CreateAsync(user);
+
             if (result.Succeeded)
             {
                 if (request.IsAdmin)
