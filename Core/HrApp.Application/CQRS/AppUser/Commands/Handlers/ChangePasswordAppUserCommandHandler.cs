@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using HrApp.Application.Wrappers;
 using HrApp.Domain.Entities;
@@ -22,8 +23,15 @@ public class ChangePasswordAppUserCommandHandler : IRequestHandler<ChangePasswor
         byte[] tokenDecodedBytes = WebEncoders.Base64UrlDecode(request.Token);
         string tokenDecoded = Encoding.UTF8.GetString(tokenDecodedBytes);
         var identityResult = await userManager.ResetPasswordAsync(user, tokenDecoded, request.Password);
+
         if (identityResult.Succeeded)
+        {
             return new ServiceResponse<string> { IsSuccess = true, Data = request.Id, Message = "Password has been updated." };
-        return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = "Password process failed please try again" };
+        }
+        else
+        {
+            var errors = string.Join(", ", identityResult.Errors.Select(e => e.Description));
+            return new ServiceResponse<string> { IsSuccess = false, Data = request.Id, Message = $"Password update failed. Errors: {errors}" };
+        }
     }
 }
