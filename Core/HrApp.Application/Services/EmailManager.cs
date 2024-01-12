@@ -42,7 +42,7 @@ namespace HrApp.Application.Services
 
         public void SendMail(string reciverMailAddress, string subject, string mailBody)
         {
-            reciverMailAddress = reciverMailAddress.Replace(" ", "");
+
 
             var smtpClient = new SmtpClient();
 
