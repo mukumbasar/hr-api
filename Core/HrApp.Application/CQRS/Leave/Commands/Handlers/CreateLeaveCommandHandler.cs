@@ -63,6 +63,8 @@ namespace HrApp.Application.CQRS.Leave.Commands.Handlers
             var leaveList = await _uow.GetLeaveRepository().GetAllAsync(true, x => x.AppUserId == request.AppUserId);
             foreach (var item in leaveList)
             {
+                if (item.ApprovalStatusId == 3)
+                    continue;
                 if (item.StartDate <= request.StartDate && item.EndDate >= request.StartDate)
                 {
                     return new ServiceResponse<int>(0) { Message = $"Leave has not been added: You already have a leave in this date range.Leave id = {item.Id}.", IsSuccess = false };
